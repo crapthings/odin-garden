@@ -43,8 +43,10 @@ snapshot. The separate
 proves the complementary rule: equal labels from two parser calls have distinct
 non-zero scopes and do not co-refer through the snapshot.
 
-The adapter exposes only a default graph. `Named` and `Any_Named` scans return
-`dataset.Invalid_View`; they are not reinterpreted as default-graph queries.
+The adapter exposes only a default graph. The copied Snapshot, live indexed
+View, and Store-adopting Snapshot all return `dataset.Invalid_View` for
+`Named` and `Any_Named` scans; those modes are never reinterpreted as
+default-graph queries.
 
 ## Limits and errors exercised
 

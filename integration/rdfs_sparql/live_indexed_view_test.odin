@@ -1,12 +1,14 @@
 package rdfs_sparql
 
 import "core:testing"
+import rdf "odin-rdf:rdf"
 import turtle "odin-rdf:rdf/turtle"
 import sparql_adapter "../../../odin-reasoner/adapter/sparql"
 import importer "../../../odin-reasoner/reasoner/import"
 import rdfs "../../../odin-reasoner/reasoner/rdfs"
 import rule "../../../odin-reasoner/reasoner/rule"
 import store "../../../odin-reasoner/reasoner/store"
+import dataset "odin-sparql:sparql/dataset"
 import engine "odin-sparql:sparql/engine"
 
 @(test)
@@ -100,23 +102,32 @@ test_adopted_store_snapshot_queries_rdfs_closure_after_source_handle_destroy :: 
 	testing.expect_value(t, store.fact_count(&source), 0)
 	store.destroy(&source)
 	testing.expect_value(t, sparql_adapter.quad_count(&snapshot), 14)
+	adopted_view := sparql_adapter.view(&snapshot)
+	stop_state: Boundary_Stop_State
+	stop_error := dataset.scan(adopted_view, {Has_Predicate = true, Predicate = rdf.iri("https://example.org/garden/relatedTo")}, boundary_stop_after_one, &stop_state)
+	testing.expect_value(t, stop_error, dataset.Error_Code.None)
+	testing.expect_value(t, stop_state.calls, 1)
+	named_error := dataset.scan(adopted_view, {Graph_Mode = .Named, Graph = rdf.iri("https://example.org/garden/graph")}, boundary_stop_after_one, &stop_state)
+	any_named_error := dataset.scan(adopted_view, {Graph_Mode = .Any_Named}, boundary_stop_after_one, &stop_state)
+	testing.expect_value(t, named_error, dataset.Error_Code.Invalid_View)
+	testing.expect_value(t, any_named_error, dataset.Error_Code.Invalid_View)
 
 	select_text := read(t, QUERY_ROOT + "select-agent.rq")
 	defer delete(select_text)
-	select_result := execute(t, string(select_text), sparql_adapter.view(&snapshot))
+	select_result := execute(t, string(select_text), adopted_view)
 	defer engine.destroy(&select_result)
 	testing.expect_value(t, engine.Row_Count(&select_result), 2)
 
 	ask_text := read(t, QUERY_ROOT + "ask-bea-person.rq")
 	defer delete(ask_text)
-	ask_result := execute(t, string(ask_text), sparql_adapter.view(&snapshot))
+	ask_result := execute(t, string(ask_text), adopted_view)
 	defer engine.destroy(&ask_result)
 	ask, ask_valid := engine.Ask_Value(&ask_result)
 	testing.expect(t, ask_valid && ask)
 
 	construct_text := read(t, QUERY_ROOT + "construct-related.rq")
 	defer delete(construct_text)
-	construct_result := execute(t, string(construct_text), sparql_adapter.view(&snapshot))
+	construct_result := execute(t, string(construct_text), adopted_view)
 	defer engine.destroy(&construct_result)
 	testing.expect_value(t, engine.Triple_Count(&construct_result), 1)
 }

@@ -15,12 +15,19 @@ database, or general knowledge dump.
 
 ## Ecosystem
 
-```text
-odin-rdf       RDF model, syntax, streaming ingestion, and canonicalization
-  ├─ odin-sparql     SPARQL 1.1 query parsing and bounded execution
-  └─ odin-reasoner   Profiled forward reasoning and closure snapshots
+```mermaid
+flowchart TB
+    Garden["odin-garden<br/>cross-project contracts, fixtures, and verification"]
 
-odin-garden    Cross-project contracts, fixtures, and verification
+    RDF["odin-rdf<br/>RDF model, syntax, streaming ingestion,<br/>and canonicalization"]
+    SPARQL["odin-sparql<br/>SPARQL 1.1 query parsing<br/>and bounded execution"]
+    Reasoner["odin-reasoner<br/>profiled forward reasoning<br/>and closure snapshots"]
+
+    SPARQL -->|runtime dependency| RDF
+    Reasoner -->|runtime dependency| RDF
+    Garden -.->|defines contracts and verifies integration| RDF
+    Garden -.->|defines contracts and verifies integration| SPARQL
+    Garden -.->|defines contracts and verifies integration| Reasoner
 ```
 
 The permitted runtime dependencies are:
@@ -35,6 +42,16 @@ odin-garden   -> no runtime dependency
 Candidate layers such as `odin-graph`, `odin-store`, and a service layer are
 intentionally deferred. They will be considered only when current consumers
 show stable, shared requirements.
+
+The first integration path is deliberately narrow:
+
+```mermaid
+flowchart LR
+    Input["pinned RDF input"] --> Materialize["RDFS materialization"]
+    Materialize --> Snapshot["immutable closure snapshot"]
+    Snapshot --> Query["SPARQL query"]
+    Query --> Expected["checked expected result"]
+```
 
 ## What belongs here
 

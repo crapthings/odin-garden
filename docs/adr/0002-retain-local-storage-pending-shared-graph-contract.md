@@ -52,10 +52,12 @@ ownership before it can define stable shared error codes.
 ## Decision
 
 Keep the reasoner store, the reasoner-to-SPARQL snapshot adapter, and
-`Memory_Dataset` local to their respective components.  Do not create or
-extract `odin-graph` yet.
+`Memory_Dataset` as the production-local representations for their respective
+components. `odin-graph v0.1.0` is now published as an experimental,
+independently versioned in-memory kernel, but no existing component must adopt
+it as its runtime representation yet.
 
-The candidate minimum graph contract will be reconsidered only after two
+The mandatory-adoption decision will be reconsidered only after two
 production-quality consumers demonstrably use one shared graph representation
 for all of the following:
 
@@ -92,6 +94,25 @@ moving the Store into its Snapshot, but this remains reasoner-specific.
 Consequently this release does not yet provide a common graph snapshot,
 named/any-named graph semantics, or a unified limit/error model, and it does
 not satisfy the extraction gate.
+
+## Experimental kernel follow-up
+
+`odin-graph v0.1.0` now supplies an owned bounded RDF Dataset set, frozen
+graph-scoped views, and optional adapters. Garden's released-component gate
+pins that tag and proves two paths: the multi-source TriG fixture executes
+exact named, variable named, and default-isolation SPARQL queries through the
+graph adapter; and a copying Reasoner-closure adapter produces the same RDFS
+Core SELECT, ASK, and CONSTRUCT results as the existing reasoner Snapshot
+after the source Store is destroyed. The fully pinned run is
+[30082635758](https://github.com/crapthings/odin-garden/actions/runs/30082635758).
+
+This is material migration evidence, not a reversal of the decision above.
+The Reasoner adapter copies its completed closure into the graph and therefore
+does not reuse the Store's terms or indexes. `Memory_Dataset` still owns a
+separate representation. No actual Reasoner named-graph semantics or common
+resource/error implementation has been adopted. A future ADR must record the
+two-consumer no-copy/indexed convergence before components replace their local
+runtime storage.
 
 ## Consequences
 

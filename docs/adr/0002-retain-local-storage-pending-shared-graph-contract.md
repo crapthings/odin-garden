@@ -35,9 +35,9 @@ The component-level identity rules are also directly regression-tested:
 `odin-reasoner/reasoner/term/dictionary_test.odin` checks language-tag
 case-folding and blank-node scope in its interned dictionary, while
 `odin-sparql/tests/dataset/dataset_test.odin` checks the corresponding
-`Memory_Dataset` set and scan behavior.  The latter is current-main regression
-evidence, not part of the pinned `v0.1.1` Garden release baseline; a future
-baseline must publish and pin it before treating it as release-qualified.
+`Memory_Dataset` set and scan behavior. The latter is released in
+`odin-sparql v0.1.2` and now independently exercised by the pinned Garden
+gate, so the value-identity comparison is release-qualified.
 
 The limit/error differences are semantic, not merely naming differences.
 `Memory_Dataset` validates and admits one mutable quad at a time, so it can
@@ -116,12 +116,12 @@ not satisfy the extraction gate.
 ## Evidence and rollout
 
 The comparison uses `odin-rdf v0.31.1` (`daa3505`), `odin-reasoner v0.3.0`
-(`c62ebd8`), and `odin-sparql v0.1.1` (`fcba9b6`) under the pinned
+(`c62ebd8`), and `odin-sparql v0.1.2` (`76ec6b5`) under the pinned
 `dev-2026-07-nightly:ab0131c` Odin compiler. Garden CI run
 [30080187600](https://github.com/crapthings/odin-garden/actions/runs/30080187600)
-verifies the v0.3.0 release tags and commits, then passes all seven integration
-tests, including the Store-adopting Snapshot's early-stop and named-graph
-rejection cases.
+is the prior v0.1.1 baseline. The next Garden CI run verifies the v0.1.2
+release tag and covers the external `Memory_Dataset` identity and graph-scan
+case.
 
 Re-run `scripts/verify-rdfs-sparql.sh` from Garden whenever any pinned
 component, the adapter, or a listed fixture changes.  Revisit this ADR only

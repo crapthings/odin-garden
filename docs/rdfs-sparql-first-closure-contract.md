@@ -32,6 +32,12 @@ Snapshot retains the reasoner-owned terms, facts, and indexes without a second
 Dataset copy. It is a reasoner-specific default-graph contract, not yet a
 common graph snapshot shared with `Memory_Dataset`.
 
+The same release-qualified gate exercises `Memory_Dataset` through its public
+API: it proves case-folded language tags deduplicate within one blank-node
+scope, distinct scopes remain distinct, and `Named` / `Any_Named` scans select
+the retained named graph. This is a released comparison point for Dataset
+identity and graph scope, not evidence of shared storage with the reasoner.
+
 ## Identity and graph scope
 
 The first closure fixture uses only IRIs. The separate

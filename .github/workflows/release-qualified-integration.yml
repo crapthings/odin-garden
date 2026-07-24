@@ -40,7 +40,7 @@ jobs:
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         with:
           repository: crapthings/odin-reasoner
-          ref: 010c8cff5720978885dc0be68cea8acee5f4c70a # v0.2.0
+          ref: c62ebd8b5070eeb44c5b818bc30698b4f0da0b26 # v0.3.0
           path: _deps/odin-reasoner
           fetch-depth: 0
           persist-credentials: false

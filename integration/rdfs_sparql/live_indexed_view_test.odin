@@ -71,3 +71,52 @@ test_live_indexed_view_matches_immutable_snapshot_for_rdfs_closure :: proc(t: ^t
 	defer engine.destroy(&immutable_construct)
 	testing.expect_value(t, engine.Triple_Count(&live_construct), engine.Triple_Count(&immutable_construct))
 }
+
+@(test)
+test_adopted_store_snapshot_queries_rdfs_closure_after_source_handle_destroy :: proc(t: ^testing.T) {
+	source_text := read(t, SOURCE_PATH)
+	defer delete(source_text)
+
+	source: store.Store
+	testing.expect_value(t, store.init(&source), store.Error_Code.None)
+	defer store.destroy(&source)
+	profile: rdfs.Profile
+	profile_error, store_error := rdfs.init(&profile, &source)
+	testing.expect_value(t, profile_error, rdfs.Error_Code.None)
+	testing.expect_value(t, store_error, store.Error_Code.None)
+
+	state: importer.Sink_State
+	importer.init(&state, &source)
+	parsed := turtle.parse(string(source_text), importer.triple_sink, {}, &state)
+	testing.expect_value(t, parsed.code, turtle.Error_Code.None)
+	testing.expect_value(t, state.last_error, store.Error_Code.None)
+	materialized := rdfs.materialize(&profile, &source)
+	testing.expect_value(t, materialized.error, rule.Error_Code.None)
+	rdfs.destroy(&profile)
+
+	snapshot: sparql_adapter.Snapshot
+	sparql_adapter.adopt_store(&snapshot, &source)
+	defer sparql_adapter.destroy(&snapshot)
+	testing.expect_value(t, store.fact_count(&source), 0)
+	store.destroy(&source)
+	testing.expect_value(t, sparql_adapter.quad_count(&snapshot), 14)
+
+	select_text := read(t, QUERY_ROOT + "select-agent.rq")
+	defer delete(select_text)
+	select_result := execute(t, string(select_text), sparql_adapter.view(&snapshot))
+	defer engine.destroy(&select_result)
+	testing.expect_value(t, engine.Row_Count(&select_result), 2)
+
+	ask_text := read(t, QUERY_ROOT + "ask-bea-person.rq")
+	defer delete(ask_text)
+	ask_result := execute(t, string(ask_text), sparql_adapter.view(&snapshot))
+	defer engine.destroy(&ask_result)
+	ask, ask_valid := engine.Ask_Value(&ask_result)
+	testing.expect(t, ask_valid && ask)
+
+	construct_text := read(t, QUERY_ROOT + "construct-related.rq")
+	defer delete(construct_text)
+	construct_result := execute(t, string(construct_text), sparql_adapter.view(&snapshot))
+	defer engine.destroy(&construct_result)
+	testing.expect_value(t, engine.Triple_Count(&construct_result), 1)
+}

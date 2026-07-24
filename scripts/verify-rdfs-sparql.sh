@@ -29,11 +29,11 @@ require_release_tag() {
 }
 
 require_revision ../odin-rdf daa350521a8ad9f79012bb1fefa96cf00938f3f1
-require_revision ../odin-reasoner 010c8cff5720978885dc0be68cea8acee5f4c70a
+require_revision ../odin-reasoner c62ebd8b5070eeb44c5b818bc30698b4f0da0b26
 require_revision ../odin-sparql fcba9b6ffd542f246bf026d69dbd045624315c8d
 
 require_release_tag ../odin-rdf v0.31.1 daa350521a8ad9f79012bb1fefa96cf00938f3f1
-require_release_tag ../odin-reasoner v0.2.0 010c8cff5720978885dc0be68cea8acee5f4c70a
+require_release_tag ../odin-reasoner v0.3.0 c62ebd8b5070eeb44c5b818bc30698b4f0da0b26
 require_release_tag ../odin-sparql v0.1.1 fcba9b6ffd542f246bf026d69dbd045624315c8d
 
 expected_odin='dev-2026-07-nightly:ab0131c'

@@ -19,8 +19,8 @@ an anticipated store design:
 | Term equality | Interned terms compare kind, lexical value, datatype, folded language, and blank-node scope.  The adapter copies RDF values and applies the same comparison. | RDF term equality uses the same fields; quads are a set under that equality. | Compatible value equality; no shared owner or identity table. |
 | Graph scope | Internal facts and the adapter snapshot are default-graph only.  Named and any-named scans return `dataset.Invalid_View`. | Read-only views require graph-mode-aware scans; the memory implementation supports default, named, and any-named graphs. | Not met. |
 | Scan work | The store selects an exact lookup, two-term index, one-term index, or full scan.  The immutable snapshot copies closure facts then scans linearly; released `indexed_view` reuses the store index while the source lives. | `Memory_Dataset` linearly scans sealed owned quads. | Partial: the direct reasoner→SPARQL live path reuses an index, but no shared immutable scan implementation exists. |
-| Ownership and lifetime | The store owns interned terms.  `indexed_view` borrows those terms while the source lives; the released adapter also owns a copied immutable quad snapshot that outlives the source. | The memory dataset owns copied lexical values; its sealed view borrows terms until destruction. | Partial for a live borrowed view; immutable snapshots still have separate allocation and copy paths. |
-| Limits and errors | Snapshot has `max_quads`, all-or-nothing initialization, and adapter-specific `Quad_Limit`. | Dataset has `Quad_Limit`, `Lexical_Limit`, validation, sealing, and Dataset error codes. | Not met: the limit/error surface differs. |
+| Ownership and lifetime | The store owns interned terms.  `indexed_view` borrows those terms while the source lives; `adopt_store` transfers them into an immutable indexed Snapshot, while `init` retains the copied Snapshot option. | The memory dataset owns copied lexical values; its sealed view borrows terms until destruction. | Partial: direct reasoner→SPARQL now has an independent no-copy immutable Snapshot, but it is not the shared `Memory_Dataset` representation. |
+| Limits and errors | Copied Snapshot has `max_quads`, all-or-nothing initialization, and adapter-specific `Quad_Limit`; an adopted Snapshot retains the source Store's bounded admission rules. | Dataset has `Quad_Limit`, `Lexical_Limit`, validation, sealing, and Dataset error codes. | Not met: the limit/error surface still differs. |
 
 The pinned Garden integration passes the source-RDF → RDFS closure → immutable
 SPARQL-view path and the live indexed View/result-equivalence path, including
@@ -63,7 +63,7 @@ kernel.
 
 ## Released convergence evidence
 
-`odin-reasoner v0.2.0` (`010c8cf`) adds `indexed_view`, a borrowing `dataset.View`
+`odin-reasoner v0.3.0` (`c62ebd8`) includes `indexed_view`, a borrowing `dataset.View`
 that calls the reasoner store's indexed `match` path directly.  Its adapter
 tests prove that it preserves store-owned term and blank-node identity while
 the source store remains alive, rejects named graph modes, and produces the
@@ -71,13 +71,17 @@ same public SPARQL query results as the immutable `Snapshot` for its covered
 default-graph cases.  Its release-commit CI run is
 [30078528810](https://github.com/crapthings/odin-reasoner/actions/runs/30078528810).
 Garden now adds a release-pinned RDFS closure comparison using both views.
+It also verifies `adopt_store`, which transfers the completed Store into an
+immutable Snapshot and preserves its indexed scans after the source handle is
+destroyed.
 
 This is useful release-qualified convergence evidence, but it remains a live
 borrowed view.  Callers must retain the source `Store` and must not mutate it
-during a scan or query.  `Snapshot` is still the independent, immutable copy
-that outlives the source store.  Consequently this release does not yet
-provide a common immutable snapshot, named/any-named graph semantics, or a
-unified limit/error model, and it does not satisfy the extraction gate.
+during a scan or query. `adopt_store` removes that lifetime restriction by
+moving the Store into its Snapshot, but this remains reasoner-specific.
+Consequently this release does not yet provide a common graph snapshot,
+named/any-named graph semantics, or a unified limit/error model, and it does
+not satisfy the extraction gate.
 
 ## Consequences
 
@@ -91,8 +95,9 @@ unified limit/error model, and it does not satisfy the extraction gate.
 
 ### Costs and risks
 
-- The immutable closure adapter continues to allocate copied RDF terms and
-  quads; only the live view reuses the reasoner indexes.
+- The copied snapshot remains available for compatibility and bounded
+  `max_quads` admission, but only the adopted Snapshot retains the existing
+  reasoner indexes without a second Dataset copy.
 - Named-graph queries cannot be served by this closure adapter until a
   production requirement defines their closure semantics.
 - A future shared kernel needs a migration comparison against the existing
@@ -100,12 +105,12 @@ unified limit/error model, and it does not satisfy the extraction gate.
 
 ## Evidence and rollout
 
-The comparison uses `odin-rdf v0.31.1` (`daa3505`), `odin-reasoner v0.2.0`
-(`010c8cf`), and `odin-sparql v0.1.1` (`fcba9b6`) under the pinned
+The comparison uses `odin-rdf v0.31.1` (`daa3505`), `odin-reasoner v0.3.0`
+(`c62ebd8`), and `odin-sparql v0.1.1` (`fcba9b6`) under the pinned
 `dev-2026-07-nightly:ab0131c` Odin compiler.  Garden CI run
 [30078806936](https://github.com/crapthings/odin-garden/actions/runs/30078806936)
-verifies the updated declared release tags and commits, then passes all six
-integration tests, including live-view/immutable-snapshot result equivalence.
+is the prior v0.2.0 baseline. The next Garden CI run verifies the v0.3.0
+release tags and commits, then covers the added Store-adopting Snapshot case.
 
 Re-run `scripts/verify-rdfs-sparql.sh` from Garden whenever any pinned
 component, the adapter, or a listed fixture changes.  Revisit this ADR only

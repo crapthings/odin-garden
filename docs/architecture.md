@@ -56,9 +56,10 @@ odin-garden   -> no runtime dependency
 particular storage implementation. `odin-reasoner` already makes a bounded,
 transactional working copy while calculating a closure. That is an inference
 correctness mechanism, not a public transaction API. Released
-`odin-reasoner v0.2.0` also supplies an indexed *live borrowed* view over its store;
-it reuses the store's scan path but cannot outlive or be mutated independently
-of that store, so it is not the common immutable snapshot proposed here.
+`odin-reasoner v0.3.0` supplies both an indexed *live borrowed* view and a
+Store-adopting immutable Snapshot: the latter retains the reasoner-owned terms
+and scan path without a second Dataset copy. It remains a reasoner-specific,
+default-graph boundary rather than the common graph snapshot proposed here.
 
 ## Candidate shared layers
 
@@ -127,8 +128,8 @@ to extract either runtime layer:
 
 | Gate | Status | Evidence / gap |
 | --- | --- | --- |
-| Common owned terms and snapshot semantics | Not met | Value equality is compatible.  Released reasoner v0.2.0 can expose a live indexed view that borrows the store's owned terms, but the public immutable SPARQL snapshot remains a second owned quad copy.  See ADR 0002. |
-| Pinned closure-to-query integration | Met | Garden pins released `odin-rdf v0.31.1`, `odin-reasoner v0.2.0`, and `odin-sparql v0.1.1`; [CI run 30078806936](https://github.com/crapthings/odin-garden/actions/runs/30078806936) verifies the tags and passes closure, lifecycle, graph-scope, limit, blank-node, and live-view/snapshot result-equivalence cases. |
+| Common owned terms and snapshot semantics | Partial | Released reasoner v0.3.0 can transfer its owned terms and indexes into an immutable SPARQL Snapshot, but `Memory_Dataset` still owns a separate representation and no common graph API exists. See ADR 0002. |
+| Pinned closure-to-query integration | Met locally; CI pending | Garden pins released `odin-rdf v0.31.1`, `odin-reasoner v0.3.0`, and `odin-sparql v0.1.1`; the local gate passes closure, lifecycle, graph-scope, limit, blank-node, live-view equivalence, and adopted-snapshot cases. |
 | Minimal API from existing use cases | Not met | Reasoner needs indexed default-graph triple closure; SPARQL needs graph-scoped read scans.  The new live view demonstrates indexed reuse only for default graph while the immutable adapter remains copying and linear; named-graph support and error/limit behavior are not shared. |
 | Durable-store requirement | Not met | There is no approved persistence, restart, multi-writer, or isolation requirement. |
 

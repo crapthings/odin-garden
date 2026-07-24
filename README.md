@@ -79,11 +79,14 @@ flowchart LR
 
 ## Status
 
-Garden is in its foundation phase. The immediate work is to publish the
-architecture and deferral ADR, pin compatible component revisions, and add the
-first evidence-backed RDFS-to-SPARQL integration fixture.
+Garden has completed its foundation milestones: the architecture and deferral
+ADRs are published, released component revisions are pinned, and the first
+evidence-backed RDFS-to-SPARQL integration path is release-qualified. The
+current decision is to retain local storage implementations until a second
+production-quality consumer proves a genuinely shared graph contract; see
+[ADR 0002](docs/adr/0002-retain-local-storage-pending-shared-graph-contract.md).
 
-The initial fixture and its fixed release-qualified command now live in
+The initial fixture and its fixed release-qualified command live in
 [`ecosystem.toml`](ecosystem.toml). It is reproducible compatibility evidence
 for the documented RDFS Core default-graph path, not a general graph-extraction
 claim.

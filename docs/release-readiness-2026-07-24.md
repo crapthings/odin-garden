@@ -24,6 +24,7 @@ release commits; see the resolution below.
 | `odin test reasoner -collection:odin-rdf=../odin-rdf` | 1 package-root test passed |
 | `odin test adapter/sparql -collection:odin-rdf=../odin-rdf -collection:odin-sparql=../odin-sparql` | 3 snapshot-adapter tests passed |
 | `odin test sparql/engine -collection:odin-rdf=../odin-rdf` | 110 engine tests passed |
+| [`odin-rdf` CI run 30075331131](https://github.com/crapthings/odin-rdf/actions/runs/30075331131) | Published `v0.31.1` commit passed the `w3c`, `quality`, and Linux/macOS/Windows test jobs |
 
 `odin test sparql/dataset` currently reports no direct tests; this is an
 observation, not a successful coverage claim.
@@ -42,6 +43,11 @@ observation, not a successful coverage claim.
 Release owners must complete their component checklists, publish immutable
 revisions, and then update the Garden matrix and rerun its gate. Until then,
 this record supports implementation decisions only.
+
+The W3C CI job is the retained aggregate JSON-LD evidence for the RDF release:
+it invokes `run-w3c-jsonld-tests.sh` together with the complete declared
+JSON-LD suite. This avoids treating an incomplete local terminal transcript as
+a release result.
 
 ## Resolution
 

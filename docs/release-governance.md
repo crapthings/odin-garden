@@ -17,6 +17,8 @@ success or a general shared-store API guarantee.
 
 The current local shared-path verification evidence is recorded in
 [release readiness — 2026-07-24](release-readiness-2026-07-24.md).
+Its RDF component is backed by the published release commit's successful
+[W3C CI job](https://github.com/crapthings/odin-rdf/actions/runs/30075331131).
 
 ## Release checklist
 

@@ -53,6 +53,15 @@ return `Invalid_View` for named graph modes, and no shared graph extraction or
 named-graph store implementation should begin until an application adopts (or
 replaces) these semantics.
 
+## Candidate contract
+
+[`candidate-shared-graph-contract.md`](candidate-shared-graph-contract.md)
+records the smallest proposed mutation, freeze, ownership, limit, error, and
+migration contract. Garden's candidate contract test pins the currently shared
+observable behavior: duplicate-at-capacity success, failed-admission
+atomicity, freeze immutability, and graph-scoped scans. The document is a
+design input for Step 3, not an extracted implementation or an ADR reversal.
+
 ## Reassessment trigger
 
 Re-run this plan when an application supplies a named-graph use case, a second

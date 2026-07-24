@@ -1,0 +1,26 @@
+id = "rdfs-core-cross-ingestion-blank-node"
+title = "Blank-node labels from independent parser calls do not co-refer"
+version = 1
+source_file = "source.ttl"
+source_kind = "authored integration fixture"
+source_version = "1"
+source_date = "2026-07-24"
+asserting_party = "Odin Garden maintainers"
+provenance = "Authored by the Odin Garden maintainers to prove that parser-generated blank-node scope is an ingestion boundary."
+license = "CC0-1.0"
+semantic_profile = "No inference is required. The fixture exercises two odin-rdf Turtle parser calls, reasoner term identity, and the immutable SPARQL snapshot adapter."
+asserted_rdf = "asserted.nt"
+inferred_rdf = "inferred.nt"
+query_expectations = "../../../queries/rdfs-core/cross-ingestion-blank-node/README.md"
+verification_command = "sh scripts/verify-rdfs-sparql.sh"
+entity_identity = "The identical _:same label is parsed in two independent calls. Each call receives a distinct non-zero blank-node scope, so the two asserted facts remain distinct."
+contradiction_status = "No contradiction is asserted or expected."
+validity_period = "Not applicable: this is a timeless synthetic semantic fixture."
+
+[expectations]
+parser_calls = 2
+source_statements_per_call = 1
+distinct_asserted_triples = 2
+inferred_triples = 0
+snapshot_quads = 2
+blank_node_scopes = "Both SELECT bindings use lexical label same, have non-zero scopes, and have different scopes."

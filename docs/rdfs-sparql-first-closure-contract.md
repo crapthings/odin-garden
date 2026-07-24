@@ -23,8 +23,10 @@ The first closure fixture uses only IRIs. The separate
 [`blank-node-boundary` fixture](../fixtures/rdfs-core/blank-node-boundary/)
 now proves that one Turtle document's repeated blank-node spelling remains one
 non-zero-scoped blank node through reasoner ownership and a destroyed-source
-snapshot. It still makes **no** claim about blank-node identity across parser
-calls or source documents.
+snapshot. The separate
+[`cross-ingestion-blank-node` fixture](../fixtures/rdfs-core/cross-ingestion-blank-node/)
+proves the complementary rule: equal labels from two parser calls have distinct
+non-zero scopes and do not co-refer through the snapshot.
 
 The adapter exposes only a default graph. `Named` and `Any_Named` scans return
 `dataset.Invalid_View`; they are not reinterpreted as default-graph queries.

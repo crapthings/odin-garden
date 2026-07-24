@@ -1,0 +1,3 @@
+# This N-Triples spelling is read twice through independent parser calls.
+# Its lexical _:same label is scoped per parser call, yielding two distinct facts.
+_:same <https://example.org/garden/knows> <https://example.org/garden/ada> .

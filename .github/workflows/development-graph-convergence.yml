@@ -38,7 +38,7 @@ jobs:
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         with:
           repository: crapthings/odin-graph
-          ref: 323f2c392b1e34677e600bf69c0c7149c4319cf4 # development origin metadata
+          ref: 446cd3d002d7c4b27ff5224d0e987b88a0f96f00 # development derivation metadata
           path: _deps/odin-graph
           fetch-depth: 0
           persist-credentials: false

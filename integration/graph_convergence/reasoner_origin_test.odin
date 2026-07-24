@@ -39,7 +39,7 @@ test_graph_closure_copy_preserves_every_rdfs_fact_origin :: proc(t: ^testing.T) 
 	testing.expect_value(t, store.fact_count(&source), 14)
 
 	candidate: graph.Graph
-	testing.expect_value(t, graph_reasoner.init(&candidate, &source), graph_reasoner.Error.None)
+	testing.expect_value(t, graph_reasoner.init_with_derivations(&candidate, &source, &profile.materializer), graph_reasoner.Error.None)
 	defer graph.destroy(&candidate)
 	testing.expect_value(t, graph.quad_count(&candidate), store.fact_count(&source))
 	for index in 0..<store.fact_count(&source) {
@@ -49,5 +49,15 @@ test_graph_closure_copy_preserves_every_rdfs_fact_origin :: proc(t: ^testing.T) 
 		testing.expect(t, candidate_found)
 		expected_origin := source_origin == .Inferred ? graph.Origin.Inferred : graph.Origin.Asserted
 		testing.expect_value(t, candidate_origin, expected_origin)
+	}
+	testing.expect_value(t, graph.derivation_count(&candidate), rule.derivation_count(&profile.materializer))
+	for index in 0..<rule.derivation_count(&profile.materializer) {
+		source_derivation, source_found := rule.derivation_at(&profile.materializer, index)
+		candidate_derivation, candidate_found := graph.derivation_at(&candidate, index)
+		testing.expect(t, source_found && candidate_found)
+		testing.expect_value(t, candidate_derivation.quad_index, int(source_derivation.fact_id) - 1)
+		testing.expect_value(t, candidate_derivation.rule_id, u32(source_derivation.rule_id))
+		testing.expect_value(t, len(candidate_derivation.supports), len(source_derivation.supports))
+		for support_index in 0..<len(source_derivation.supports) do testing.expect_value(t, candidate_derivation.supports[support_index], int(source_derivation.supports[support_index]) - 1)
 	}
 }

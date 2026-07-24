@@ -9,11 +9,11 @@ passes, and its component entries are `release_qualified = true` in
 
 | Baseline | Odin | odin-rdf | odin-reasoner | odin-sparql | Garden gate | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| `rdfs-sparql-first-closure` | `dev-2026-07:819fdc7a8` | `acb3a190` (after `v0.31.0`) | `a46a693` (unreleased) | `00acabd` (after `v0.1.0`) | `verify-rdfs-sparql.sh` | Development evidence; not supported |
+| `rdfs-sparql-first-closure` | `dev-2026-07:819fdc7a8` | `daa3505` (`v0.31.1`) | `3ac9267` (`v0.1.0`) | `fcba9b6` (`v0.1.1`) | `verify-rdfs-sparql.sh` | Release-qualified local integration path |
 
-There is currently no release-qualified compatibility row. A development row
-may guide implementation work, but must not be presented as a public
-compatibility guarantee or graph-extraction success.
+This row is limited to the documented default-graph RDFS closure path. It is a
+compatibility guarantee for that integration command, not graph-extraction
+success or a general shared-store API guarantee.
 
 The current local shared-path verification evidence is recorded in
 [release readiness — 2026-07-24](release-readiness-2026-07-24.md).

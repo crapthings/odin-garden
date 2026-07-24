@@ -1,8 +1,9 @@
 # Release-readiness evidence — 2026-07-24
 
-This is a local, pre-release evidence record for the fixed development snapshot
-in [`../ecosystem.toml`](../ecosystem.toml). It is not a release approval and
-does not create a supported compatibility row.
+This began as a local, pre-release evidence record for the fixed development
+snapshot in [`../ecosystem.toml`](../ecosystem.toml). The recorded components
+were subsequently released and the same Garden gate was rerun against their
+release commits; see the resolution below.
 
 ## Environment
 
@@ -41,3 +42,15 @@ observation, not a successful coverage claim.
 Release owners must complete their component checklists, publish immutable
 revisions, and then update the Garden matrix and rerun its gate. Until then,
 this record supports implementation decisions only.
+
+## Resolution
+
+The release blockers above were resolved on 2026-07-24:
+
+- `odin-rdf v0.31.1` at `daa350521a8ad9f79012bb1fefa96cf00938f3f1`;
+- `odin-reasoner v0.1.0` at `3ac9267f8651eb9add25b13ac8e12b952e63a959`; and
+- `odin-sparql v0.1.1` at `fcba9b6ffd542f246bf026d69dbd045624315c8d`.
+
+The Garden matrix now records those releases and its local integration gate
+passes. This resolution does not satisfy the independent graph-extraction
+conditions for shared mutable semantics or a durable-store requirement.

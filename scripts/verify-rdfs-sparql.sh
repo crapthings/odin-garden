@@ -14,9 +14,9 @@ require_revision() {
   fi
 }
 
-require_revision ../odin-rdf acb3a190371e8679a2a35a3d4668ec166ec24891
-require_revision ../odin-reasoner a46a693f30b00360d6adcf761188cdef681959e1
-require_revision ../odin-sparql 00acabd46113676820a55955328b5532149fbf47
+require_revision ../odin-rdf daa350521a8ad9f79012bb1fefa96cf00938f3f1
+require_revision ../odin-reasoner 3ac9267f8651eb9add25b13ac8e12b952e63a959
+require_revision ../odin-sparql fcba9b6ffd542f246bf026d69dbd045624315c8d
 
 expected_odin='dev-2026-07:819fdc7a8'
 actual_odin=$(odin version)

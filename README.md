@@ -66,9 +66,10 @@ Garden is in its foundation phase. The immediate work is to publish the
 architecture and deferral ADR, pin compatible component revisions, and add the
 first evidence-backed RDFS-to-SPARQL integration fixture.
 
-The initial fixture and its fixed development-snapshot command now live in
-[`ecosystem.toml`](ecosystem.toml). It is reproducible implementation evidence,
-not yet a release-qualified compatibility claim.
+The initial fixture and its fixed release-qualified command now live in
+[`ecosystem.toml`](ecosystem.toml). It is reproducible compatibility evidence
+for the documented RDFS Core default-graph path, not a general graph-extraction
+claim.
 
 The exercised ownership, graph-scope, blank-node, resource-limit, and error
 boundaries are recorded in

@@ -3,24 +3,23 @@
 ## Current baseline
 
 `ecosystem.toml` is the authoritative, machine-readable record for every
-Garden integration run. Its initial baseline is intentionally a fixed
-**development snapshot**, not a supported release combination:
-
-- `odin-reasoner` has no release tag;
-- `odin-rdf` and `odin-sparql` are checked out after their listed releases; and
-- the Odin compiler is a development build.
+Garden integration run. The current baseline is a fixed
+**release-qualified component combination**: `odin-rdf v0.31.1`,
+`odin-reasoner v0.1.0`, and `odin-sparql v0.1.1`. The Odin compiler remains a
+pinned development build and is recorded exactly rather than treated as a
+moving dependency.
 
 The command in `commands.rdfs_sparql_first_closure` verifies all four exact
-identities before executing the fixture. It therefore produces reproducible
-implementation evidence, but cannot satisfy the architecture's
-release-qualified graph-extraction gate.
+identities before executing the fixture. It supplies release-qualified local
+integration evidence for the documented RDFS Core default-graph path; it does
+not satisfy the separate shared-graph extraction gate.
 
 ## Supported combinations
 
-No release-qualified Garden combination is supported yet. A baseline becomes
-supported only when every component entry refers to a published revision,
-`release_qualified = true` for each component, and all listed integration
-commands pass without local source changes.
+The current baseline is supported for its documented local integration path.
+Any baseline is supported only when every component entry refers to a published
+revision, `release_qualified = true` for each component, and all listed
+integration commands pass without local source changes.
 
 ## Upgrade procedure
 

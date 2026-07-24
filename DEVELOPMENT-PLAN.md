@@ -42,9 +42,8 @@ odin-garden   -> no runtime dependency
 
 ### Deliverables
 
-- [x] `ecosystem.toml` with a pinned Odin compiler revision and component
-  development revisions. It is explicitly not a release baseline because the
-  reasoner is unreleased.
+- [x] `ecosystem.toml` with a pinned Odin compiler revision and released
+  component revisions.
 - [x] A compatibility policy: supported combinations, upgrade procedure, and
   required integration gates before changing `rdf.Term`, blank-node scope,
   ownership contracts, or public dataset boundaries.
@@ -71,8 +70,8 @@ revision produced a result. No integration check silently follows moving
 - [x] Expected asserted and inferred triples, including provenance expectations.
 - [x] SPARQL `SELECT`, `ASK`, and `CONSTRUCT` queries over the same immutable
   closure snapshot.
-- [x] A single reproducible local verification command. CI is pending the
-  first release-qualified component matrix.
+- [x] A single reproducible release-qualified local verification command. CI
+  configuration remains pending.
 
 ### Acceptance
 

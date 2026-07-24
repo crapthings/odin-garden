@@ -1,13 +1,12 @@
 # Odin Garden integration baseline.
 #
-# This records an immutable development snapshot, not a release baseline: the
-# reasoner has no release tag and the RDF/SPARQL worktrees are ahead of their
-# latest releases. A release-qualified extraction gate must replace these refs
-# with published revisions before it can be considered passed.
+# This records an immutable release-qualified component baseline. Passing this
+# gate proves the documented RDFS Core default-graph path only; it does not by
+# itself establish the shared mutable graph semantics required for extraction.
 
 [baseline]
 name = "rdfs-sparql-first-closure"
-kind = "development-snapshot"
+kind = "release-qualified"
 recorded_on = "2026-07-24"
 
 [toolchain]
@@ -16,23 +15,24 @@ version = "dev-2026-07:819fdc7a8"
 
 [components.odin_rdf]
 repository = "https://github.com/crapthings/odin-rdf.git"
-revision = "acb3a190371e8679a2a35a3d4668ec166ec24891"
-release = "v0.31.0"
-release_qualified = false
+revision = "daa350521a8ad9f79012bb1fefa96cf00938f3f1"
+release = "v0.31.1"
+release_qualified = true
 
 [components.odin_reasoner]
 repository = "https://github.com/crapthings/odin-reasoner.git"
-revision = "a46a693f30b00360d6adcf761188cdef681959e1"
-release_qualified = false
+revision = "3ac9267f8651eb9add25b13ac8e12b952e63a959"
+release = "v0.1.0"
+release_qualified = true
 
 [components.odin_sparql]
 repository = "https://github.com/crapthings/odin-sparql.git"
-revision = "00acabd46113676820a55955328b5532149fbf47"
-release = "v0.1.0"
-release_qualified = false
+revision = "fcba9b6ffd542f246bf026d69dbd045624315c8d"
+release = "v0.1.1"
+release_qualified = true
 
 [commands.rdfs_sparql_first_closure]
-description = "Run the pinned development-snapshot RDFS closure to SPARQL integration fixture."
+description = "Run the pinned release-qualified RDFS closure to SPARQL integration fixture."
 command = "sh scripts/verify-rdfs-sparql.sh"
 requires_adjacent_checkouts = ["../odin-rdf", "../odin-reasoner", "../odin-sparql"]
-status = "pre-release evidence only"
+status = "release-qualified local integration evidence"

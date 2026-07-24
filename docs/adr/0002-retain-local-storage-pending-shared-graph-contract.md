@@ -76,9 +76,10 @@ kernel.
 The comparison uses `odin-rdf v0.31.1` (`daa3505`), `odin-reasoner v0.1.0`
 (`3ac9267`), and `odin-sparql v0.1.1` (`fcba9b6`) under the pinned
 `dev-2026-07-nightly:ab0131c` Odin compiler.  Garden CI run
-[30076603206](https://github.com/crapthings/odin-garden/actions/runs/30076603206)
-passes all five release-qualified integration tests, including the
-cross-ingestion blank-node case.
+[30077117814](https://github.com/crapthings/odin-garden/actions/runs/30077117814)
+verifies the declared release tags and commits, then passes all five
+release-qualified integration tests, including the cross-ingestion blank-node
+case.
 
 Re-run `scripts/verify-rdfs-sparql.sh` from Garden whenever any pinned
 component, the adapter, or a listed fixture changes.  Revisit this ADR only

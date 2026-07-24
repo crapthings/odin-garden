@@ -26,14 +26,14 @@ jobs:
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         with:
           repository: crapthings/odin-rdf
-          ref: feaf50f72c117a834da15402ee618aaaf9bcdabd # OWL RL numeric value-space dispatcher
+          ref: 335a57a76ac580f7b91756397cf09de9db23a6bb # extended OWL RL value-space dispatcher
           path: _deps/odin-rdf
           fetch-depth: 0
           persist-credentials: false
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         with:
           repository: crapthings/odin-reasoner
-          ref: 6ab1d134584cfff9d3ccc17141399ce2de675555 # OWL RL numeric value-space dispatcher
+          ref: 81a5b7998526e6cb54b99ccc51ed62bafaad2494 # extended OWL RL value-space dispatcher
           path: _deps/odin-reasoner
           fetch-depth: 0
           persist-credentials: false

@@ -1,0 +1,4 @@
+@prefix ex: <https://example.org/garden/> .
+
+ex:a ex:relatedTo ex:b .
+ex:c ex:relatedTo ex:d .

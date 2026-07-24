@@ -31,10 +31,13 @@ The adapter exposes only a default graph. `Named` and `Any_Named` scans return
 
 ## Limits and errors exercised
 
-The fixture creates 14 closure facts. It proves that `max_quads = 13` returns
-`sparql_adapter.Quad_Limit` and leaves no partial snapshot, while
-`max_quads = 14` succeeds. A scan sink that returns `false` stops successfully
-and does not become an adapter error.
+The closure fixture creates 14 facts. The separate
+[`default-graph-boundary` fixture](../fixtures/rdfs-core/default-graph-boundary/)
+proves that `max_quads = 1` rejects a two-quad snapshot with
+`sparql_adapter.Quad_Limit` and leaves the attempted snapshot empty. It also
+proves that a scan sink returning `false` stops successfully and that `Named`
+and `Any_Named` scans return `dataset.Invalid_View` rather than becoming
+default-graph scans.
 
 The successful path records parser, store, materializer, snapshot, and query
 errors as their respective `None` values. It does not exercise parser failure,

@@ -1,0 +1,26 @@
+id = "rdfs-core-default-graph-boundary"
+title = "Default-graph scan scope and atomic snapshot resource limit"
+version = 1
+source_file = "source.ttl"
+source_kind = "authored integration fixture"
+source_version = "1"
+source_date = "2026-07-24"
+asserting_party = "Odin Garden maintainers"
+provenance = "Authored by the Odin Garden maintainers to prove default-graph-only adapter behavior and all-or-nothing snapshot admission."
+license = "CC0-1.0"
+semantic_profile = "No inference is required. The fixture exercises reasoner storage and the default-graph SPARQL snapshot adapter."
+asserted_rdf = "asserted.nt"
+inferred_rdf = "inferred.nt"
+query_expectations = "../../../queries/rdfs-core/default-graph-boundary/README.md"
+verification_command = "sh scripts/verify-rdfs-sparql.sh"
+entity_identity = "All fixture IRIs are authored and distinct. No blank nodes or aliases are asserted."
+contradiction_status = "No contradiction is asserted or expected."
+validity_period = "Not applicable: this is a timeless synthetic semantic fixture."
+
+[expectations]
+distinct_asserted_triples = 2
+inferred_triples = 0
+snapshot_quads = 2
+limit = "max_quads = 1 returns Quad_Limit and leaves the attempted snapshot empty."
+default_graph_scan = "A sink may stop successfully after the first matching quad."
+named_graph_scan = "Named and Any_Named scan requests return dataset.Invalid_View."

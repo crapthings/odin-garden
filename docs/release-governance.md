@@ -22,7 +22,7 @@ guarantee for that integration command, not graph-extraction success or a
 general shared-store API guarantee.
 
 The current release-qualified shared-path verification is
-[Garden CI run 30080187600](https://github.com/crapthings/odin-garden/actions/runs/30080187600).
+[Garden CI run 30080807670](https://github.com/crapthings/odin-garden/actions/runs/30080807670).
 The initial release-readiness record remains in
 [release readiness — 2026-07-24](release-readiness-2026-07-24.md), and its RDF
 component is backed by the published release commit's successful

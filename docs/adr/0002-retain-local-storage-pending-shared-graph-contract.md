@@ -118,10 +118,9 @@ not satisfy the extraction gate.
 The comparison uses `odin-rdf v0.31.1` (`daa3505`), `odin-reasoner v0.3.0`
 (`c62ebd8`), and `odin-sparql v0.1.2` (`76ec6b5`) under the pinned
 `dev-2026-07-nightly:ab0131c` Odin compiler. Garden CI run
-[30080187600](https://github.com/crapthings/odin-garden/actions/runs/30080187600)
-is the prior v0.1.1 baseline. The next Garden CI run verifies the v0.1.2
-release tag and covers the external `Memory_Dataset` identity and graph-scan
-case.
+[30080807670](https://github.com/crapthings/odin-garden/actions/runs/30080807670)
+verifies the v0.1.2 release tag and passes all eight integration tests,
+including the external `Memory_Dataset` identity and graph-scan case.
 
 Re-run `scripts/verify-rdfs-sparql.sh` from Garden whenever any pinned
 component, the adapter, or a listed fixture changes.  Revisit this ADR only

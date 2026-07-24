@@ -39,6 +39,16 @@ case-folding and blank-node scope in its interned dictionary, while
 evidence, not part of the pinned `v0.1.1` Garden release baseline; a future
 baseline must publish and pin it before treating it as release-qualified.
 
+The limit/error differences are semantic, not merely naming differences.
+`Memory_Dataset` validates and admits one mutable quad at a time, so it can
+report invalid input, sealing, lexical-byte, and quad-capacity failures at the
+write boundary. The reasoner Store instead admits terms and triples while
+importing or materializing a closure, with term, lexical-byte, and fact limits.
+Only after that work does copied `Snapshot.init` apply its all-or-nothing
+`max_quads` bound; `adopt_store` performs no new admission at all. A future
+common contract must first choose its mutation phase, atomicity, and resource
+ownership before it can define stable shared error codes.
+
 ## Decision
 
 Keep the reasoner store, the reasoner-to-SPARQL snapshot adapter, and
@@ -56,10 +66,10 @@ for all of the following:
 4. one immutable snapshot ownership, bounded-resource, and stable-error
    contract.
 
-The current reasoner snapshot remains a deliberately copying, default-graph
-adapter.  It must reject unsupported graph modes explicitly and keep its
-all-or-nothing `Quad_Limit` behavior.  It is not a provisional public graph
-kernel.
+The reasoner keeps a copying default-graph Snapshot for bounded
+`max_quads` admission and also offers a Store-adopting default-graph Snapshot
+for no-copy indexed ownership transfer. Both reject unsupported graph modes
+explicitly. Neither is a provisional public graph kernel.
 
 ## Released convergence evidence
 
@@ -68,8 +78,8 @@ that calls the reasoner store's indexed `match` path directly.  Its adapter
 tests prove that it preserves store-owned term and blank-node identity while
 the source store remains alive, rejects named graph modes, and produces the
 same public SPARQL query results as the immutable `Snapshot` for its covered
-default-graph cases.  Its release-commit CI run is
-[30078528810](https://github.com/crapthings/odin-reasoner/actions/runs/30078528810).
+default-graph cases. Its v0.3.0 release-commit CI run is
+[30079193793](https://github.com/crapthings/odin-reasoner/actions/runs/30079193793).
 Garden now adds a release-pinned RDFS closure comparison using both views.
 It also verifies `adopt_store`, which transfers the completed Store into an
 immutable Snapshot and preserves its indexed scans after the source handle is

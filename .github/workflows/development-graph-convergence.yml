@@ -33,7 +33,7 @@ jobs:
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         with:
           repository: crapthings/odin-reasoner
-          ref: f76f3d21450997dc5f6acf1eccf70cdaf9d42940 # development convergence baseline
+          ref: d798b5c58df7966fda954dd93c1d6377c97cf58a # development convergence baseline
           path: _deps/odin-reasoner
           fetch-depth: 0
           persist-credentials: false

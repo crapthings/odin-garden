@@ -19,9 +19,12 @@ for a later graph-contract decision, not a published cross-project API.
 
 ## Identity and graph scope
 
-The fixture uses only IRIs. It makes **no** claim about blank-node identity
-across parser calls, stores, or snapshots; that needs a dedicated fixture
-before it can support graph extraction.
+The first closure fixture uses only IRIs. The separate
+[`blank-node-boundary` fixture](../fixtures/rdfs-core/blank-node-boundary/)
+now proves that one Turtle document's repeated blank-node spelling remains one
+non-zero-scoped blank node through reasoner ownership and a destroyed-source
+snapshot. It still makes **no** claim about blank-node identity across parser
+calls or source documents.
 
 The adapter exposes only a default graph. `Named` and `Any_Named` scans return
 `dataset.Invalid_View`; they are not reinterpreted as default-graph queries.

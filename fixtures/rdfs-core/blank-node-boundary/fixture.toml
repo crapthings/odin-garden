@@ -1,0 +1,27 @@
+id = "rdfs-core-blank-node-boundary"
+title = "Blank-node identity, duplicate ingestion, and immutable snapshot lifetime"
+version = 1
+source_file = "source.ttl"
+source_kind = "authored integration fixture"
+source_version = "1"
+source_date = "2026-07-24"
+asserting_party = "Odin Garden maintainers"
+provenance = "Authored by the Odin Garden maintainers to test one parser-scoped blank node through owned reasoner storage and an immutable SPARQL snapshot."
+license = "CC0-1.0"
+semantic_profile = "No inference is required. The fixture exercises odin-rdf Turtle ingestion, reasoner set semantics, and the default-graph SPARQL snapshot adapter."
+asserted_rdf = "asserted.nt"
+inferred_rdf = "inferred.nt"
+query_expectations = "../../../queries/rdfs-core/blank-node-boundary/README.md"
+verification_command = "sh scripts/verify-rdfs-sparql.sh"
+entity_identity = "The repeated _:same spelling occurs in one Turtle document and denotes one parser-scoped blank node. The fixture makes no claim that the same label in another parse call co-refers."
+contradiction_status = "No contradiction is asserted or expected."
+validity_period = "Not applicable: this is a timeless synthetic semantic fixture."
+
+[expectations]
+source_statements = 2
+distinct_asserted_triples = 1
+duplicates = 1
+inferred_triples = 0
+snapshot_quads = 1
+graph_scope = "default graph only"
+blank_node_scope = "The returned term remains a blank node with a non-zero parser scope after the source store is destroyed; it remains owned by the immutable snapshot until Snapshot.destroy."

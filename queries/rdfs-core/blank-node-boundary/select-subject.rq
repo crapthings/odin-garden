@@ -1,0 +1,3 @@
+SELECT ?subject WHERE {
+  ?subject <https://example.org/garden/knows> <https://example.org/garden/ada> .
+}

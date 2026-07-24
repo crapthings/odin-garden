@@ -1,0 +1,4 @@
+@prefix ex: <https://example.org/garden/> .
+
+_:same ex:knows ex:ada .
+_:same ex:knows ex:ada .

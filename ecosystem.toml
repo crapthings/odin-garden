@@ -31,6 +31,12 @@ revision = "76ec6b5f3ece65ff65131939106a5973333dd5f2"
 release = "v0.1.2"
 release_qualified = true
 
+[components.odin_graph]
+repository = "https://github.com/crapthings/odin-graph.git"
+revision = "5c970316ba2008a2fbfea388d1a8c6a56ae94a1f"
+release_qualified = false
+purpose = "candidate shared graph kernel plus optional SPARQL adapter; not yet a released dependency"
+
 [commands.rdfs_sparql_first_closure]
 description = "Run the pinned release-qualified RDFS closure to SPARQL integration fixture."
 command = "sh scripts/verify-rdfs-sparql.sh"

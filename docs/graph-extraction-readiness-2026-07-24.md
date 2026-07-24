@@ -62,6 +62,15 @@ observable behavior: duplicate-at-capacity success, failed-admission
 atomicity, freeze immutability, and graph-scoped scans. The document is a
 design input for Step 3, not an extracted implementation or an ADR reversal.
 
+## Candidate implementation evidence
+
+The experimental `odin-graph` repository now pins its own core tests and
+provides a separate optional SPARQL adapter. Garden ingests the synthetic TriG
+fixture into that graph, freezes it, and executes the fixture's exact named,
+variable named, and default-isolation queries through the adapter. This proves
+the candidate graph-to-SPARQL path without changing the released reasoner
+adapter or claiming a shared reasoner representation.
+
 ## Reassessment trigger
 
 Re-run this plan when an application supplies a named-graph use case, a second

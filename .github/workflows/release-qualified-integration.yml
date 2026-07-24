@@ -51,6 +51,13 @@ jobs:
           path: _deps/odin-sparql
           fetch-depth: 0
           persist-credentials: false
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        with:
+          repository: crapthings/odin-graph
+          ref: 5c970316ba2008a2fbfea388d1a8c6a56ae94a1f
+          path: _deps/odin-graph
+          fetch-depth: 0
+          persist-credentials: false
       - uses: laytan/setup-odin@8536d8fa450ec6f1bd9ddc84bbaaf16296c0051d # v2.12.2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -60,5 +67,6 @@ jobs:
           ln -s "$GITHUB_WORKSPACE/_deps/odin-rdf" "$GITHUB_WORKSPACE/../odin-rdf"
           ln -s "$GITHUB_WORKSPACE/_deps/odin-reasoner" "$GITHUB_WORKSPACE/../odin-reasoner"
           ln -s "$GITHUB_WORKSPACE/_deps/odin-sparql" "$GITHUB_WORKSPACE/../odin-sparql"
+          ln -s "$GITHUB_WORKSPACE/_deps/odin-graph" "$GITHUB_WORKSPACE/../odin-graph"
       - name: Verify the pinned RDFS-to-SPARQL integration path
         run: sh scripts/verify-rdfs-sparql.sh

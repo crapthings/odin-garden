@@ -26,14 +26,14 @@ jobs:
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         with:
           repository: crapthings/odin-rdf
-          ref: 4ddd470c04e0a688807509275eeeece5db02fb87 # OWL RL literal value relation dispatch
+          ref: 7c2ed37109860f7c68e299f50e3582d9f6304667 # OWL RL datetime literal value comparison
           path: _deps/odin-rdf
           fetch-depth: 0
           persist-credentials: false
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         with:
           repository: crapthings/odin-reasoner
-          ref: 70e0ee6a517241fc126bc2f3e81ff6566797e7ce # generalized OWL datatype contradictions
+          ref: 51b5bef7de994cf145f2abd9c6db15e41ad2b450 # synchronized RDF datetime value semantics
           path: _deps/odin-reasoner
           fetch-depth: 0
           persist-credentials: false

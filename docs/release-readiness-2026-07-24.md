@@ -63,3 +63,8 @@ asset, whose compiler identity is `dev-2026-07-nightly:ab0131c`; this replaces
 the initial local development build as the baseline compiler. This resolution
 does not satisfy the independent graph-extraction conditions for shared mutable
 semantics or a durable-store requirement.
+
+The retained [release-qualified Garden CI run 30076603206](https://github.com/crapthings/odin-garden/actions/runs/30076603206)
+passes the fixed baseline with five integration cases: RDFS closure queries,
+snapshot lifetime, default-graph scope and atomic limit, one-document
+blank-node identity, and cross-ingestion blank-node non-identity.

@@ -30,6 +30,14 @@ calls are distinct blank nodes, while repeated labels within one document are
 identical.  The fixture is evidence for the current adapter contract, not
 proof that the two consumers share an in-memory graph implementation.
 
+The component-level identity rules are also directly regression-tested:
+`odin-reasoner/reasoner/term/dictionary_test.odin` checks language-tag
+case-folding and blank-node scope in its interned dictionary, while
+`odin-sparql/tests/dataset/dataset_test.odin` checks the corresponding
+`Memory_Dataset` set and scan behavior.  The latter is current-main regression
+evidence, not part of the pinned `v0.1.1` Garden release baseline; a future
+baseline must publish and pin it before treating it as release-qualified.
+
 ## Decision
 
 Keep the reasoner store, the reasoner-to-SPARQL snapshot adapter, and

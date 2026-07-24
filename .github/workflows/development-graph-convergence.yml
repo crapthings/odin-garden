@@ -33,7 +33,7 @@ jobs:
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         with:
           repository: crapthings/odin-reasoner
-          ref: bdce150f23b8b37f947df75d2add6ab5bf27a2f2 # OWL RL literal value relation dispatch
+          ref: d7c8ef704ba59d81719dad1b229e3584fdf609b4 # generalized OWL materialization path
           path: _deps/odin-reasoner
           fetch-depth: 0
           persist-credentials: false

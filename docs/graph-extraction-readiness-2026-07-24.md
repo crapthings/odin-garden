@@ -69,7 +69,11 @@ provides a separate optional SPARQL adapter. Garden ingests the synthetic TriG
 fixture into that graph, freezes it, and executes the fixture's exact named,
 variable named, and default-isolation queries through the adapter. This proves
 the candidate graph-to-SPARQL path without changing the released reasoner
-adapter or claiming a shared reasoner representation.
+adapter or claiming a shared reasoner representation. A separate copying
+Reasoner closure prototype now produces the same Garden SELECT, ASK, and
+CONSTRUCT results as the existing reasoner Snapshot after the source Store is
+destroyed. It is migration evidence only: it neither reuses the Store's
+indexes nor broadens the reasoner's default-graph-only public contract.
 
 ## Reassessment trigger
 

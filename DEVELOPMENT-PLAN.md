@@ -70,8 +70,7 @@ revision produced a result. No integration check silently follows moving
 - [x] Expected asserted and inferred triples, including provenance expectations.
 - [x] SPARQL `SELECT`, `ASK`, and `CONSTRUCT` queries over the same immutable
   closure snapshot.
-- [x] A single reproducible release-qualified local verification command. CI
-  configuration remains pending.
+- [x] A reproducible release-qualified local verification command and CI gate.
 
 ### Acceptance
 

@@ -14,6 +14,11 @@ identities before executing the fixture. It supplies release-qualified local
 integration evidence for the documented RDFS Core default-graph path; it does
 not satisfy the separate shared-graph extraction gate.
 
+GitHub Actions runs the same command against those exact component commits in
+the `Release-qualified integration` workflow. The workflow installs the pinned
+`dev-2026-07` Odin release and recreates the documented adjacent-checkout
+layout without following any component branch.
+
 ## Supported combinations
 
 The current baseline is supported for its documented local integration path.

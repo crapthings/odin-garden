@@ -88,6 +88,12 @@ The staged execution plan is in [DEVELOPMENT-PLAN.md](DEVELOPMENT-PLAN.md).
 It includes the explicit decision gate for any future `odin-graph` or
 `odin-store` extraction.
 
+The current ecosystem boundary is documented in
+[docs/architecture.md](docs/architecture.md). The decision to defer both
+runtime extractions, then create `odin-graph` before any future `odin-store`,
+is recorded in
+[ADR 0001](docs/adr/0001-defer-odin-graph.md).
+
 ## License
 
 License information will be added before the first public release.

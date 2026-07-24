@@ -47,7 +47,7 @@ jobs:
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         with:
           repository: crapthings/odin-sparql
-          ref: 76ec6b5f3ece65ff65131939106a5973333dd5f2 # v0.1.2
+          ref: d8503a652539497f2f6622cee04c899ef3bfeb0f # v0.2.0
           path: _deps/odin-sparql
           fetch-depth: 0
           persist-credentials: false

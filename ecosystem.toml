@@ -27,8 +27,8 @@ release_qualified = true
 
 [components.odin_sparql]
 repository = "https://github.com/crapthings/odin-sparql.git"
-revision = "76ec6b5f3ece65ff65131939106a5973333dd5f2"
-release = "v0.1.2"
+revision = "d8503a652539497f2f6622cee04c899ef3bfeb0f"
+release = "v0.2.0"
 release_qualified = true
 
 [components.odin_graph]

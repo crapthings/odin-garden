@@ -8,9 +8,10 @@ The authoritative decision criteria remain [ADR 0002](adr/0002-retain-local-stor
 
 ## Verified starting point
 
-Garden currently pins released `odin-rdf v0.31.1`, `odin-reasoner v0.3.0`, and
-`odin-sparql v0.1.2`. Its [release-qualified CI run 30080807670](https://github.com/crapthings/odin-garden/actions/runs/30080807670)
-passes eight integration tests.
+Garden currently pins released `odin-rdf v0.31.1`, `odin-reasoner v0.3.0`,
+`odin-sparql v0.2.0`, and experimental `odin-graph v0.1.0`. Its
+release-qualified gate includes both the established closure path and the
+public graph-backed SPARQL Dataset consumer path.
 
 The direct reasoner-to-SPARQL path now has a Store-adopting immutable Snapshot
 that retains reasoner-owned terms and indexes without a second Dataset copy.
@@ -68,8 +69,11 @@ Released `odin-graph v0.1.0` pins its own core tests and provides separate
 optional SPARQL and Reasoner migration adapters. Garden ingests the synthetic
 TriG fixture into that graph, freezes it, and executes the fixture's exact
 named, variable named, and default-isolation queries through the SPARQL
-adapter. This proves the released graph-to-SPARQL path without changing the
-released reasoner adapter or claiming a shared reasoner representation. A
+adapter. Released `odin-sparql v0.2.0` also exposes that path as the opt-in
+public `sparql/graph_dataset` package, which Garden consumes against the same
+fixture. This proves the released graph-to-SPARQL consumer boundary without
+changing the released reasoner adapter or claiming a shared reasoner
+representation. A
 separate copying Reasoner closure prototype now produces the same Garden
 SELECT, ASK, and CONSTRUCT results as the existing reasoner Snapshot after the
 source Store is destroyed. It is migration evidence only: it neither reuses

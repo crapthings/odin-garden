@@ -36,7 +36,7 @@ The component-level identity rules are also directly regression-tested:
 case-folding and blank-node scope in its interned dictionary, while
 `odin-sparql/tests/dataset/dataset_test.odin` checks the corresponding
 `Memory_Dataset` set and scan behavior. The latter is released in
-`odin-sparql v0.1.2` and now independently exercised by the pinned Garden
+`odin-sparql v0.2.0` and now independently exercised by the pinned Garden
 gate, so the value-identity comparison is release-qualified.
 
 The limit/error differences are semantic, not merely naming differences.
@@ -101,10 +101,10 @@ not satisfy the extraction gate.
 graph-scoped views, and optional adapters. Garden's released-component gate
 pins that tag and proves two paths: the multi-source TriG fixture executes
 exact named, variable named, and default-isolation SPARQL queries through the
-graph adapter; and a copying Reasoner-closure adapter produces the same RDFS
-Core SELECT, ASK, and CONSTRUCT results as the existing reasoner Snapshot
-after the source Store is destroyed. The fully pinned run is
-[30082635758](https://github.com/crapthings/odin-garden/actions/runs/30082635758).
+graph adapter; `odin-sparql v0.2.0` exposes the same graph through its opt-in
+public `sparql/graph_dataset` Dataset package; and a copying Reasoner-closure
+adapter produces the same RDFS Core SELECT, ASK, and CONSTRUCT results as the
+existing reasoner Snapshot after the source Store is destroyed.
 
 This is material migration evidence, not a reversal of the decision above.
 The Reasoner adapter copies its completed closure into the graph and therefore
@@ -137,11 +137,10 @@ runtime storage.
 ## Evidence and rollout
 
 The comparison uses `odin-rdf v0.31.1` (`daa3505`), `odin-reasoner v0.3.0`
-(`c62ebd8`), and `odin-sparql v0.1.2` (`76ec6b5`) under the pinned
-`dev-2026-07-nightly:ab0131c` Odin compiler. Garden CI run
-[30080807670](https://github.com/crapthings/odin-garden/actions/runs/30080807670)
-verifies the v0.1.2 release tag and passes all eight integration tests,
-including the external `Memory_Dataset` identity and graph-scan case.
+(`c62ebd8`), `odin-sparql v0.2.0` (`d8503a6`), and `odin-graph v0.1.0`
+(`8c34912`) under the pinned `dev-2026-07-nightly:ab0131c` Odin compiler.
+The Garden gate verifies each release tag, including the external
+`Memory_Dataset` identity and graph-backed Dataset graph-scan cases.
 
 Re-run `scripts/verify-rdfs-sparql.sh` from Garden whenever any pinned
 component, the adapter, or a listed fixture changes.  Revisit this ADR only

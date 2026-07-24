@@ -30,12 +30,12 @@ require_release_tag() {
 
 require_revision ../odin-rdf daa350521a8ad9f79012bb1fefa96cf00938f3f1
 require_revision ../odin-reasoner c62ebd8b5070eeb44c5b818bc30698b4f0da0b26
-require_revision ../odin-sparql 76ec6b5f3ece65ff65131939106a5973333dd5f2
+require_revision ../odin-sparql d8503a652539497f2f6622cee04c899ef3bfeb0f
 require_revision ../odin-graph 8c349129a75551335bb10685ead4709951155406
 
 require_release_tag ../odin-rdf v0.31.1 daa350521a8ad9f79012bb1fefa96cf00938f3f1
 require_release_tag ../odin-reasoner v0.3.0 c62ebd8b5070eeb44c5b818bc30698b4f0da0b26
-require_release_tag ../odin-sparql v0.1.2 76ec6b5f3ece65ff65131939106a5973333dd5f2
+require_release_tag ../odin-sparql v0.2.0 d8503a652539497f2f6622cee04c899ef3bfeb0f
 require_release_tag ../odin-graph v0.1.0 8c349129a75551335bb10685ead4709951155406
 
 expected_odin='dev-2026-07-nightly:ab0131c'

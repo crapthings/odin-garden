@@ -21,9 +21,11 @@ indexed live View while the source Store remains alive. It is a compatibility
 guarantee for that integration command, not graph-extraction success or a
 general shared-store API guarantee.
 
-The current local shared-path verification evidence is recorded in
-[release readiness — 2026-07-24](release-readiness-2026-07-24.md).
-Its RDF component is backed by the published release commit's successful
+The current release-qualified shared-path verification is
+[Garden CI run 30078806936](https://github.com/crapthings/odin-garden/actions/runs/30078806936).
+The initial release-readiness record remains in
+[release readiness — 2026-07-24](release-readiness-2026-07-24.md), and its RDF
+component is backed by the published release commit's successful
 [W3C CI job](https://github.com/crapthings/odin-rdf/actions/runs/30075331131).
 
 ## Release checklist

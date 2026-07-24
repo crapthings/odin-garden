@@ -103,10 +103,9 @@ unified limit/error model, and it does not satisfy the extraction gate.
 The comparison uses `odin-rdf v0.31.1` (`daa3505`), `odin-reasoner v0.2.0`
 (`010c8cf`), and `odin-sparql v0.1.1` (`fcba9b6`) under the pinned
 `dev-2026-07-nightly:ab0131c` Odin compiler.  Garden CI run
-[30077117814](https://github.com/crapthings/odin-garden/actions/runs/30077117814)
-is the prior snapshot-only release baseline. The next Garden CI run verifies
-the updated declared tags and commits, then covers the additional live-view
-result-equivalence case.
+[30078806936](https://github.com/crapthings/odin-garden/actions/runs/30078806936)
+verifies the updated declared release tags and commits, then passes all six
+integration tests, including live-view/immutable-snapshot result equivalence.
 
 Re-run `scripts/verify-rdfs-sparql.sh` from Garden whenever any pinned
 component, the adapter, or a listed fixture changes.  Revisit this ADR only

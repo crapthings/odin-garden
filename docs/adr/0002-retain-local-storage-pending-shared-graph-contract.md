@@ -115,11 +115,13 @@ two-consumer no-copy/indexed convergence before components replace their local
 runtime storage.
 
 The current development Graph has freeze-time candidate indexes and retains
-asserted/inferred first origin metadata from the copied Reasoner closure. Its
-separate [development convergence run 30085395000](https://github.com/crapthings/odin-garden/actions/runs/30085395000)
-checks all fourteen facts in the RDFS Core fixture. That check is intentionally
-not a release-qualified claim: it does not retain Store term/fact IDs,
-derivation supports, or no-copy index ownership.
+asserted/inferred first origin plus opaque first-rule and support metadata from
+the copied Reasoner closure. Its separate
+[development convergence run 30085650816](https://github.com/crapthings/odin-garden/actions/runs/30085650816)
+checks all fourteen facts and every RDFS Materializer derivation in the
+fixture. That check is intentionally not a release-qualified claim: it does
+not retain Store term/fact IDs, live Materializer ownership, or no-copy index
+ownership.
 
 ## Consequences
 

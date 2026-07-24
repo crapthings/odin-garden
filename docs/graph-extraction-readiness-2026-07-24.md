@@ -83,11 +83,12 @@ contract.
 
 The current development Graph source also builds immutable scan candidate
 indexes at freeze time and retains each copied closure fact's asserted/inferred
-first origin. [Development convergence CI run 30085395000](https://github.com/crapthings/odin-garden/actions/runs/30085395000)
-checks every fact in the fourteen-fact RDFS Core fixture against the source
-Store's origin. This is deliberately a separate exact-source development gate,
-not a release-qualified baseline and not evidence of no-copy ownership or
-Reasoner provenance-derivation reuse.
+first origin plus its opaque first rule and supporting Graph facts.
+[Development convergence CI run 30085650816](https://github.com/crapthings/odin-garden/actions/runs/30085650816)
+checks every fact and every RDFS derivation record in the fourteen-fact fixture
+against the source Store and Materializer. This is deliberately a separate
+exact-source development gate, not a release-qualified baseline and not
+evidence of no-copy ownership or Reasoner provenance-derivation reuse.
 
 ## Reassessment trigger
 

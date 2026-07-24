@@ -64,16 +64,17 @@ design input for Step 3, not an extracted implementation or an ADR reversal.
 
 ## Candidate implementation evidence
 
-The experimental `odin-graph` repository now pins its own core tests and
-provides a separate optional SPARQL adapter. Garden ingests the synthetic TriG
-fixture into that graph, freezes it, and executes the fixture's exact named,
-variable named, and default-isolation queries through the adapter. This proves
-the candidate graph-to-SPARQL path without changing the released reasoner
-adapter or claiming a shared reasoner representation. A separate copying
-Reasoner closure prototype now produces the same Garden SELECT, ASK, and
-CONSTRUCT results as the existing reasoner Snapshot after the source Store is
-destroyed. It is migration evidence only: it neither reuses the Store's
-indexes nor broadens the reasoner's default-graph-only public contract.
+Released `odin-graph v0.1.0` pins its own core tests and provides separate
+optional SPARQL and Reasoner migration adapters. Garden ingests the synthetic
+TriG fixture into that graph, freezes it, and executes the fixture's exact
+named, variable named, and default-isolation queries through the SPARQL
+adapter. This proves the released graph-to-SPARQL path without changing the
+released reasoner adapter or claiming a shared reasoner representation. A
+separate copying Reasoner closure prototype now produces the same Garden
+SELECT, ASK, and CONSTRUCT results as the existing reasoner Snapshot after the
+source Store is destroyed. It is migration evidence only: it neither reuses
+the Store's indexes nor broadens the reasoner's default-graph-only public
+contract.
 
 ## Reassessment trigger
 

@@ -14,9 +14,27 @@ require_revision() {
   fi
 }
 
+require_release_tag() {
+	path=$1
+	tag=$2
+	expected=$3
+	actual=$(git -C "$path" rev-parse "$tag^{commit}" 2>/dev/null) || {
+		printf '%s\n' "expected $path to contain release tag $tag" >&2
+		exit 1
+	}
+	if [ "$actual" != "$expected" ]; then
+		printf '%s\n' "expected $path tag $tag at $expected, found $actual" >&2
+		exit 1
+	fi
+}
+
 require_revision ../odin-rdf daa350521a8ad9f79012bb1fefa96cf00938f3f1
 require_revision ../odin-reasoner 3ac9267f8651eb9add25b13ac8e12b952e63a959
 require_revision ../odin-sparql fcba9b6ffd542f246bf026d69dbd045624315c8d
+
+require_release_tag ../odin-rdf v0.31.1 daa350521a8ad9f79012bb1fefa96cf00938f3f1
+require_release_tag ../odin-reasoner v0.1.0 3ac9267f8651eb9add25b13ac8e12b952e63a959
+require_release_tag ../odin-sparql v0.1.1 fcba9b6ffd542f246bf026d69dbd045624315c8d
 
 expected_odin='dev-2026-07-nightly:ab0131c'
 actual_odin=$(odin version)

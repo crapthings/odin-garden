@@ -7,6 +7,10 @@ only after all listed revisions are published, every relevant Garden command
 passes, and its component entries are `release_qualified = true` in
 [`../ecosystem.toml`](../ecosystem.toml).
 
+`verify-rdfs-sparql.sh` verifies both each pinned commit and its declared
+release tag, so a matching SHA without the corresponding published tag cannot
+qualify the baseline.
+
 | Baseline | Odin | odin-rdf | odin-reasoner | odin-sparql | Garden gate | Status |
 | --- | --- | --- | --- | --- | --- | --- |
 | `rdfs-sparql-first-closure` | `dev-2026-07-nightly:ab0131c` | `daa3505` (`v0.31.1`) | `3ac9267` (`v0.1.0`) | `fcba9b6` (`v0.1.1`) | `verify-rdfs-sparql.sh` | Release-qualified local integration path |

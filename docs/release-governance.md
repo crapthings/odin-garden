@@ -9,7 +9,7 @@ passes, and its component entries are `release_qualified = true` in
 
 | Baseline | Odin | odin-rdf | odin-reasoner | odin-sparql | Garden gate | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| `rdfs-sparql-first-closure` | `dev-2026-07:819fdc7a8` | `daa3505` (`v0.31.1`) | `3ac9267` (`v0.1.0`) | `fcba9b6` (`v0.1.1`) | `verify-rdfs-sparql.sh` | Release-qualified local integration path |
+| `rdfs-sparql-first-closure` | `dev-2026-07-nightly:ab0131c` | `daa3505` (`v0.31.1`) | `3ac9267` (`v0.1.0`) | `fcba9b6` (`v0.1.1`) | `verify-rdfs-sparql.sh` | Release-qualified local integration path |
 
 This row is limited to the documented default-graph RDFS closure path. It is a
 compatibility guarantee for that integration command, not graph-extraction

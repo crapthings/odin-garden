@@ -7,7 +7,7 @@ release commits; see the resolution below.
 
 ## Environment
 
-- Odin compiler: `dev-2026-07:819fdc7a8`
+- Odin compiler used for the initial local audit: `dev-2026-07:819fdc7a8`
 - `odin-rdf`: `acb3a190371e8679a2a35a3d4668ec166ec24891`
 - `odin-reasoner`: `a46a693f30b00360d6adcf761188cdef681959e1`
 - `odin-sparql`: `00acabd46113676820a55955328b5532149fbf47`
@@ -52,5 +52,8 @@ The release blockers above were resolved on 2026-07-24:
 - `odin-sparql v0.1.1` at `fcba9b6ffd542f246bf026d69dbd045624315c8d`.
 
 The Garden matrix now records those releases and its local integration gate
-passes. This resolution does not satisfy the independent graph-extraction
-conditions for shared mutable semantics or a durable-store requirement.
+passes. The reproducible CI matrix uses the official `dev-2026-07` release
+asset, whose compiler identity is `dev-2026-07-nightly:ab0131c`; this replaces
+the initial local development build as the baseline compiler. This resolution
+does not satisfy the independent graph-extraction conditions for shared mutable
+semantics or a durable-store requirement.

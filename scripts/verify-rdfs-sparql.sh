@@ -18,7 +18,7 @@ require_revision ../odin-rdf daa350521a8ad9f79012bb1fefa96cf00938f3f1
 require_revision ../odin-reasoner 3ac9267f8651eb9add25b13ac8e12b952e63a959
 require_revision ../odin-sparql fcba9b6ffd542f246bf026d69dbd045624315c8d
 
-expected_odin='dev-2026-07:819fdc7a8'
+expected_odin='dev-2026-07-nightly:ab0131c'
 actual_odin=$(odin version)
 actual_odin=${actual_odin##* version }
 if [ "$actual_odin" != "$expected_odin" ]; then

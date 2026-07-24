@@ -29,20 +29,25 @@ Error :: enum {
 }
 
 Graph    :: struct { /* owned mutable Dataset set */ }
-Snapshot :: struct { /* owned immutable Dataset set */ }
+View     :: struct { /* borrowed frozen Graph handle */ }
+Graph_Mode   :: enum { Default, Named, Any_Named }
+Quad_Pattern :: struct { /* graph, subject, predicate, object selectors */ }
+Scan_Sink    :: #type proc(rdf.Quad, rawptr) -> bool
 
 init    :: proc(graph: ^Graph, options: Options = {}) -> Error
 add     :: proc(graph: ^Graph, quad: rdf.Quad) -> Error
 freeze  :: proc(graph: ^Graph) -> Error
-view    :: proc(graph: ^Graph) -> (dataset.View, Error)
+view    :: proc(graph: ^Graph) -> (View, Error)
+scan    :: proc(view: View, pattern: Quad_Pattern, sink: Scan_Sink, data: rawptr = nil) -> Error
 destroy :: proc(graph: ^Graph)
 ```
 
 `Graph` changes state only through `add` before `freeze`. `freeze` is
-idempotent, does not copy the Dataset, and makes `view` available. A view
+idempotent, does not copy the Dataset, and makes `view` available. A View
 borrows terms from its owner and remains valid only until `destroy`; owners
-must not mutate a Graph during a scan or SPARQL evaluation. `Snapshot` is the
-future name for the frozen ownership state, not an additional copy operation.
+must not mutate a Graph during a scan. The kernel deliberately does not import
+`odin-sparql`; the next-stage SPARQL adapter maps this View and scan callback
+onto `dataset.custom_view`.
 
 The view observes RDF Dataset set semantics: exact duplicates are successful
 no-ops, including when a capacity bound has been reached. `Default` selects
@@ -70,11 +75,11 @@ first public API.
 | Add after `freeze` | `Sealed` | Frozen contents unchanged | Dataset already has this behavior. |
 | Duplicate at any capacity | `None` | Contents and resource counters unchanged | Dataset and Store already deduplicate. |
 
-`dataset.Invalid_View` and `dataset.Invalid_Sink` remain scan-wrapper errors,
-not graph-admission errors. A full shared Graph view supports all three graph
-modes. The existing reasoner adapter continues to return `Invalid_View` for
-named modes until the reasoner itself adopts named-graph ingestion and closure
-semantics.
+`Invalid_View` and `Invalid_Sink` are scan-wrapper errors, not graph-admission
+errors. A full shared Graph view supports all three graph modes. The SPARQL
+adapter maps those failures to its public Dataset errors. The existing reasoner
+adapter continues to return `dataset.Invalid_View` for named modes until the
+reasoner itself adopts named-graph ingestion and closure semantics.
 
 ## Migration notes
 

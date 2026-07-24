@@ -55,8 +55,8 @@ odin-garden   -> no runtime dependency
 `dataset.custom_view`. This is an adapter boundary, not an endorsement of a
 particular storage implementation. `odin-reasoner` already makes a bounded,
 transactional working copy while calculating a closure. That is an inference
-correctness mechanism, not a public transaction API. Current unreleased
-reasoner main also supplies an indexed *live borrowed* view over its store;
+correctness mechanism, not a public transaction API. Released
+`odin-reasoner v0.2.0` also supplies an indexed *live borrowed* view over its store;
 it reuses the store's scan path but cannot outlive or be mutated independently
 of that store, so it is not the common immutable snapshot proposed here.
 
@@ -127,8 +127,8 @@ to extract either runtime layer:
 
 | Gate | Status | Evidence / gap |
 | --- | --- | --- |
-| Common owned terms and snapshot semantics | Not met | Value equality is compatible.  Unreleased reasoner main can expose a live indexed view that borrows the store's owned terms, but the public immutable SPARQL snapshot remains a second owned quad copy.  See ADR 0002. |
-| Pinned closure-to-query integration | Met | Garden pins released `odin-rdf v0.31.1`, `odin-reasoner v0.1.0`, and `odin-sparql v0.1.1`; CI passes RDFS Core closure, lifecycle, graph-scope, limit, and cross-ingestion blank-node cases through the immutable snapshot adapter. |
+| Common owned terms and snapshot semantics | Not met | Value equality is compatible.  Released reasoner v0.2.0 can expose a live indexed view that borrows the store's owned terms, but the public immutable SPARQL snapshot remains a second owned quad copy.  See ADR 0002. |
+| Pinned closure-to-query integration | Met locally; CI pending | Garden pins released `odin-rdf v0.31.1`, `odin-reasoner v0.2.0`, and `odin-sparql v0.1.1`; the local gate passes closure, lifecycle, graph-scope, limit, blank-node, and live-view/snapshot result-equivalence cases. |
 | Minimal API from existing use cases | Not met | Reasoner needs indexed default-graph triple closure; SPARQL needs graph-scoped read scans.  The new live view demonstrates indexed reuse only for default graph while the immutable adapter remains copying and linear; named-graph support and error/limit behavior are not shared. |
 | Durable-store requirement | Not met | There is no approved persistence, restart, multi-writer, or isolation requirement. |
 

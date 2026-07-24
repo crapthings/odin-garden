@@ -60,24 +60,23 @@ adapter.  It must reject unsupported graph modes explicitly and keep its
 all-or-nothing `Quad_Limit` behavior.  It is not a provisional public graph
 kernel.
 
-## Post-baseline candidate evidence
+## Released convergence evidence
 
-Current `odin-reasoner` main adds `indexed_view`, a borrowing `dataset.View`
+`odin-reasoner v0.2.0` (`010c8cf`) adds `indexed_view`, a borrowing `dataset.View`
 that calls the reasoner store's indexed `match` path directly.  Its adapter
 tests prove that it preserves store-owned term and blank-node identity while
 the source store remains alive, rejects named graph modes, and produces the
 same public SPARQL query results as the immutable `Snapshot` for its covered
-default-graph cases.  The cross-platform and strict/ASan CI run is
-[30078249090](https://github.com/crapthings/odin-reasoner/actions/runs/30078249090).
+default-graph cases.  Its release-commit CI run is
+[30078528810](https://github.com/crapthings/odin-reasoner/actions/runs/30078528810).
+Garden now adds a release-pinned RDFS closure comparison using both views.
 
-This is useful convergence evidence, but it is deliberately **not** part of
-the release-qualified Garden baseline: it is an unreleased main-branch change
-and a live borrowed view.  Callers must retain the source `Store` and must not
-mutate it during a scan or query.  `Snapshot` is still the independent,
-immutable copy that outlives the source store.  Consequently this candidate
-does not yet provide a common immutable snapshot, named/any-named graph
-semantics, or a unified limit/error model, and it does not satisfy the
-extraction gate.
+This is useful release-qualified convergence evidence, but it remains a live
+borrowed view.  Callers must retain the source `Store` and must not mutate it
+during a scan or query.  `Snapshot` is still the independent, immutable copy
+that outlives the source store.  Consequently this release does not yet
+provide a common immutable snapshot, named/any-named graph semantics, or a
+unified limit/error model, and it does not satisfy the extraction gate.
 
 ## Consequences
 
@@ -92,7 +91,8 @@ extraction gate.
 ### Costs and risks
 
 - The closure adapter continues to allocate copied RDF terms and quads.
-- Querying a reasoner closure does not currently reuse the reasoner indexes.
+- The immutable closure adapter continues to allocate copied RDF terms and
+  quads; only the live view reuses the reasoner indexes.
 - Named-graph queries cannot be served by this closure adapter until a
   production requirement defines their closure semantics.
 - A future shared kernel needs a migration comparison against the existing
@@ -100,13 +100,13 @@ extraction gate.
 
 ## Evidence and rollout
 
-The comparison uses `odin-rdf v0.31.1` (`daa3505`), `odin-reasoner v0.1.0`
-(`3ac9267`), and `odin-sparql v0.1.1` (`fcba9b6`) under the pinned
+The comparison uses `odin-rdf v0.31.1` (`daa3505`), `odin-reasoner v0.2.0`
+(`010c8cf`), and `odin-sparql v0.1.1` (`fcba9b6`) under the pinned
 `dev-2026-07-nightly:ab0131c` Odin compiler.  Garden CI run
 [30077117814](https://github.com/crapthings/odin-garden/actions/runs/30077117814)
-verifies the declared release tags and commits, then passes all five
-release-qualified integration tests, including the cross-ingestion blank-node
-case.
+is the prior snapshot-only release baseline. The next Garden CI run verifies
+the updated declared tags and commits, then covers the additional live-view
+result-equivalence case.
 
 Re-run `scripts/verify-rdfs-sparql.sh` from Garden whenever any pinned
 component, the adapter, or a listed fixture changes.  Revisit this ADR only

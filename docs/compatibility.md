@@ -5,7 +5,7 @@
 `ecosystem.toml` is the authoritative, machine-readable record for every
 Garden integration run. The current baseline is a fixed
 **release-qualified component combination**: `odin-rdf v0.31.1`,
-`odin-reasoner v0.1.0`, and `odin-sparql v0.1.1`. The Odin compiler remains a
+`odin-reasoner v0.2.0`, and `odin-sparql v0.1.1`. The Odin compiler remains a
 pinned development build and is recorded exactly rather than treated as a
 moving dependency.
 

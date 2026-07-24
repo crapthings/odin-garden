@@ -25,7 +25,7 @@ permissions:
 
 jobs:
   rdfs-sparql:
-    name: RDFS closure to SPARQL snapshot
+    name: RDFS closure to SPARQL views
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -40,7 +40,7 @@ jobs:
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         with:
           repository: crapthings/odin-reasoner
-          ref: 3ac9267f8651eb9add25b13ac8e12b952e63a959 # v0.1.0
+          ref: 010c8cff5720978885dc0be68cea8acee5f4c70a # v0.2.0
           path: _deps/odin-reasoner
           fetch-depth: 0
           persist-credentials: false

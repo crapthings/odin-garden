@@ -21,8 +21,8 @@ release_qualified = true
 
 [components.odin_reasoner]
 repository = "https://github.com/crapthings/odin-reasoner.git"
-revision = "3ac9267f8651eb9add25b13ac8e12b952e63a959"
-release = "v0.1.0"
+revision = "010c8cff5720978885dc0be68cea8acee5f4c70a"
+release = "v0.2.0"
 release_qualified = true
 
 [components.odin_sparql]

@@ -13,11 +13,13 @@ qualify the baseline.
 
 | Baseline | Odin | odin-rdf | odin-reasoner | odin-sparql | Garden gate | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| `rdfs-sparql-first-closure` | `dev-2026-07-nightly:ab0131c` | `daa3505` (`v0.31.1`) | `3ac9267` (`v0.1.0`) | `fcba9b6` (`v0.1.1`) | `verify-rdfs-sparql.sh` | Release-qualified local integration path |
+| `rdfs-sparql-first-closure` | `dev-2026-07-nightly:ab0131c` | `daa3505` (`v0.31.1`) | `010c8cf` (`v0.2.0`) | `fcba9b6` (`v0.1.1`) | `verify-rdfs-sparql.sh` | Release-qualified local integration path |
 
-This row is limited to the documented default-graph RDFS closure path. It is a
-compatibility guarantee for that integration command, not graph-extraction
-success or a general shared-store API guarantee.
+This row is limited to the documented default-graph RDFS closure path. It
+checks both the independent immutable snapshot and the released borrowed,
+indexed live View while the source Store remains alive. It is a compatibility
+guarantee for that integration command, not graph-extraction success or a
+general shared-store API guarantee.
 
 The current local shared-path verification evidence is recorded in
 [release readiness — 2026-07-24](release-readiness-2026-07-24.md).

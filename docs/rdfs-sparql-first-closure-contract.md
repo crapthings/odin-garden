@@ -17,6 +17,14 @@ for a later graph-contract decision, not a published cross-project API.
    SELECT, ASK, and CONSTRUCT execute. Terms supplied by its Dataset view remain
    borrowed from the snapshot and are valid only until `Snapshot.destroy`.
 
+The release-qualified `odin-reasoner v0.2.0` baseline adds a distinct live
+path: `sparql_adapter.indexed_view` borrows the source Store's owned terms and
+reuses its indexed matching operation without materializing a second dataset.
+The Garden equivalence test executes SELECT, ASK, and CONSTRUCT through that
+View and the immutable `Snapshot` over the same RDFS closure. The live View is
+valid only while its source Store stays alive and unmodified; it is not an
+alternative immutable snapshot.
+
 ## Identity and graph scope
 
 The first closure fixture uses only IRIs. The separate

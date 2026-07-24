@@ -139,8 +139,9 @@ runtime storage.
 The comparison uses `odin-rdf v0.31.1` (`daa3505`), `odin-reasoner v0.3.0`
 (`c62ebd8`), `odin-sparql v0.2.0` (`d8503a6`), and `odin-graph v0.1.0`
 (`8c34912`) under the pinned `dev-2026-07-nightly:ab0131c` Odin compiler.
-The Garden gate verifies each release tag, including the external
-`Memory_Dataset` identity and graph-backed Dataset graph-scan cases.
+The [Garden CI run 30083966449](https://github.com/crapthings/odin-garden/actions/runs/30083966449)
+verifies each release tag, including the external `Memory_Dataset` identity
+and graph-backed Dataset graph-scan cases.
 
 Re-run `scripts/verify-rdfs-sparql.sh` from Garden whenever any pinned
 component, the adapter, or a listed fixture changes.  Revisit this ADR only

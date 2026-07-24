@@ -10,8 +10,9 @@ The authoritative decision criteria remain [ADR 0002](adr/0002-retain-local-stor
 
 Garden currently pins released `odin-rdf v0.31.1`, `odin-reasoner v0.3.0`,
 `odin-sparql v0.2.0`, and experimental `odin-graph v0.1.0`. Its
-release-qualified gate includes both the established closure path and the
-public graph-backed SPARQL Dataset consumer path.
+[release-qualified CI run 30083966449](https://github.com/crapthings/odin-garden/actions/runs/30083966449)
+includes both the established closure path and the public graph-backed SPARQL
+Dataset consumer path.
 
 The direct reasoner-to-SPARQL path now has a Store-adopting immutable Snapshot
 that retains reasoner-owned terms and indexes without a second Dataset copy.

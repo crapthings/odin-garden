@@ -124,9 +124,9 @@ to extract either runtime layer:
 
 | Gate | Status | Evidence / gap |
 | --- | --- | --- |
-| Common owned terms and snapshot semantics | Not met | The reasoner owns an internal triple representation; SPARQL consumes borrowed RDF quads from a read-only external view. |
-| Pinned closure-to-query integration | Met for the documented local path | Garden pins released `odin-rdf v0.31.1`, `odin-reasoner v0.1.0`, and `odin-sparql v0.1.1`; its RDFS Core default-graph fixture passes through the immutable snapshot adapter. |
-| Minimal API from existing use cases | Not met | Reasoner needs default-graph closure; SPARQL needs graph-scoped read scans. Their shared mutable semantics are not established. |
+| Common owned terms and snapshot semantics | Not met | Value equality is compatible, but the reasoner owns an interned triple store and the SPARQL adapter makes a second owned quad snapshot.  See ADR 0002. |
+| Pinned closure-to-query integration | Met | Garden pins released `odin-rdf v0.31.1`, `odin-reasoner v0.1.0`, and `odin-sparql v0.1.1`; CI passes RDFS Core closure, lifecycle, graph-scope, limit, and cross-ingestion blank-node cases through the immutable snapshot adapter. |
+| Minimal API from existing use cases | Not met | Reasoner needs indexed default-graph triple closure; SPARQL needs graph-scoped read scans.  The adapter is a copying, linear default-graph view and named-graph support is not shared. |
 | Durable-store requirement | Not met | There is no approved persistence, restart, multi-writer, or isolation requirement. |
 
 The completed Garden fixture is decision evidence, not extraction approval.

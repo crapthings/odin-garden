@@ -26,14 +26,14 @@ jobs:
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         with:
           repository: crapthings/odin-rdf
-          ref: a4024ddec94fbdcd810631206752d87c5595120f # development convergence baseline
+          ref: dc37feb31d5c585f69f85d0b7f5cd4d5bf9cce4e # shared OWL RL datatype registry
           path: _deps/odin-rdf
           fetch-depth: 0
           persist-credentials: false
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         with:
           repository: crapthings/odin-reasoner
-          ref: 86d106118663c6dc0200c8fb4b807edff8990b8d # development convergence baseline
+          ref: afe329dc9e33e2e23bc1bb11b945b9b0b75d3a2c # shared OWL RL datatype registry
           path: _deps/odin-reasoner
           fetch-depth: 0
           persist-credentials: false

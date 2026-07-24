@@ -107,10 +107,10 @@ not satisfy the extraction gate.
 
 The comparison uses `odin-rdf v0.31.1` (`daa3505`), `odin-reasoner v0.3.0`
 (`c62ebd8`), and `odin-sparql v0.1.1` (`fcba9b6`) under the pinned
-`dev-2026-07-nightly:ab0131c` Odin compiler.  Garden CI run
-[30078806936](https://github.com/crapthings/odin-garden/actions/runs/30078806936)
-is the prior v0.2.0 baseline. The next Garden CI run verifies the v0.3.0
-release tags and commits, then covers the added Store-adopting Snapshot case.
+`dev-2026-07-nightly:ab0131c` Odin compiler. Garden CI run
+[30079510562](https://github.com/crapthings/odin-garden/actions/runs/30079510562)
+verifies the v0.3.0 release tags and commits, then passes all seven integration
+tests, including the Store-adopting Snapshot case.
 
 Re-run `scripts/verify-rdfs-sparql.sh` from Garden whenever any pinned
 component, the adapter, or a listed fixture changes.  Revisit this ADR only

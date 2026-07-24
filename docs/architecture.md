@@ -129,7 +129,7 @@ to extract either runtime layer:
 | Gate | Status | Evidence / gap |
 | --- | --- | --- |
 | Common owned terms and snapshot semantics | Partial | Released reasoner v0.3.0 can transfer its owned terms and indexes into an immutable SPARQL Snapshot, but `Memory_Dataset` still owns a separate representation and no common graph API exists. See ADR 0002. |
-| Pinned closure-to-query integration | Met locally; CI pending | Garden pins released `odin-rdf v0.31.1`, `odin-reasoner v0.3.0`, and `odin-sparql v0.1.1`; the local gate passes closure, lifecycle, graph-scope, limit, blank-node, live-view equivalence, and adopted-snapshot cases. |
+| Pinned closure-to-query integration | Met | Garden pins released `odin-rdf v0.31.1`, `odin-reasoner v0.3.0`, and `odin-sparql v0.1.1`; [CI run 30079510562](https://github.com/crapthings/odin-garden/actions/runs/30079510562) verifies the tags and passes closure, lifecycle, graph-scope, limit, blank-node, live-view equivalence, and adopted-snapshot cases. |
 | Minimal API from existing use cases | Not met | Reasoner needs indexed default-graph triple closure; SPARQL needs graph-scoped read scans.  The new live view demonstrates indexed reuse only for default graph while the immutable adapter remains copying and linear; named-graph support and error/limit behavior are not shared. |
 | Durable-store requirement | Not met | There is no approved persistence, restart, multi-writer, or isolation requirement. |
 

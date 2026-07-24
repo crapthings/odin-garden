@@ -1,8 +1,8 @@
 # First RDFS-to-SPARQL integration boundary record
 
-This record applies only to the `rdfs-sparql-first-closure` development
-snapshot declared in [`../ecosystem.toml`](../ecosystem.toml). It is evidence
-for a later graph-contract decision, not a published cross-project API.
+This record applies to the release-qualified `rdfs-sparql-first-closure`
+baseline declared in [`../ecosystem.toml`](../ecosystem.toml). It is evidence
+for a later graph-contract decision, not a shared public graph API.
 
 ## Data and ownership boundary
 

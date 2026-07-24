@@ -18,13 +18,14 @@ an anticipated store design:
 | --- | --- | --- | --- |
 | Term equality | Interned terms compare kind, lexical value, datatype, folded language, and blank-node scope.  The adapter copies RDF values and applies the same comparison. | RDF term equality uses the same fields; quads are a set under that equality. | Compatible value equality; no shared owner or identity table. |
 | Graph scope | Internal facts and the adapter snapshot are default-graph only.  Named and any-named scans return `dataset.Invalid_View`. | Read-only views require graph-mode-aware scans; the memory implementation supports default, named, and any-named graphs. | Not met. |
-| Scan work | The internal triple store selects an exact lookup, two-term index, one-term index, or full scan.  The released snapshot adapter copies closure facts and then linearly scans its snapshot. | `Memory_Dataset` linearly scans sealed owned quads. | Not met in the release baseline: no indexed scan is reused across consumers. |
-| Ownership and lifetime | The store owns interned terms.  The released adapter owns a copied immutable quad snapshot that outlives the source store; scan values are borrowed until snapshot destruction. | The memory dataset owns copied lexical values; its sealed view borrows terms until destruction. | Similar lifetime shape, but separate allocation and copy paths. |
+| Scan work | The store selects an exact lookup, two-term index, one-term index, or full scan.  The immutable snapshot copies closure facts then scans linearly; released `indexed_view` reuses the store index while the source lives. | `Memory_Dataset` linearly scans sealed owned quads. | Partial: the direct reasoner→SPARQL live path reuses an index, but no shared immutable scan implementation exists. |
+| Ownership and lifetime | The store owns interned terms.  `indexed_view` borrows those terms while the source lives; the released adapter also owns a copied immutable quad snapshot that outlives the source. | The memory dataset owns copied lexical values; its sealed view borrows terms until destruction. | Partial for a live borrowed view; immutable snapshots still have separate allocation and copy paths. |
 | Limits and errors | Snapshot has `max_quads`, all-or-nothing initialization, and adapter-specific `Quad_Limit`. | Dataset has `Quad_Limit`, `Lexical_Limit`, validation, sealing, and Dataset error codes. | Not met: the limit/error surface differs. |
 
 The pinned Garden integration passes the source-RDF → RDFS closure → immutable
-SPARQL-view path, including source lifetime, default-graph rejection, atomic
-quad limit, early stop, and blank-node boundaries.  In particular, the
+SPARQL-view path and the live indexed View/result-equivalence path, including
+source lifetime, default-graph rejection, atomic quad limit, early stop, and
+blank-node boundaries.  In particular, the
 cross-ingestion fixture proves that equal parser labels from separate parser
 calls are distinct blank nodes, while repeated labels within one document are
 identical.  The fixture is evidence for the current adapter contract, not
@@ -45,8 +46,8 @@ Keep the reasoner store, the reasoner-to-SPARQL snapshot adapter, and
 extract `odin-graph` yet.
 
 The candidate minimum graph contract will be reconsidered only after two
-production-quality consumers demonstrably use all of the following without
-materializing a second dataset:
+production-quality consumers demonstrably use one shared graph representation
+for all of the following:
 
 1. one owned RDF term/blank-node identity boundary;
 2. graph-scoped default, named, and any-named scan semantics where consumers
@@ -90,7 +91,6 @@ unified limit/error model, and it does not satisfy the extraction gate.
 
 ### Costs and risks
 
-- The closure adapter continues to allocate copied RDF terms and quads.
 - The immutable closure adapter continues to allocate copied RDF terms and
   quads; only the live view reuses the reasoner indexes.
 - Named-graph queries cannot be served by this closure adapter until a

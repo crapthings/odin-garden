@@ -33,7 +33,7 @@ jobs:
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         with:
           repository: crapthings/odin-reasoner
-          ref: 7c8b825f7e4fe69f527dbce0feb4868a89c60e05 # OWL RL class and list schema axioms
+          ref: 884feabe6145272c4c3cecd73337059fb0d9bce3 # generalized complete OWL RL list closure
           path: _deps/odin-reasoner
           fetch-depth: 0
           persist-credentials: false

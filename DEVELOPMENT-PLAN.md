@@ -21,9 +21,9 @@ end-to-end behavior explicit.
 
 - [x] Repository charter in `README.md`.
 - [x] This execution plan.
-- [ ] `docs/architecture.md` with the dependency map, package boundaries, and
+- [x] `docs/architecture.md` with the dependency map, package boundaries, and
   long-term semantic-data vocabulary.
-- [ ] `docs/adr/0001-defer-odin-graph.md`, recording why the graph/store layer
+- [x] `docs/adr/0001-defer-odin-graph.md`, recording why the graph/store layer
   remains pending.
 
 ### Acceptance
@@ -42,12 +42,13 @@ odin-garden   -> no runtime dependency
 
 ### Deliverables
 
-- [ ] `ecosystem.toml` with pinned Odin compiler revision and component release
-  revisions.
-- [ ] A compatibility policy: supported combinations, upgrade procedure, and
+- [x] `ecosystem.toml` with a pinned Odin compiler revision and component
+  development revisions. It is explicitly not a release baseline because the
+  reasoner is unreleased.
+- [x] A compatibility policy: supported combinations, upgrade procedure, and
   required integration gates before changing `rdf.Term`, blank-node scope,
   ownership contracts, or public dataset boundaries.
-- [ ] A machine-readable command manifest for local and CI verification.
+- [x] A machine-readable command manifest for local and CI verification.
 
 ### Acceptance
 
@@ -66,11 +67,12 @@ revision produced a result. No integration check silently follows moving
 
 ### Deliverables
 
-- [ ] A small source RDF fixture with documented provenance.
-- [ ] Expected asserted and inferred triples, including provenance expectations.
-- [ ] SPARQL `SELECT`, `ASK`, and `CONSTRUCT` queries over the same immutable
+- [x] A small source RDF fixture with documented provenance.
+- [x] Expected asserted and inferred triples, including provenance expectations.
+- [x] SPARQL `SELECT`, `ASK`, and `CONSTRUCT` queries over the same immutable
   closure snapshot.
-- [ ] A single reproducible verification command and CI job.
+- [x] A single reproducible local verification command. CI is pending the
+  first release-qualified component matrix.
 
 ### Acceptance
 
@@ -90,11 +92,11 @@ up behavior.
 
 ### Deliverables
 
-- [ ] `docs/fixture-policy.md` defining required provenance, source version,
+- [x] `docs/fixture-policy.md` defining required provenance, source version,
   interpretation, expected result, and license for every fixture.
-- [ ] `fixtures/` taxonomy separating source documents, normalized claims,
+- [x] `fixtures/` taxonomy separating source documents, normalized claims,
   asserted RDF, inferred output, and test expectations.
-- [ ] A review checklist for entity identity, contradictions, validity periods,
+- [x] A review checklist for entity identity, contradictions, validity periods,
   and semantic-profile applicability.
 
 ### Acceptance
@@ -107,9 +109,9 @@ first defense against low-quality or ungrounded semantic data.
 
 ### Deliverables
 
-- [ ] Cross-project compatibility table and release checklist.
-- [ ] ADR template for shared semantic decisions.
-- [ ] Change policy for data-model, blank-node, equality/hash, snapshot, and
+- [x] Cross-project compatibility table and release checklist.
+- [x] ADR template for shared semantic decisions.
+- [x] Change policy for data-model, blank-node, equality/hash, snapshot, and
   provenance changes.
 
 ### Acceptance

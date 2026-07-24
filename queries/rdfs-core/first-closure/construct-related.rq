@@ -1,0 +1,6 @@
+CONSTRUCT {
+  ?subject <https://example.org/garden/relatedTo> ?object .
+}
+WHERE {
+  ?subject <https://example.org/garden/relatedTo> ?object .
+}

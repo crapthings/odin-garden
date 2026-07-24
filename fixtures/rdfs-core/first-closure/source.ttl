@@ -1,0 +1,11 @@
+@prefix ex: <https://example.org/garden/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Person rdfs:subClassOf ex:Agent .
+ex:Agent rdfs:subClassOf ex:Entity .
+ex:worksWith rdfs:subPropertyOf ex:relatedTo .
+ex:worksWith rdfs:domain ex:Person .
+ex:worksWith rdfs:range ex:Person .
+ex:ada rdf:type ex:Person .
+ex:ada ex:worksWith ex:bea .

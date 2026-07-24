@@ -66,6 +66,22 @@ Garden is in its foundation phase. The immediate work is to publish the
 architecture and deferral ADR, pin compatible component revisions, and add the
 first evidence-backed RDFS-to-SPARQL integration fixture.
 
+The initial fixture and its fixed development-snapshot command now live in
+[`ecosystem.toml`](ecosystem.toml). It is reproducible implementation evidence,
+not yet a release-qualified compatibility claim.
+
+The exercised ownership, graph-scope, blank-node, resource-limit, and error
+boundaries are recorded in
+[`docs/rdfs-sparql-first-closure-contract.md`](docs/rdfs-sparql-first-closure-contract.md).
+
+New semantic evidence follows the
+[fixture policy](docs/fixture-policy.md), [fixture taxonomy](fixtures/README.md),
+and [review checklist](docs/fixture-review-checklist.md).
+
+Supported cross-project combinations and the release/change process are defined
+in [release governance](docs/release-governance.md) and the
+[semantic change policy](docs/change-policy.md).
+
 The component projects remain independently released and versioned. Do not
 point integration checks at moving `main` branches.
 

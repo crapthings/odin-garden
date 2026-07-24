@@ -1,0 +1,38 @@
+# Odin Garden integration baseline.
+#
+# This records an immutable development snapshot, not a release baseline: the
+# reasoner has no release tag and the RDF/SPARQL worktrees are ahead of their
+# latest releases. A release-qualified extraction gate must replace these refs
+# with published revisions before it can be considered passed.
+
+[baseline]
+name = "rdfs-sparql-first-closure"
+kind = "development-snapshot"
+recorded_on = "2026-07-24"
+
+[toolchain]
+command = "odin"
+version = "dev-2026-07:819fdc7a8"
+
+[components.odin_rdf]
+repository = "https://github.com/crapthings/odin-rdf.git"
+revision = "acb3a190371e8679a2a35a3d4668ec166ec24891"
+release = "v0.31.0"
+release_qualified = false
+
+[components.odin_reasoner]
+repository = "https://github.com/crapthings/odin-reasoner.git"
+revision = "a46a693f30b00360d6adcf761188cdef681959e1"
+release_qualified = false
+
+[components.odin_sparql]
+repository = "https://github.com/crapthings/odin-sparql.git"
+revision = "00acabd46113676820a55955328b5532149fbf47"
+release = "v0.1.0"
+release_qualified = false
+
+[commands.rdfs_sparql_first_closure]
+description = "Run the pinned development-snapshot RDFS closure to SPARQL integration fixture."
+command = "sh scripts/verify-rdfs-sparql.sh"
+requires_adjacent_checkouts = ["../odin-rdf", "../odin-reasoner", "../odin-sparql"]
+status = "pre-release evidence only"

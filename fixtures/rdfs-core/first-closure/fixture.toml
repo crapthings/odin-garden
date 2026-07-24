@@ -1,0 +1,29 @@
+id = "rdfs-core-first-closure"
+title = "RDFS Core closure exposed through an immutable SPARQL Dataset view"
+version = 1
+source_file = "source.ttl"
+source_kind = "authored integration fixture"
+source_version = "1"
+source_date = "2026-07-24"
+asserting_party = "Odin Garden maintainers"
+provenance = "Authored by the Odin Garden maintainers on 2026-07-24 to exercise the documented six-rule RDFS Core profile."
+license = "CC0-1.0"
+semantic_profile = "odin-reasoner RDFS Core: subclass, subproperty, transitivity, domain, and range only; no axiomatic triples, datatype entailment, or named graphs."
+asserted_rdf = "asserted.nt"
+inferred_rdf = "inferred.nt"
+query_expectations = "../../../queries/rdfs-core/first-closure/README.md"
+verification_command = "sh scripts/verify-rdfs-sparql.sh"
+entity_identity = "All fixture IRIs are authored, distinct identifiers. No aliases, sameAs relation, or blank nodes are asserted."
+contradiction_status = "No contradiction is asserted or expected under the documented RDFS Core profile."
+validity_period = "Not applicable: this is a timeless synthetic semantic fixture, not a claim about an external changing domain."
+
+[expectations]
+asserted_triples = 7
+inferred_triples = 7
+closure_triples = 14
+graph_scope = "default graph only"
+snapshot = "owned and immutable after the source store and RDFS profile are destroyed"
+
+[exclusions]
+named_graphs = "The reasoner SPARQL adapter rejects Named and Any_Named scans with dataset.Invalid_View."
+blank_nodes = "No blank nodes are used; this fixture makes no cross-ingestion blank-node claim."

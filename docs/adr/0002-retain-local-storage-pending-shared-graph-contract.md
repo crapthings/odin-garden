@@ -114,6 +114,13 @@ resource/error implementation has been adopted. A future ADR must record the
 two-consumer no-copy/indexed convergence before components replace their local
 runtime storage.
 
+The current development Graph has freeze-time candidate indexes and retains
+asserted/inferred first origin metadata from the copied Reasoner closure. Its
+separate [development convergence run 30085395000](https://github.com/crapthings/odin-garden/actions/runs/30085395000)
+checks all fourteen facts in the RDFS Core fixture. That check is intentionally
+not a release-qualified claim: it does not retain Store term/fact IDs,
+derivation supports, or no-copy index ownership.
+
 ## Consequences
 
 ### Positive

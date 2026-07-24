@@ -130,9 +130,11 @@ to extract either runtime layer:
 | --- | --- | --- |
 | Common owned terms and snapshot semantics | Partial | Released reasoner v0.3.0 can transfer its owned terms and indexes into an immutable SPARQL Snapshot; released SPARQL v0.1.2 now externally proves matching Dataset identity rules, but `Memory_Dataset` still owns a separate representation and no common graph API exists. See ADR 0002. |
 | Pinned closure-to-query integration | Met | Garden pins released `odin-rdf v0.31.1`, `odin-reasoner v0.3.0`, and `odin-sparql v0.1.2`; [CI run 30080807670](https://github.com/crapthings/odin-garden/actions/runs/30080807670) verifies the tags and passes closure, lifecycle, graph-scope, limit, blank-node, live-view equivalence, adopted-snapshot, and external Memory_Dataset identity cases. |
-| Minimal API from existing use cases | Not met | Reasoner needs indexed default-graph triple closure; SPARQL needs graph-scoped read scans.  The new live view demonstrates indexed reuse only for default graph while the immutable adapter remains copying and linear; named-graph support and error/limit behavior are not shared. |
+| Minimal API from existing use cases | Not met | Reasoner now has indexed default-graph closure and a Store-adopting immutable Snapshot; SPARQL needs graph-scoped read scans. No common API is justified until a named-graph consumer and one mutation/limit/error contract are concrete. |
 | Durable-store requirement | Not met | There is no approved persistence, restart, multi-writer, or isolation requirement. |
 
 The completed Garden fixture is decision evidence, not extraction approval.
 The remaining work is to establish common owned-term, index, and immutable
 snapshot semantics across more than one production-quality consumer path.
+The current dependency-ordered estimate is in
+[graph extraction readiness plan — 2026-07-24](graph-extraction-readiness-2026-07-24.md).

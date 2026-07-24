@@ -1,0 +1,47 @@
+# Graph extraction readiness plan — 2026-07-24
+
+## Purpose
+
+This is a time and dependency assessment for deciding whether to extract
+`odin-graph`. It is not a date-based commitment to create that repository.
+The authoritative decision criteria remain [ADR 0002](adr/0002-retain-local-storage-pending-shared-graph-contract.md).
+
+## Verified starting point
+
+Garden currently pins released `odin-rdf v0.31.1`, `odin-reasoner v0.3.0`, and
+`odin-sparql v0.1.2`. Its [release-qualified CI run 30080807670](https://github.com/crapthings/odin-garden/actions/runs/30080807670)
+passes eight integration tests.
+
+The direct reasoner-to-SPARQL path now has a Store-adopting immutable Snapshot
+that retains reasoner-owned terms and indexes without a second Dataset copy.
+`Memory_Dataset` has independently released identity and named-graph scan
+coverage. These are compatible evidence points, not one shared representation.
+
+## Remaining work and estimate
+
+| Order | Deliverable | Dependency | Estimate | Completion evidence |
+| --- | --- | --- | --- | --- |
+| 1 | Name the first production named-graph consumer and define its `Named` / `Any_Named` semantics, including default-graph interaction. | Product or application requirement; this cannot be inferred from current code. | 0.5–1 working day after the requirement is supplied. | ADR, curated fixture, and explicit supported/rejected query cases. |
+| 2 | Specify the smallest common mutation, freeze, ownership, resource-limit, and error contract from that consumer and the existing reasoner path. | Step 1. | 1–2 working days. | Public API sketch, atomicity/error matrix, migration notes, and contract tests. |
+| 3 | Implement a narrow shared in-memory representation plus immutable snapshot, then adapt the existing reasoner and SPARQL paths without moving inference or query algebra. | Step 2. | 3–5 working days. | Ownership, blank-node, duplicate, graph-scan, limit, and snapshot tests; no adapter-specific Dataset copy in the shared path. |
+| 4 | Run migration equivalence, pin releases, and update Garden fixtures/CI. | Step 3. | 1.5–2 working days. | Pinned cross-project result-equivalence gate, release notes, and an extraction-decision ADR update. |
+
+**Total after a concrete named-graph requirement: 6–10 working days.** The
+range excludes review latency and any durable-store requirement. `odin-store`
+is not estimated because persistence, recovery, concurrency, and isolation
+requirements have not been approved.
+
+## Execution rule until Step 1 exists
+
+Do not implement named-graph storage, an error-code wrapper, or an
+`odin-graph` placeholder merely to reduce the estimate. Keep publishing and
+pinning regression evidence for the existing default-graph paths. The explicit
+`Invalid_View` response for unsupported named-graph scans remains the correct
+contract until an actual consumer defines the semantics.
+
+## Reassessment trigger
+
+Re-run this plan when an application supplies a named-graph use case, a second
+independently maintained graph consumer, or a durable/multi-writer requirement.
+If none is supplied, the correct completed state is to retain the local
+implementations described by ADR 0002.

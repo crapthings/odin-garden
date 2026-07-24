@@ -40,7 +40,7 @@ jobs:
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         with:
           repository: crapthings/odin-sparql
-          ref: 9a4725c9e2f87fb0eb1fda052fbc03153a709e0f # development convergence baseline
+          ref: 285a98498f5885021fa321bfb8729560535174d0 # development convergence baseline
           path: _deps/odin-sparql
           fetch-depth: 0
           persist-credentials: false

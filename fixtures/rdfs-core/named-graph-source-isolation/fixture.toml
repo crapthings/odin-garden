@@ -1,0 +1,24 @@
+id = "named-graph-source-isolation"
+title = "Named source-graph isolation for multi-source knowledge data"
+version = 1
+source_file = "source.trig"
+source_kind = "authored integration fixture"
+source_version = "1"
+source_date = "2026-07-24"
+asserting_party = "Odin Garden maintainers"
+provenance = "Authored by the Odin Garden maintainers as a provisional consumer scenario for source-isolated named-graph queries."
+license = "CC0-1.0"
+semantic_profile = "No inference. The fixture models two source-owned named graphs and default-graph catalog metadata."
+query_expectations = "../../../queries/rdfs-core/named-graph-source-isolation/README.md"
+verification_command = "sh scripts/verify-rdfs-sparql.sh"
+entity_identity = "The same IRI may occur in both source graphs; graph scope, not a new term identity rule, keeps their statements distinct."
+contradiction_status = "No contradiction is asserted or expected."
+validity_period = "Not applicable: this is a timeless synthetic semantic fixture."
+
+[expectations]
+source_quads = 6
+default_graph_quads = 2
+named_graphs = 2
+exact_named_graph = "GRAPH <source-a> returns only Bea as Ada's known person."
+variable_named_graph = "GRAPH ?source returns the source/friend pairs for both source graphs."
+default_graph_isolation = "A default-graph BGP cannot see statements held only by a named graph."

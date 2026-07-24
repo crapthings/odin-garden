@@ -39,6 +39,20 @@ pinning regression evidence for the existing default-graph paths. The explicit
 `Invalid_View` response for unsupported named-graph scans remains the correct
 contract until an actual consumer defines the semantics.
 
+## Provisional consumer evidence
+
+Garden now carries the synthetic `named-graph-source-isolation` fixture. It
+models two source-owned named graphs plus default-graph publication metadata,
+and exercises exact `GRAPH <name>`, variable `GRAPH ?name`, and default-graph
+non-leakage through the released `Memory_Dataset` path. This is a deliberately
+narrow test consumer that fixes candidate semantics and regression evidence;
+it is **not** a substitute for the first production named-graph requirement.
+
+The fixture does not change the rule above: the reasoner adapter continues to
+return `Invalid_View` for named graph modes, and no shared graph extraction or
+named-graph store implementation should begin until an application adopts (or
+replaces) these semantics.
+
 ## Reassessment trigger
 
 Re-run this plan when an application supplies a named-graph use case, a second

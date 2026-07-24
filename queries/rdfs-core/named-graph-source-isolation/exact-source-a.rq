@@ -1,0 +1,7 @@
+SELECT ?friend
+WHERE {
+  GRAPH <https://example.org/garden/graph-fixture/source-a> {
+    <https://example.org/garden/graph-fixture/ada>
+      <https://example.org/garden/graph-fixture/knows> ?friend .
+  }
+}

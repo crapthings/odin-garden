@@ -1,0 +1,5 @@
+ASK {
+  <https://example.org/garden/graph-fixture/ada>
+    <https://example.org/garden/graph-fixture/knows>
+    <https://example.org/garden/graph-fixture/bea> .
+}

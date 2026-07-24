@@ -1,0 +1,8 @@
+SELECT ?source ?friend
+WHERE {
+  GRAPH ?source {
+    <https://example.org/garden/graph-fixture/ada>
+      <https://example.org/garden/graph-fixture/knows> ?friend .
+  }
+}
+ORDER BY ?source

@@ -1,0 +1,15 @@
+@prefix ex: <https://example.org/garden/graph-fixture/> .
+
+# Default-graph metadata is deliberately separate from the source payloads.
+ex:catalog ex:published ex:source-a .
+ex:catalog ex:published ex:source-b .
+
+ex:source-a {
+  ex:ada ex:knows ex:bea .
+  ex:ada ex:label "Ada from source A" .
+}
+
+ex:source-b {
+  ex:ada ex:knows ex:cy .
+  ex:ada ex:label "Ada from source B" .
+}

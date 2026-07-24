@@ -8,16 +8,18 @@ The authoritative decision criteria remain [ADR 0002](adr/0002-retain-local-stor
 
 ## Verified starting point
 
-Garden currently pins released `odin-rdf v0.31.1`, `odin-reasoner v0.3.0`,
-`odin-sparql v0.2.0`, and experimental `odin-graph v0.1.0`. Its
-[release-qualified CI run 30083966449](https://github.com/crapthings/odin-garden/actions/runs/30083966449)
-includes both the established closure path and the public graph-backed SPARQL
-Dataset consumer path.
+The historical release-qualified combination remains recorded in
+[CI run 30083966449](https://github.com/crapthings/odin-garden/actions/runs/30083966449),
+but it is not the active development baseline. The current development gate
+pins exact RDF, Reasoner, SPARQL, and Graph source commits and runs both the
+RDFS-to-SPARQL integration fixture and Graph closure-origin/derivation fixture.
 
 The direct reasoner-to-SPARQL path now has a Store-adopting immutable Snapshot
 that retains reasoner-owned terms and indexes without a second Dataset copy.
-`Memory_Dataset` has independently released identity and named-graph scan
-coverage. These are compatible evidence points, not one shared representation.
+`Memory_Dataset` now owns the shared Graph kernel directly, including its
+freeze-time scan indexes. The Reasoner Store remains a distinct indexed,
+transactional inference representation; its Graph adapter copies a completed
+closure and preserves asserted/inferred origin plus first derivation supports.
 
 ## Remaining work and estimate
 
@@ -25,21 +27,20 @@ coverage. These are compatible evidence points, not one shared representation.
 | --- | --- | --- | --- | --- |
 | 1 | Name the first production named-graph consumer and define its `Named` / `Any_Named` semantics, including default-graph interaction. | Product or application requirement; this cannot be inferred from current code. | 0.5–1 working day after the requirement is supplied. | ADR, curated fixture, and explicit supported/rejected query cases. |
 | 2 | Specify the smallest common mutation, freeze, ownership, resource-limit, and error contract from that consumer and the existing reasoner path. | Step 1. | 1–2 working days. | Public API sketch, atomicity/error matrix, migration notes, and contract tests. |
-| 3 | Implement a narrow shared in-memory representation plus immutable snapshot, then adapt the existing reasoner and SPARQL paths without moving inference or query algebra. | Step 2. | 3–5 working days. | Ownership, blank-node, duplicate, graph-scan, limit, and snapshot tests; no adapter-specific Dataset copy in the shared path. |
-| 4 | Run migration equivalence, pin releases, and update Garden fixtures/CI. | Step 3. | 1.5–2 working days. | Pinned cross-project result-equivalence gate, release notes, and an extraction-decision ADR update. |
+| 3 | Decide whether the Reasoner requires live term/index identity rather than the verified frozen Graph closure copy. | Step 2. | 1–3 working days. | Explicit requirement, ownership/transaction analysis, and a revised ADR. |
+| 4 | Keep exact-source migration equivalence running across RDF, Reasoner, SPARQL, and Graph. | Step 3. | 0.5–1 working day per material contract change. | Current-source Garden gate and updated conformance evidence. |
 
-**Total after a concrete named-graph requirement: 6–10 working days.** The
-range excludes review latency and any durable-store requirement. `odin-store`
-is not estimated because persistence, recovery, concurrency, and isolation
-requirements have not been approved.
+The remaining effort depends on whether an application requires Reasoner live
+identity or durable storage. Persistence, recovery, concurrency, and isolation
+requirements have not been approved and are intentionally not estimated.
 
 ## Execution rule until Step 1 exists
 
-Do not implement named-graph storage, an error-code wrapper, or an
-`odin-graph` placeholder merely to reduce the estimate. Keep publishing and
-pinning regression evidence for the existing default-graph paths. The explicit
-`Invalid_View` response for unsupported named-graph scans remains the correct
-contract until an actual consumer defines the semantics.
+Do not add persistence, multi-writer behavior, or Reasoner named-graph
+semantics merely to reduce an estimate. Keep publishing exact-source regression
+evidence for the existing default-graph inference paths. The explicit
+`Invalid_View` response for unsupported Reasoner named-graph scans remains the
+correct contract until an actual consumer defines the semantics.
 
 ## Provisional consumer evidence
 

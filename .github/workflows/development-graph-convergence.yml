@@ -6,10 +6,12 @@ on:
     paths:
       - '.github/workflows/development-graph-convergence.yml'
       - 'integration/graph_convergence/**'
+      - 'integration/rdfs_sparql/**'
   pull_request:
     paths:
       - '.github/workflows/development-graph-convergence.yml'
       - 'integration/graph_convergence/**'
+      - 'integration/rdfs_sparql/**'
 
 permissions:
   contents: read
@@ -24,15 +26,22 @@ jobs:
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         with:
           repository: crapthings/odin-rdf
-          ref: daa350521a8ad9f79012bb1fefa96cf00938f3f1 # v0.31.1
+          ref: a4024ddec94fbdcd810631206752d87c5595120f # development convergence baseline
           path: _deps/odin-rdf
           fetch-depth: 0
           persist-credentials: false
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         with:
           repository: crapthings/odin-reasoner
-          ref: c62ebd8b5070eeb44c5b818bc30698b4f0da0b26 # v0.3.0
+          ref: f76f3d21450997dc5f6acf1eccf70cdaf9d42940 # development convergence baseline
           path: _deps/odin-reasoner
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        with:
+          repository: crapthings/odin-sparql
+          ref: 9a4725c9e2f87fb0eb1fda052fbc03153a709e0f # development convergence baseline
+          path: _deps/odin-sparql
           fetch-depth: 0
           persist-credentials: false
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
@@ -50,6 +59,9 @@ jobs:
         run: |
           ln -s "$GITHUB_WORKSPACE/_deps/odin-rdf" "$GITHUB_WORKSPACE/../odin-rdf"
           ln -s "$GITHUB_WORKSPACE/_deps/odin-reasoner" "$GITHUB_WORKSPACE/../odin-reasoner"
+          ln -s "$GITHUB_WORKSPACE/_deps/odin-sparql" "$GITHUB_WORKSPACE/../odin-sparql"
           ln -s "$GITHUB_WORKSPACE/_deps/odin-graph" "$GITHUB_WORKSPACE/../odin-graph"
+      - name: Verify current RDFS-to-SPARQL integration
+        run: odin test integration/rdfs_sparql -collection:odin-rdf="$GITHUB_WORKSPACE/_deps/odin-rdf" -collection:odin-reasoner="$GITHUB_WORKSPACE/_deps/odin-reasoner" -collection:odin-sparql="$GITHUB_WORKSPACE/_deps/odin-sparql" -collection:odin-graph="$GITHUB_WORKSPACE/_deps/odin-graph"
       - name: Verify RDFS closure asserted/inferred origin preservation
         run: odin test integration/graph_convergence -collection:odin-rdf="$GITHUB_WORKSPACE/_deps/odin-rdf" -collection:odin-reasoner="$GITHUB_WORKSPACE/_deps/odin-reasoner" -collection:odin-graph="$GITHUB_WORKSPACE/_deps/odin-graph"

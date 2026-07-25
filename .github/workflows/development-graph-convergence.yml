@@ -64,4 +64,4 @@ jobs:
       - name: Verify current RDFS-to-SPARQL integration
         run: odin test integration/rdfs_sparql -collection:odin-rdf="$GITHUB_WORKSPACE/_deps/odin-rdf" -collection:odin-reasoner="$GITHUB_WORKSPACE/_deps/odin-reasoner" -collection:odin-sparql="$GITHUB_WORKSPACE/_deps/odin-sparql" -collection:odin-graph="$GITHUB_WORKSPACE/_deps/odin-graph"
       - name: Verify RDFS closure asserted/inferred origin preservation
-        run: odin test integration/graph_convergence -collection:odin-rdf="$GITHUB_WORKSPACE/_deps/odin-rdf" -collection:odin-reasoner="$GITHUB_WORKSPACE/_deps/odin-reasoner" -collection:odin-graph="$GITHUB_WORKSPACE/_deps/odin-graph"
+        run: odin test integration/graph_convergence -collection:odin-rdf="$GITHUB_WORKSPACE/_deps/odin-rdf" -collection:odin-reasoner="$GITHUB_WORKSPACE/_deps/odin-reasoner" -collection:odin-sparql="$GITHUB_WORKSPACE/_deps/odin-sparql" -collection:odin-graph="$GITHUB_WORKSPACE/_deps/odin-graph"

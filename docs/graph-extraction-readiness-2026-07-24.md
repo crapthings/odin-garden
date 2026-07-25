@@ -67,8 +67,9 @@ design input for Step 3, not an extracted implementation or an ADR reversal.
 
 ## Candidate implementation evidence
 
-Released `odin-graph v0.1.0` pins its own core tests and provides separate
-optional SPARQL and Reasoner migration adapters. Garden ingests the synthetic
+The experimental `odin-graph v0.1.0` tag pins its own core tests and provides
+separate optional SPARQL and Reasoner migration adapters. It is a reproducible
+Garden baseline rather than an independently supported public release. Garden ingests the synthetic
 TriG fixture into that graph, freezes it, and executes the fixture's exact
 named, variable named, and default-isolation queries through the SPARQL
 adapter. Released `odin-sparql v0.2.0` also exposes that path as the opt-in

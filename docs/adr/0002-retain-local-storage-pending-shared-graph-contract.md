@@ -53,9 +53,9 @@ ownership before it can define stable shared error codes.
 
 Keep the reasoner store, the reasoner-to-SPARQL snapshot adapter, and
 `Memory_Dataset` as the production-local representations for their respective
-components. `odin-graph v0.1.0` is now published as an experimental,
-independently versioned in-memory kernel, but no existing component must adopt
-it as its runtime representation yet.
+components. `odin-graph v0.1.0` is an experimental Garden-pinned tag for an
+independently versioned in-memory kernel, not an independently supported public
+release; no existing component must adopt it as its runtime representation yet.
 
 The mandatory-adoption decision will be reconsidered only after two
 production-quality consumers demonstrably use one shared graph representation

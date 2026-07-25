@@ -1,8 +1,9 @@
 # Odin Garden integration baseline.
 #
-# This records an immutable release-qualified component baseline. Passing this
+# This records an immutable tag-qualified component baseline. Passing this
 # gate proves the documented RDFS Core default-graph path only; it does not by
-# itself establish the shared mutable graph semantics required for extraction.
+# itself establish a supported public release or the shared mutable graph
+# semantics required for extraction.
 
 [baseline]
 name = "rdfs-sparql-first-closure"
@@ -36,7 +37,7 @@ repository = "https://github.com/crapthings/odin-graph.git"
 revision = "8c349129a75551335bb10685ead4709951155406"
 release = "v0.1.0"
 release_qualified = true
-purpose = "experimental shared graph kernel plus optional SPARQL and Reasoner migration adapters"
+purpose = "experimental tagged graph baseline plus optional SPARQL and Reasoner migration adapters; not an independently supported public release"
 
 [commands.rdfs_sparql_first_closure]
 description = "Run the pinned release-qualified RDFS closure to SPARQL integration fixture."

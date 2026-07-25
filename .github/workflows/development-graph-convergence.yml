@@ -26,28 +26,28 @@ jobs:
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         with:
           repository: crapthings/odin-rdf
-          ref: a6ca367d008201a8d104207cff962bf636fa0ef4 # implement temporal data-value identity
+          ref: 8bc7cb436b41828a501597161bb8d3e44c818b21 # current development convergence baseline
           path: _deps/odin-rdf
           fetch-depth: 0
           persist-credentials: false
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         with:
           repository: crapthings/odin-reasoner
-          ref: dd4d7a18d7bd849ac1096754db61fc4dc657f68a # propagate temporal value identity
+          ref: dbfcce52d1f42c52c5aa8b174c548f905bfde236 # bounded OWL RL conformance evidence
           path: _deps/odin-reasoner
           fetch-depth: 0
           persist-credentials: false
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         with:
           repository: crapthings/odin-sparql
-          ref: 285a98498f5885021fa321bfb8729560535174d0 # development convergence baseline
+          ref: 88491f39d2dff818acb2c80516dbdafe9df60048 # bounded optimized engine verification
           path: _deps/odin-sparql
           fetch-depth: 0
           persist-credentials: false
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         with:
           repository: crapthings/odin-graph
-          ref: 446cd3d002d7c4b27ff5224d0e987b88a0f96f00 # development derivation metadata
+          ref: 902a0480de8b7e7d49108a0c3cbb4f2bed12c514 # current conformance gate baseline
           path: _deps/odin-graph
           fetch-depth: 0
           persist-credentials: false

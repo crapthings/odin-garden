@@ -1,7 +1,10 @@
-package rdfs_sparql
+// Development-only OWL RL convergence checks. These depend on current
+// Reasoner APIs and deliberately stay out of the pinned release package.
+package graph_convergence
 
 import "core:testing"
 import rdf "odin-rdf:rdf"
+import sparql "odin-sparql:sparql"
 import dataset "odin-sparql:sparql/dataset"
 import engine "odin-sparql:sparql/engine"
 import graph "odin-graph:graph"
@@ -21,6 +24,19 @@ import store "../../../odin-reasoner/reasoner/store"
 	state := cast(^W3C_Import_Resolver)user_data
 	if state == nil || iri != state.iri do return "", false
 	return state.document, true
+}
+
+@(private) execute :: proc(t: ^testing.T, text: string, view: dataset.View) -> engine.Result {
+	query, parse_error := sparql.Parse(text)
+	defer sparql.Destroy(&query)
+	testing.expect_value(t, sparql.Parse_Error_Code(parse_error), sparql.Error_Code.None)
+	result, execute_error := engine.execute(&query, view, {Max_Solutions = 16})
+	testing.expect_value(t, execute_error, engine.Error_Code.None)
+	return result
+}
+
+@(private) same_term :: proc(left, right: rdf.Term) -> bool {
+	return left.kind == right.kind && left.value == right.value && left.language == right.language && left.datatype == right.datatype && left.scope == right.scope
 }
 
 @(test)

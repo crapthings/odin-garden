@@ -123,8 +123,10 @@ multi-writer requirement makes its transaction semantics concrete.
 
 ## Current assessment — 2026-07-24
 
-The ecosystem is ready to gather evidence for a shared graph contract, but not
-to extract either runtime layer:
+The in-memory Graph kernel is now implemented as an experimental repository
+and is the current `odin-sparql` `Memory_Dataset` representation. The remaining
+question is narrower: whether a second production-quality consumer needs the
+same no-copy ownership and index contract. No durable runtime layer is proposed:
 
 | Gate | Status | Evidence / gap |
 | --- | --- | --- |
@@ -133,8 +135,9 @@ to extract either runtime layer:
 | Minimal API from existing use cases | Partial | Garden now has a provisional multi-source named-graph fixture and a [candidate shared graph contract](candidate-shared-graph-contract.md) for mutation, freeze, limits, and errors. Reasoner still has only indexed default-graph closure; the proposal is not an extracted implementation or a production requirement. |
 | Durable-store requirement | Not met | There is no approved persistence, restart, multi-writer, or isolation requirement. |
 
-The completed Garden fixture is decision evidence, not extraction approval.
-The remaining work is to establish common owned-term, index, and immutable
-snapshot semantics across more than one production-quality consumer path.
-The current dependency-ordered estimate is in
-[graph extraction readiness plan — 2026-07-24](graph-extraction-readiness-2026-07-24.md).
+The completed Garden fixture is evidence for the current in-memory Graph
+boundary, not approval for a shared Reasoner Store or durable storage. The
+remaining work is to establish common owned-term, index, and immutable snapshot
+semantics across more than one production-quality consumer path. The current
+dependency-ordered estimate is in [graph extraction readiness plan —
+2026-07-24](graph-extraction-readiness-2026-07-24.md).

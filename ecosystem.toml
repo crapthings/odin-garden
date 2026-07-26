@@ -135,6 +135,46 @@ command = "sh scripts/verify-cli-validate.sh"
 requires_adjacent_checkouts = ["../odin-rdf", "../odin-shacl", "../odin-cli"]
 status = "release-qualified local application evidence"
 
+[application_baselines.odin_cli_query_local_friends]
+name = "odin-cli-query-local-friends"
+kind = "release-qualified"
+recorded_on = "2026-07-26"
+description = "Bounded local Turtle default-graph query with deterministic SPARQL Results JSON and N-Triples output."
+
+[application_baselines.odin_cli_query_local_friends.toolchain]
+command = "odin"
+version = "dev-2026-07-nightly:ab0131c"
+
+[application_baselines.odin_cli_query_local_friends.components.odin_rdf]
+repository = "https://github.com/crapthings/odin-rdf.git"
+revision = "eac24a8d3251d03cb3fe700e6ffbda0ad1a47ee4"
+release = "v0.33.0"
+release_qualified = true
+
+[application_baselines.odin_cli_query_local_friends.components.odin_shacl]
+repository = "https://github.com/crapthings/odin-shacl.git"
+revision = "4ee8249b84380e4ef1d888bd94f8cd24d6e7b985"
+release = "v0.1.0"
+release_qualified = true
+
+[application_baselines.odin_cli_query_local_friends.components.odin_sparql]
+repository = "https://github.com/crapthings/odin-sparql.git"
+revision = "4150774bfecc23ea027036084b1edbd41dad13e5"
+release = "v0.7.0"
+release_qualified = true
+
+[application_baselines.odin_cli_query_local_friends.components.odin_cli]
+repository = "https://github.com/crapthings/odin-cli.git"
+revision = "488e7be86dd8dba04f644f178a195c1564252387"
+release = "v0.2.0"
+release_qualified = true
+
+[commands.odin_cli_query_local_friends]
+description = "Run the pinned local odin query workflow and compare exact SELECT JSON and CONSTRUCT N-Triples output."
+command = "sh scripts/verify-cli-query-v0-2.sh"
+requires_adjacent_checkouts = ["../odin-rdf", "../odin-shacl", "../odin-sparql", "../odin-cli"]
+status = "release-qualified local application query evidence without odin-graph"
+
 [application_baselines.odin_cli_wikidata_south_africa_capital_selection]
 name = "odin-cli-wikidata-south-africa-capital-selection"
 kind = "release-qualified"

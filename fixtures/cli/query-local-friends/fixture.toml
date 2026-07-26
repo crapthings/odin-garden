@@ -1,0 +1,37 @@
+id = "odin-cli-query-local-friends"
+title = "Local odin query command over an authored two-friend Turtle graph"
+version = 1
+data_graph = "data.ttl"
+select_query = "select.rq"
+construct_query = "construct.rq"
+expected_select_output = "expected-select.json"
+expected_construct_output = "expected-construct.nt"
+source_kind = "authored local application fixture"
+source_version = "1"
+source_date = "2026-07-26"
+asserting_party = "Odin Garden maintainers"
+provenance = "Defines the v0.2 bounded local query command contract over a small authored default graph."
+license = "CC0-1.0"
+semantic_profile = "odin-cli v0.2 local Turtle default graph over odin-sparql v0.7 RDF-only Memory_Dataset; deterministic SELECT JSON and CONSTRUCT N-Triples."
+verification_command = "sh scripts/verify-cli-query-v0-2.sh"
+entity_identity = "All fixture IRIs are authored urn identifiers; no aliases, equivalences, or blank nodes occur."
+contradiction_status = "Not applicable: this fixture asserts two independent facts and makes no inference claim."
+validity_period = "Not applicable: this is a timeless synthetic application fixture."
+
+[expectations]
+select_exit_status = 0
+construct_exit_status = 0
+select_output_terminator = "none"
+construct_output_terminator = "one LF"
+result_order = "friend IRI ascending via ORDER BY"
+limits = "max data triples 8; max statement bytes 1024; max query bytes 512; max results 8"
+output = "byte-exact standard output with no diagnostics on each completed query"
+
+[exclusions]
+standard_input = "The command rejects - for data or query."
+named_graphs = "Only one Turtle default graph is admitted."
+network = "No URL, remote context, HTTP, FROM fetch, or network loading behavior exists."
+service = "No SERVICE callback or remote resolver is configured."
+inference = "The command performs no RDFS, OWL, or other inference."
+update = "SPARQL Update and persistence are outside the command boundary."
+graph_dependency = "The query execution path uses the RDF-only SPARQL Dataset and does not check out or import odin-graph."

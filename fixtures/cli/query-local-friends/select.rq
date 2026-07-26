@@ -1,0 +1,5 @@
+SELECT ?friend
+WHERE {
+  <urn:ada> <urn:knows> ?friend .
+}
+ORDER BY ?friend

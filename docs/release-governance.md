@@ -25,12 +25,20 @@ CLI layer, then verifies an exact JSON response and a violation exit status.
 It establishes an application workflow only; it is not a server, query, or
 storage compatibility claim.
 
+`verify-cli-query-v0-2.sh` applies the same check to RDF, SHACL, SPARQL, and
+the released v0.2 CLI. It verifies byte-exact default SELECT JSON and
+CONSTRUCT N-Triples over a bounded local default graph, requires quiet standard
+error and exit 0, and rejects a Graph import. It establishes a local application
+query workflow only; it is not an endpoint, graph store, inference, Update, or
+network compatibility claim.
+
 | Baseline | Odin | odin-rdf | Components | Garden gate | Status |
 | --- | --- | --- | --- | --- | --- |
 | `rdfs-sparql-first-closure` | `dev-2026-07-nightly:ab0131c` | `d07162c` (`v0.32.1`) | `476fe59` Reasoner (`v0.6.0`); `d8503a6` SPARQL (`v0.2.0`); `8c34912` Graph (`v0.1.0`, experimental) | `verify-rdfs-sparql.sh` | Release-qualified local integration path |
 | `sparql-core-v0.7` | `dev-2026-07-nightly:ab0131c` | `eac24a8` (`v0.33.0`) | `4150774` SPARQL (`v0.7.0`); no Graph input | `verify-sparql-core-v0-7.sh` | Release-qualified core query boundary |
 | `shacl-core-person-record` | `dev-2026-07-nightly:ab0131c` | `eac24a8` (`v0.33.0`) | `4ee8249` SHACL (`v0.1.0`) | `verify-shacl.sh` | Release-qualified validation path |
 | `odin-cli-validate-person-record` | `dev-2026-07-nightly:ab0131c` | `eac24a8` (`v0.33.0`) | `4ee8249` SHACL (`v0.1.0`); `63c639e` CLI (`v0.1.0`) | `verify-cli-validate.sh` | Release-qualified local application path |
+| `odin-cli-query-local-friends` | `dev-2026-07-nightly:ab0131c` | `eac24a8` (`v0.33.0`) | `4ee8249` SHACL (`v0.1.0`, compile); `4150774` SPARQL (`v0.7.0`); `488e7be` CLI (`v0.2.0`); no Graph | `verify-cli-query-v0-2.sh` | Release-qualified local query application path |
 | `odin-cli-wikidata-south-africa-capital-selection` | `dev-2026-07-nightly:ab0131c` | `eac24a8` (`v0.33.0`) | `4ee8249` SHACL (`v0.1.0`); `63c639e` CLI (`v0.1.0`) | `verify-cli-wikidata-capital-selection.sh` | Release-qualified public-source application path |
 
 This row is limited to the documented default-graph RDFS closure path. It
@@ -50,6 +58,10 @@ or universal report serialization.
 The separate CLI row is defined by the
 [local CLI validation contract](cli-validate-contract.md) and its exact-output
 fixture; it only composes the released parser and validator for local files.
+The separate CLI query row is defined by the
+[local CLI query contract](cli-query-contract.md) and its exact-output fixture;
+it composes the released RDF-only SPARQL Dataset for local files without a
+Graph runtime dependency.
 The public-source CLI row is defined by the
 [Wikidata capital-selection readiness record](release-readiness-wikidata-capital-selection-2026-07-26.md).
 It validates a consumer admission policy and preserves the source’s multi-value

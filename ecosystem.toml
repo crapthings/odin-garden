@@ -44,3 +44,31 @@ description = "Run the pinned release-qualified RDFS closure to SPARQL integrati
 command = "sh scripts/verify-rdfs-sparql.sh"
 requires_adjacent_checkouts = ["../odin-rdf", "../odin-reasoner", "../odin-sparql", "../odin-graph"]
 status = "release-qualified local integration evidence"
+
+[validation_baselines.shacl_core_person_record]
+name = "shacl-core-person-record"
+kind = "release-qualified"
+recorded_on = "2026-07-26"
+description = "Bounded SHACL Core validation with a deterministic owned report; independent from the RDFS-to-SPARQL baseline."
+
+[validation_baselines.shacl_core_person_record.toolchain]
+command = "odin"
+version = "dev-2026-07-nightly:ab0131c"
+
+[validation_baselines.shacl_core_person_record.components.odin_rdf]
+repository = "https://github.com/crapthings/odin-rdf.git"
+revision = "eac24a8d3251d03cb3fe700e6ffbda0ad1a47ee4"
+release = "v0.33.0"
+release_qualified = true
+
+[validation_baselines.shacl_core_person_record.components.odin_shacl]
+repository = "https://github.com/crapthings/odin-shacl.git"
+revision = "4ee8249b84380e4ef1d888bd94f8cd24d6e7b985"
+release = "v0.1.0"
+release_qualified = true
+
+[commands.shacl_core_person_record]
+description = "Run the pinned SHACL Core person-record validation fixture."
+command = "sh scripts/verify-shacl.sh"
+requires_adjacent_checkouts = ["../odin-rdf", "../odin-shacl"]
+status = "release-qualified local integration evidence"

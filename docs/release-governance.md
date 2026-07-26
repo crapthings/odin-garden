@@ -11,9 +11,14 @@ passes, and its component entries are `release_qualified = true` in
 release tag, so a matching SHA without the corresponding published tag cannot
 qualify the baseline.
 
-| Baseline | Odin | odin-rdf | odin-reasoner | odin-sparql | odin-graph | Garden gate | Status |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| `rdfs-sparql-first-closure` | `dev-2026-07-nightly:ab0131c` | `d07162c` (`v0.32.1`) | `476fe59` (`v0.6.0`) | `d8503a6` (`v0.2.0`) | `8c34912` (`v0.1.0`, experimental) | `verify-rdfs-sparql.sh` | Release-qualified local integration path |
+`verify-shacl.sh` applies the same commit-and-annotated-tag check to the
+validation pair. It is a separate row because it uses RDF v0.33.0 and has no
+Reasoner, SPARQL, or Graph runtime dependency.
+
+| Baseline | Odin | odin-rdf | Components | Garden gate | Status |
+| --- | --- | --- | --- | --- | --- |
+| `rdfs-sparql-first-closure` | `dev-2026-07-nightly:ab0131c` | `d07162c` (`v0.32.1`) | `476fe59` Reasoner (`v0.6.0`); `d8503a6` SPARQL (`v0.2.0`); `8c34912` Graph (`v0.1.0`, experimental) | `verify-rdfs-sparql.sh` | Release-qualified local integration path |
+| `shacl-core-person-record` | `dev-2026-07-nightly:ab0131c` | `eac24a8` (`v0.33.0`) | `4ee8249` SHACL (`v0.1.0`) | `verify-shacl.sh` | Release-qualified validation path |
 
 This row is limited to the documented default-graph RDFS closure path. It
 checks the copied immutable snapshot, the released borrowed indexed live View,
@@ -24,7 +29,11 @@ general shared-store API guarantee.
 The exact cross-project commitments for this row are in the
 [release-qualified interoperability contracts](release-qualified-interop-contract.md).
 They are deliberately limited to exercised behavior; a SHACL validation report
-and universal rule-exchange format are not part of this compatibility row.
+and universal rule-exchange format are not part of the RDFS-to-SPARQL row.
+The separate SHACL row is defined by the
+[bounded validation contract](shacl-core-validation-contract.md) and its
+person-record fixture; it does not promote a shared Graph, Reasoner rule API,
+or universal report serialization.
 
 The current release-qualified shared-path verification is
 [Garden CI run 30180602169](https://github.com/crapthings/odin-garden/actions/runs/30180602169).
@@ -32,6 +41,10 @@ The current evidence record is
 [release readiness — 2026-07-26](release-readiness-2026-07-26.md), and its RDF
 component is backed by the published release commit's successful
 [CI run 30180307959](https://github.com/crapthings/odin-rdf/actions/runs/30180307959).
+The SHACL candidate evidence is recorded in
+[SHACL release readiness — 2026-07-26](release-readiness-shacl-2026-07-26.md),
+with `odin-shacl` source CI at
+[run 30181642051](https://github.com/crapthings/odin-shacl/actions/runs/30181642051).
 
 ## Release checklist
 

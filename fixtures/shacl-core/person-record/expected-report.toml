@@ -1,0 +1,33 @@
+conforms = false
+result_count = 4
+ordering = "focus node, result path, constraint component, source shape, then optional value"
+
+[[result]]
+focus_node = "https://example.org/garden/shacl/bea"
+result_path = "https://example.org/garden/shacl/email"
+value_nt = "\"not-an-iri\""
+source_shape = "https://example.org/garden/shacl/EmailShape"
+source_constraint_component = "sh:NodeKindConstraintComponent"
+severity = "sh:Violation"
+
+[[result]]
+focus_node = "https://example.org/garden/shacl/bea"
+result_path = "https://example.org/garden/shacl/employeeId"
+value_nt = "\"ID-2\""
+source_shape = "https://example.org/garden/shacl/EmployeeIdShape"
+source_constraint_component = "sh:DatatypeConstraintComponent"
+severity = "sh:Violation"
+
+[[result]]
+focus_node = "https://example.org/garden/shacl/cora"
+result_path = "https://example.org/garden/shacl/email"
+source_shape = "https://example.org/garden/shacl/EmailShape"
+source_constraint_component = "sh:MinCountConstraintComponent"
+severity = "sh:Violation"
+
+[[result]]
+focus_node = "https://example.org/garden/shacl/cora"
+result_path = "https://example.org/garden/shacl/employeeId"
+source_shape = "https://example.org/garden/shacl/EmployeeIdShape"
+source_constraint_component = "sh:MaxCountConstraintComponent"
+severity = "sh:Violation"

@@ -117,6 +117,36 @@ first defense against low-quality or ungrounded semantic data.
 A core change cannot be released without identifying affected consumers and
 running their relevant integration gates.
 
+## Phase G5 — Bounded validation profile
+
+Validation is a separate semantic concern from closure materialization. It may
+consume an application-owned asserted graph or a completed upstream closure,
+but it must not turn Reasoner provenance or Rule IDs into validation results.
+
+### Deliverables
+
+- [x] An authored SHACL Core fixture with separate data graph, shapes graph,
+  deterministic expected report, ownership expectation, and explicit
+  exclusions.
+- [x] A proposed report/ownership contract that rejects unsupported SHACL
+  semantics instead of treating them as conforming.
+- [ ] Pin the first `odin-shacl` release and its `odin-rdf` dependency in a
+  dedicated Garden command and CI job.
+
+### Acceptance
+
+```text
+RDF data + SHACL shapes
+  -> bounded validation
+  -> owned deterministic report
+```
+
+The qualifying gate must parse both graphs through the released RDF component,
+destroy input ownership before reading the report, assert every expected result
+field, and prove that an unsupported SHACL construct returns an error. It must
+not claim SHACL-SPARQL, complex property paths, a shared graph store, or RDFS
+materialization by the validator.
+
 ## Decision gate: whether to create `odin-graph` or `odin-store`
 
 Neither project is scheduled by date. Revisit extraction only when all of the

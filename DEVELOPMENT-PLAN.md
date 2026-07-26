@@ -188,7 +188,7 @@ claim that the source is false, malformed, or should be rewritten.
   single-select capital policy.
 - [x] A deterministic released-CLI command that returns the full policy result
   without any network access.
-- [ ] A successful remote and post-merge Garden CI run for the public-source
+- [x] A successful remote and post-merge Garden CI run for the public-source
   application baseline.
 
 ### Acceptance

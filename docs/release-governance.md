@@ -63,8 +63,10 @@ The CLI application evidence is recorded in
 [CLI release readiness — 2026-07-26](release-readiness-cli-2026-07-26.md), with
 the post-merge authoritative Garden gate at
 [run 30182571701](https://github.com/crapthings/odin-garden/actions/runs/30182571701).
-The public-source application candidate is recorded in
-[Wikidata capital-selection readiness — 2026-07-26](release-readiness-wikidata-capital-selection-2026-07-26.md).
+The public-source application evidence is recorded in
+[Wikidata capital-selection readiness — 2026-07-26](release-readiness-wikidata-capital-selection-2026-07-26.md),
+with the post-merge authoritative Garden gate at
+[run 30183114722](https://github.com/crapthings/odin-garden/actions/runs/30183114722).
 
 ## Release checklist
 

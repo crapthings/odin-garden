@@ -1,0 +1,15 @@
+@prefix app: <https://example.org/garden/application/wikidata-capital-selection/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+
+app:SingleCapitalSelectionShape
+  a sh:NodeShape ;
+  sh:targetClass app:SingleCapitalSelection ;
+  sh:property app:CapitalShape .
+
+app:CapitalShape
+  a sh:PropertyShape ;
+  sh:path wdt:P36 ;
+  sh:minCount 1 ;
+  sh:maxCount 1 ;
+  sh:nodeKind sh:IRI .

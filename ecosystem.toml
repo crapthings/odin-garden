@@ -106,3 +106,37 @@ description = "Run the pinned local odin validate workflow and compare its exact
 command = "sh scripts/verify-cli-validate.sh"
 requires_adjacent_checkouts = ["../odin-rdf", "../odin-shacl", "../odin-cli"]
 status = "release-qualified local application evidence"
+
+[application_baselines.odin_cli_wikidata_south_africa_capital_selection]
+name = "odin-cli-wikidata-south-africa-capital-selection"
+kind = "release-qualified"
+recorded_on = "2026-07-26"
+description = "A real CC0 Wikidata fact excerpt evaluated against a consumer-owned single-capital admission policy."
+
+[application_baselines.odin_cli_wikidata_south_africa_capital_selection.toolchain]
+command = "odin"
+version = "dev-2026-07-nightly:ab0131c"
+
+[application_baselines.odin_cli_wikidata_south_africa_capital_selection.components.odin_rdf]
+repository = "https://github.com/crapthings/odin-rdf.git"
+revision = "eac24a8d3251d03cb3fe700e6ffbda0ad1a47ee4"
+release = "v0.33.0"
+release_qualified = true
+
+[application_baselines.odin_cli_wikidata_south_africa_capital_selection.components.odin_shacl]
+repository = "https://github.com/crapthings/odin-shacl.git"
+revision = "4ee8249b84380e4ef1d888bd94f8cd24d6e7b985"
+release = "v0.1.0"
+release_qualified = true
+
+[application_baselines.odin_cli_wikidata_south_africa_capital_selection.components.odin_cli]
+repository = "https://github.com/crapthings/odin-cli.git"
+revision = "63c639e8cdc2a691377f36085631cb4bf4664b02"
+release = "v0.1.0"
+release_qualified = true
+
+[commands.odin_cli_wikidata_south_africa_capital_selection]
+description = "Run the pinned Wikidata South Africa single-capital import-policy fixture."
+command = "sh scripts/verify-cli-wikidata-capital-selection.sh"
+requires_adjacent_checkouts = ["../odin-rdf", "../odin-shacl", "../odin-cli"]
+status = "release-qualified public-source application evidence"

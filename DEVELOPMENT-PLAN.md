@@ -174,6 +174,34 @@ syntax, remote loading, inference, SPARQL, named graphs, persistence, or a
 server concern. Further application behavior starts only from a real consumer
 requirement and its fixture.
 
+## Phase G7 — First public-source application evidence
+
+The first real-data workflow must distinguish source facts from an
+application’s admission policy. A validation violation is not automatically a
+claim that the source is false, malformed, or should be rewritten.
+
+### Deliverables
+
+- [x] A small external CC0 source excerpt with immutable revision, retrieval
+  date, content digest, source/license record, and completed fixture review.
+- [x] An explicit normalization boundary and ADR for a consumer-owned
+  single-select capital policy.
+- [x] A deterministic released-CLI command that returns the full policy result
+  without any network access.
+- [ ] A successful remote and post-merge Garden CI run for the public-source
+  application baseline.
+
+### Acceptance
+
+    immutable public source facts
+      -> explicit application normalization
+      -> local released CLI policy validation
+      -> preserve source values + require a product decision
+
+The gate must not silently choose a capital, treat a source multiplicity as a
+logical contradiction, refresh the external source in CI, or use inference,
+query, persistence, or network loading.
+
 ## Decision gate: whether to create `odin-graph` or `odin-store`
 
 Neither project is scheduled by date. Revisit extraction only when all of the

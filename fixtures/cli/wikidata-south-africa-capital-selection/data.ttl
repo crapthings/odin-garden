@@ -1,0 +1,9 @@
+@prefix app: <https://example.org/garden/application/wikidata-capital-selection/> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+
+wd:Q258
+  a app:SingleCapitalSelection ;
+  wdt:P36 wd:Q3926,
+    wd:Q37701,
+    wd:Q5465 .

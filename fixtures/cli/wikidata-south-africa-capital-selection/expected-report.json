@@ -1,0 +1,1 @@
+{"conforms":false,"results":[{"focusNode":{"type":"iri","value":"http://www.wikidata.org/entity/Q258"},"resultPath":{"type":"iri","value":"http://www.wikidata.org/prop/direct/P36"},"sourceShape":{"type":"iri","value":"https://example.org/garden/application/wikidata-capital-selection/CapitalShape"},"sourceConstraintComponent":"maxCount","severity":"violation"}]}

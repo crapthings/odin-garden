@@ -138,5 +138,7 @@ jobs:
           ln -s "$GITHUB_WORKSPACE/_deps/cli-odin-rdf" "$GITHUB_WORKSPACE/../odin-rdf"
           ln -s "$GITHUB_WORKSPACE/_deps/cli-odin-shacl" "$GITHUB_WORKSPACE/../odin-shacl"
           ln -s "$GITHUB_WORKSPACE/_deps/odin-cli" "$GITHUB_WORKSPACE/../odin-cli"
-      - name: Verify the pinned local CLI validation workflow
+      - name: Verify the pinned person-record CLI validation workflow
         run: sh scripts/verify-cli-validate.sh
+      - name: Verify the public-source single-capital application policy
+        run: sh scripts/verify-cli-wikidata-capital-selection.sh

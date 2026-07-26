@@ -25,6 +25,7 @@ storage compatibility claim.
 | `rdfs-sparql-first-closure` | `dev-2026-07-nightly:ab0131c` | `d07162c` (`v0.32.1`) | `476fe59` Reasoner (`v0.6.0`); `d8503a6` SPARQL (`v0.2.0`); `8c34912` Graph (`v0.1.0`, experimental) | `verify-rdfs-sparql.sh` | Release-qualified local integration path |
 | `shacl-core-person-record` | `dev-2026-07-nightly:ab0131c` | `eac24a8` (`v0.33.0`) | `4ee8249` SHACL (`v0.1.0`) | `verify-shacl.sh` | Release-qualified validation path |
 | `odin-cli-validate-person-record` | `dev-2026-07-nightly:ab0131c` | `eac24a8` (`v0.33.0`) | `4ee8249` SHACL (`v0.1.0`); `63c639e` CLI (`v0.1.0`) | `verify-cli-validate.sh` | Release-qualified local application path |
+| `odin-cli-wikidata-south-africa-capital-selection` | `dev-2026-07-nightly:ab0131c` | `eac24a8` (`v0.33.0`) | `4ee8249` SHACL (`v0.1.0`); `63c639e` CLI (`v0.1.0`) | `verify-cli-wikidata-capital-selection.sh` | Release-qualified public-source application path |
 
 This row is limited to the documented default-graph RDFS closure path. It
 checks the copied immutable snapshot, the released borrowed indexed live View,
@@ -43,6 +44,10 @@ or universal report serialization.
 The separate CLI row is defined by the
 [local CLI validation contract](cli-validate-contract.md) and its exact-output
 fixture; it only composes the released parser and validator for local files.
+The public-source CLI row is defined by the
+[Wikidata capital-selection readiness record](release-readiness-wikidata-capital-selection-2026-07-26.md).
+It validates a consumer admission policy and preserves the source’s multi-value
+facts; it does not label the source data invalid or choose a primary capital.
 
 The current release-qualified shared-path verification is
 [Garden CI run 30180602169](https://github.com/crapthings/odin-garden/actions/runs/30180602169).
@@ -58,6 +63,8 @@ The CLI application evidence is recorded in
 [CLI release readiness — 2026-07-26](release-readiness-cli-2026-07-26.md), with
 the post-merge authoritative Garden gate at
 [run 30182571701](https://github.com/crapthings/odin-garden/actions/runs/30182571701).
+The public-source application candidate is recorded in
+[Wikidata capital-selection readiness — 2026-07-26](release-readiness-wikidata-capital-selection-2026-07-26.md).
 
 ## Release checklist
 

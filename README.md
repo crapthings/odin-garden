@@ -118,6 +118,13 @@ For non-public business data, Garden provides a
 [local validation intake](docs/real-data-validation-intake.md). Raw data stays
 outside the repository unless its owner explicitly authorizes publication.
 
+The first local consumer-data evaluation is recorded as
+[redacted Ism Library evidence](docs/local-validation-evidence-ism-library-2026-07-26.md).
+It found a curator-owned navigation-completeness decision, not an Odin
+capability gap; its [ADR](docs/adr/0004-ism-library-graph-navigation-completeness.md)
+keeps raw content out of Garden while the source license declaration is
+clarified.
+
 New semantic evidence follows the
 [fixture policy](docs/fixture-policy.md), [fixture taxonomy](fixtures/README.md),
 and [review checklist](docs/fixture-review-checklist.md).

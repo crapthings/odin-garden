@@ -202,6 +202,38 @@ The gate must not silently choose a capital, treat a source multiplicity as a
 logical contradiction, refresh the external source in CI, or use inference,
 query, persistence, or network loading.
 
+## Phase G8 — Local consumer-data evidence
+
+Real consumer inputs may prove an application/content policy without becoming
+a Garden fixture. They must first use the local intake and may publish only
+owner-authorized, redacted aggregates.
+
+### Deliverables
+
+- [x] A local intake boundary that prevents unauthorized source data and full
+  reports from entering Garden.
+- [x] A first user-owned content-library evaluation, recording only structural
+  aggregates, component revisions, the constraint category, and remediation
+  ownership.
+- [x] An ADR distinguishing absent curator-owned navigation links from invalid
+  source content, and rejecting automatic relationship generation.
+- [x] A license/publication boundary: no source or derived fixture until the
+  owner resolves the source repository's inconsistent license declaration.
+
+### Acceptance
+
+    authorized local consumer input
+      -> released local CLI validation
+      -> redacted aggregate evidence
+      -> owner chooses remediation or an evidenced Odin gap
+
+The record must not turn a content policy into a truth claim, publish raw data
+without clear authorization, or start a component solely because the data was
+useful to inspect. The current Ism Library result is handled through curation,
+an explicit standalone policy, or a UI fallback; it does not start C1–C5.
+It is an evidence sample, not an Odin dependency or a scheduled product
+workstream.
+
 ## Decision gate: whether to create `odin-graph` or `odin-store`
 
 Neither project is scheduled by date. Revisit extraction only when all of the

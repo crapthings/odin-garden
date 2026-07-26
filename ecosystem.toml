@@ -72,3 +72,37 @@ description = "Run the pinned SHACL Core person-record validation fixture."
 command = "sh scripts/verify-shacl.sh"
 requires_adjacent_checkouts = ["../odin-rdf", "../odin-shacl"]
 status = "release-qualified local integration evidence"
+
+[application_baselines.odin_cli_validate_person_record]
+name = "odin-cli-validate-person-record"
+kind = "release-qualified"
+recorded_on = "2026-07-26"
+description = "Local Turtle validation command with deterministic JSON output and conventional violation exit status."
+
+[application_baselines.odin_cli_validate_person_record.toolchain]
+command = "odin"
+version = "dev-2026-07-nightly:ab0131c"
+
+[application_baselines.odin_cli_validate_person_record.components.odin_rdf]
+repository = "https://github.com/crapthings/odin-rdf.git"
+revision = "eac24a8d3251d03cb3fe700e6ffbda0ad1a47ee4"
+release = "v0.33.0"
+release_qualified = true
+
+[application_baselines.odin_cli_validate_person_record.components.odin_shacl]
+repository = "https://github.com/crapthings/odin-shacl.git"
+revision = "4ee8249b84380e4ef1d888bd94f8cd24d6e7b985"
+release = "v0.1.0"
+release_qualified = true
+
+[application_baselines.odin_cli_validate_person_record.components.odin_cli]
+repository = "https://github.com/crapthings/odin-cli.git"
+revision = "63c639e8cdc2a691377f36085631cb4bf4664b02"
+release = "v0.1.0"
+release_qualified = true
+
+[commands.odin_cli_validate_person_record]
+description = "Run the pinned local odin validate workflow and compare its exact JSON report."
+command = "sh scripts/verify-cli-validate.sh"
+requires_adjacent_checkouts = ["../odin-rdf", "../odin-shacl", "../odin-cli"]
+status = "release-qualified local application evidence"

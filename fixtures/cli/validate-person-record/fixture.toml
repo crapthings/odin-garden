@@ -1,0 +1,28 @@
+id = "odin-cli-validate-person-record"
+title = "Local odin validate command over the SHACL person-record fixture"
+version = 1
+data_graph = "../../shacl-core/person-record/data.ttl"
+shapes_graph = "../../shacl-core/person-record/shapes.ttl"
+expected_output = "expected-report.json"
+source_kind = "application fixture over an authored Garden semantic fixture"
+source_version = "1"
+source_date = "2026-07-26"
+asserting_party = "Odin Garden maintainers"
+provenance = "Derives its input graphs from shacl-core-person-record and defines the v0.1 CLI JSON and exit-status contract."
+license = "CC0-1.0"
+semantic_profile = "odin-cli v0.1 local Turtle validation over odin-shacl bounded Core 0.1; no inference, SPARQL, named graphs, persistence, or network access."
+verification_command = "sh scripts/verify-cli-validate.sh"
+entity_identity = "Inherited from shacl-core-person-record; all fixture IRIs are authored and distinct."
+contradiction_status = "The expected nonzero CLI status represents validation violations, not logical inconsistency."
+validity_period = "Not applicable: this is a timeless synthetic application fixture."
+
+[expectations]
+exit_status = 1
+conforms = false
+result_count = 4
+output = "one newline-terminated deterministic JSON object on standard output with no diagnostic prose"
+
+[exclusions]
+standard_input = "The command rejects - for data or shapes because two input streams would be ambiguous."
+output_files = "Version 0.1 writes only standard output."
+network = "No URL, remote context, HTTP, or network loading behavior exists."

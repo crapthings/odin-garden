@@ -130,7 +130,7 @@ but it must not turn Reasoner provenance or Rule IDs into validation results.
   exclusions.
 - [x] A proposed report/ownership contract that rejects unsupported SHACL
   semantics instead of treating them as conforming.
-- [ ] Pin the first `odin-shacl` release and its `odin-rdf` dependency in a
+- [x] Pin the first `odin-shacl` release and its `odin-rdf` dependency in a
   dedicated Garden command and CI job.
 
 ### Acceptance
@@ -146,6 +146,33 @@ destroy input ownership before reading the report, assert every expected result
 field, and prove that an unsupported SHACL construct returns an error. It must
 not claim SHACL-SPARQL, complex property paths, a shared graph store, or RDFS
 materialization by the validator.
+
+## Phase G6 — First local application workflow
+
+The CLI is a consumer-facing boundary, not a replacement for the component
+contracts. Garden qualifies it only as a fixed workflow over released parser
+and validator inputs.
+
+### Deliverables
+
+- [x] An exact-output CLI fixture over the authored person-record data and
+  shape graphs.
+- [x] A versioned local-file, JSON-output, exit-status, and limits contract.
+- [x] A dedicated command that checks all release tags, output bytes, exit
+  status, and absence of diagnostics for completed validation.
+- [ ] A successful remote and post-merge Garden CI run for this application
+  baseline.
+
+### Acceptance
+
+    local Turtle data + local Turtle shapes
+      -> released RDF parsing + bounded SHACL validation
+      -> deterministic JSON report + conventional exit status
+
+The gate must not silently add standard input, output files, another RDF
+syntax, remote loading, inference, SPARQL, named graphs, persistence, or a
+server concern. Further application behavior starts only from a real consumer
+requirement and its fixture.
 
 ## Decision gate: whether to create `odin-graph` or `odin-store`
 

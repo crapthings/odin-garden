@@ -231,6 +231,8 @@ The record must not turn a content policy into a truth claim, publish raw data
 without clear authorization, or start a component solely because the data was
 useful to inspect. The current Ism Library result is handled through curation,
 an explicit standalone policy, or a UI fallback; it does not start C1–C5.
+It is an evidence sample, not an Odin dependency or a scheduled product
+workstream.
 
 ## Decision gate: whether to create `odin-graph` or `odin-store`
 

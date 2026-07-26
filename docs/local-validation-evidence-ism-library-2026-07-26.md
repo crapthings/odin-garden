@@ -46,19 +46,22 @@ category. The run used released `odin-rdf v0.33.0` (`eac24a8`),
 `odin-shacl v0.1.0` (`4ee8249`), and `odin-cli v0.1.0` (`63c639e`) with Odin
 compiler `dev-2026-07-nightly:ab0131c`.
 
-## Decision and follow-through
+## Decision and optional follow-through
 
 The bounded SHACL profile expresses this policy without a change to Odin.
-Garden will therefore not begin C1, C2, C3, C4, or C5 from this record.
+Garden will therefore not begin C1, C2, C3, C4, or C5 from this record. This
+sample does not make Ism Library an Odin dependency, a release requirement, or
+the next product priority.
 
-The content owner should choose a policy for the 25 entries:
+If its owner independently chooses to ship graph navigation, the content owner
+can choose a policy for the 25 entries:
 
 1. author one or more curated related links;
 2. explicitly designate an entry as standalone/exempt; or
 3. provide a UI fallback that does not require graph navigation.
 
 Do not automatically infer links from shared words, titles, or categories, and
-do not represent an absent curated link as a content error. After the owner
-chooses the policy and resolves the repository license declaration, rerun the
-same local aggregate check. A shareable regression fixture is a separate
-decision under the [fixture policy](fixture-policy.md).
+do not represent an absent curated link as a content error. If that independent
+product work proceeds, resolve the repository license declaration before
+considering a shareable regression fixture, then rerun the same local aggregate
+check. Neither action is required for the Odin roadmap.

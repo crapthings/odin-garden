@@ -33,6 +33,12 @@ complete machine-readable report and checks exit status 1, so it proves the
 command boundary without exposing a component's internal API or implying a
 network, service, or storage layer.
 
+`commands.odin_cli_wikidata_south_africa_capital_selection` uses the same
+released tuple but a separately versioned public-source application fixture.
+It proves that a source fact excerpt is preserved while a consumer-owned
+single-select policy is enforced; it neither declares the source erroneous nor
+chooses a value.
+
 ## Supported combinations
 
 The current baseline is supported for its documented local integration path.
@@ -47,7 +53,8 @@ integration commands pass without local source changes.
    compiler identity used for the run.
 3. Run every command declared for the affected baseline in the manifest, such
    as `sh scripts/verify-rdfs-sparql.sh`, `sh scripts/verify-shacl.sh`, or
-   `sh scripts/verify-cli-validate.sh`.
+   `sh scripts/verify-cli-validate.sh` or
+   `sh scripts/verify-cli-wikidata-capital-selection.sh`.
 4. Review fixture output and any change to RDF term, blank-node, ownership,
    resource-limit, Dataset-view, or error behavior.
 5. Record an ADR before accepting behavior changes in those boundaries, then

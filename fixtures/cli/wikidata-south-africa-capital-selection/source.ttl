@@ -1,0 +1,9 @@
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+
+wd:Q258
+  wdt:P31 wd:Q3624078,
+    wd:Q6256 ;
+  wdt:P36 wd:Q3926,
+    wd:Q37701,
+    wd:Q5465 .

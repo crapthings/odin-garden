@@ -1,0 +1,35 @@
+id = "wikidata-south-africa-capital-selection"
+title = "Wikidata South Africa single-capital import policy"
+version = 1
+source_document = "source.ttl"
+data_graph = "data.ttl"
+shapes_graph = "shapes.ttl"
+expected_output = "expected-report.json"
+expected_source_output = "expected-source-report.json"
+source_kind = "Wikidata RDF entity export, truthy direct-property excerpt"
+source_version = "Wikidata entity revision 2522617312"
+source_date = "2026-07-25T19:02:07Z"
+retrieved_on = "2026-07-26"
+upstream_url = "https://www.wikidata.org/wiki/Special:EntityData/Q258.ttl?flavor=simple&revision=2522617312"
+upstream_sha256 = "057dd7022052c76789d65a1ea147cb46c01e3a1b4216f345cc4c57cfb010cdf7"
+asserting_party = "Wikidata contributors for source facts; Odin Garden maintainers for the application normalization and import policy."
+provenance = "source.ttl is a semantically faithful Turtle excerpt of the selected wdt:P31 and wdt:P36 facts from the immutable upstream revision. data.ttl adds only app:SingleCapitalSelection to state the consumer-owned admission policy."
+license = "CC0-1.0"
+semantic_profile = "odin-cli v0.1 local Turtle validation over odin-shacl bounded Core 0.1; exact one IRI-valued wdt:P36 for records admitted to a single-capital selector."
+verification_command = "sh scripts/verify-cli-wikidata-capital-selection.sh"
+entity_identity = "wd:Q258 and all wd:Q* capital IRIs retain their Wikidata identities. The app namespace is owned by this fixture and creates no equivalence claims."
+contradiction_status = "No logical contradiction is asserted. Three capital values are source facts; the violation is solely against the application’s one-value import policy."
+validity_period = "The source facts are pinned to the recorded Wikidata revision. The application policy is valid only for a single-select capital workflow."
+
+[expectations]
+exit_status = 1
+conforms = false
+result_count = 1
+output = "one newline-terminated deterministic JSON object that reports only the MaxCount violation"
+handling = "Do not discard or rank the source values. Preserve all values and require an explicit product policy before single-value ingestion."
+
+[exclusions]
+source_refresh = "The verifier is offline and never refetches Wikidata. Updating the source requires a new fixture version, revision, digest, and review."
+inference = "No RDFS or OWL inference is used."
+semantic_claim = "The fixture does not claim that Wikidata is erroneous or that any capital is primary."
+network = "No URL, HTTP, remote context, or network loading behavior exists in the CLI run."

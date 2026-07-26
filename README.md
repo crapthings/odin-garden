@@ -109,6 +109,11 @@ Turtle-only admission, deterministic JSON output, and exit behavior while
 remaining independent from inference, query, persistence, service, and network
 concerns.
 
+The first public-source application fixture applies that workflow to a pinned
+CC0 Wikidata fact excerpt. Its [capital-selection decision](docs/adr/0003-wikidata-capital-selection.md)
+shows how an application policy can flag a multi-valued import without
+rewriting or falsely condemning the source data.
+
 New semantic evidence follows the
 [fixture policy](docs/fixture-policy.md), [fixture taxonomy](fixtures/README.md),
 and [review checklist](docs/fixture-review-checklist.md).

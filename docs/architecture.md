@@ -123,15 +123,17 @@ multi-writer requirement makes its transaction semantics concrete.
 
 ## Current assessment — 2026-07-26
 
-The in-memory Graph kernel is now implemented as an experimental repository
-and is the current `odin-sparql` `Memory_Dataset` representation. The remaining
-question is narrower: whether a second production-quality consumer needs the
-same no-copy ownership and index contract. No durable runtime layer is proposed:
+The in-memory Graph kernel is implemented as an experimental repository, but
+it is no longer the representation or runtime prerequisite of the released
+`odin-sparql` core. `Memory_Dataset` owns its bounded RDF Dataset directly over
+`odin-rdf`; Graph remains an optional adapter. The remaining question is
+whether a second production-quality consumer needs Graph's particular no-copy
+ownership and index contract. No durable runtime layer is proposed:
 
 | Gate | Status | Evidence / gap |
 | --- | --- | --- |
-| Common owned terms and snapshot semantics | Partial | `Memory_Dataset` now owns the shared Graph kernel and its frozen scan indexes. The Reasoner still owns a distinct indexed transactional Store; its Graph adapter verifies an owned completed closure with origin and first-derivation support metadata. See ADR 0002. |
-| Pinned closure-to-query integration | Met | Garden pins released `odin-rdf v0.32.1`, `odin-reasoner v0.6.0`, and `odin-sparql v0.2.0`, plus the experimental `odin-graph v0.1.0` tag. The Graph tag is a reproducible Garden baseline, not an independently supported public release. The release-qualified workflow verifies their tags and closure, lifecycle, graph-scope, limit, blank-node, live-view equivalence, adopted-snapshot, external `Memory_Dataset` identity, and public graph-backed Dataset cases. The development OWL RL equivalence suite additionally queries one closure through the reasoner Snapshot, copied `Memory_Dataset`, and copied Graph adapter with colliding blank-node labels in distinct scopes; each path returns the same single binding. This adds compatibility evidence, not a common no-copy snapshot. |
+| Common owned terms and snapshot semantics | Partial | The released `Memory_Dataset` owns an RDF-only bounded set; the Reasoner owns a distinct indexed transactional Store. Graph's optional Reasoner and SPARQL adapters remain migration evidence, not a shared runtime representation. See ADR 0002 and ADR 0006. |
+| Pinned closure-to-query integration | Met, deliberately split | Garden retains the historical fixed `odin-rdf v0.32.1` / Reasoner `v0.6.0` / SPARQL `v0.2.0` / experimental Graph `v0.1.0` closure tuple. Separately, `sparql-core-v0.7` pins RDF `v0.33.0` and SPARQL `v0.7.0` with no Graph checkout, and verifies owned and custom Dataset views. Neither row claims a common no-copy snapshot. |
 | Minimal API from existing use cases | Partial | Garden now has a provisional multi-source named-graph fixture and a [candidate shared graph contract](candidate-shared-graph-contract.md) for mutation, freeze, limits, and errors. Reasoner still has only indexed default-graph closure; the proposal is not an extracted implementation or a production requirement. |
 | Durable-store requirement | Not met | There is no approved persistence, restart, multi-writer, or isolation requirement. |
 

@@ -15,6 +15,11 @@ qualify the baseline.
 validation pair. It is a separate row because it uses RDF v0.33.0 and has no
 Reasoner, SPARQL, or Graph runtime dependency.
 
+`verify-sparql-core-v0-7.sh` applies the same check to the RDF v0.33.0 and
+SPARQL v0.7.0 pair. It proves the public Memory_Dataset and custom View
+boundary without a Graph checkout; it neither changes nor replaces the older
+Reasoner/SPARQL/Graph closure row.
+
 `verify-cli-validate.sh` applies the same check to RDF, SHACL, and the thin
 CLI layer, then verifies an exact JSON response and a violation exit status.
 It establishes an application workflow only; it is not a server, query, or
@@ -23,6 +28,7 @@ storage compatibility claim.
 | Baseline | Odin | odin-rdf | Components | Garden gate | Status |
 | --- | --- | --- | --- | --- | --- |
 | `rdfs-sparql-first-closure` | `dev-2026-07-nightly:ab0131c` | `d07162c` (`v0.32.1`) | `476fe59` Reasoner (`v0.6.0`); `d8503a6` SPARQL (`v0.2.0`); `8c34912` Graph (`v0.1.0`, experimental) | `verify-rdfs-sparql.sh` | Release-qualified local integration path |
+| `sparql-core-v0.7` | `dev-2026-07:819fdc7a8` | `eac24a8` (`v0.33.0`) | `4150774` SPARQL (`v0.7.0`); no Graph input | `verify-sparql-core-v0-7.sh` | Release-qualified core query boundary |
 | `shacl-core-person-record` | `dev-2026-07-nightly:ab0131c` | `eac24a8` (`v0.33.0`) | `4ee8249` SHACL (`v0.1.0`) | `verify-shacl.sh` | Release-qualified validation path |
 | `odin-cli-validate-person-record` | `dev-2026-07-nightly:ab0131c` | `eac24a8` (`v0.33.0`) | `4ee8249` SHACL (`v0.1.0`); `63c639e` CLI (`v0.1.0`) | `verify-cli-validate.sh` | Release-qualified local application path |
 | `odin-cli-wikidata-south-africa-capital-selection` | `dev-2026-07-nightly:ab0131c` | `eac24a8` (`v0.33.0`) | `4ee8249` SHACL (`v0.1.0`); `63c639e` CLI (`v0.1.0`) | `verify-cli-wikidata-capital-selection.sh` | Release-qualified public-source application path |

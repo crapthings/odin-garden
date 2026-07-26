@@ -54,8 +54,10 @@ The SHACL candidate evidence is recorded in
 [SHACL release readiness — 2026-07-26](release-readiness-shacl-2026-07-26.md),
 with `odin-shacl` source CI at
 [run 30181642051](https://github.com/crapthings/odin-shacl/actions/runs/30181642051).
-The CLI application candidate is recorded in
-[CLI release readiness — 2026-07-26](release-readiness-cli-2026-07-26.md).
+The CLI application evidence is recorded in
+[CLI release readiness — 2026-07-26](release-readiness-cli-2026-07-26.md), with
+the post-merge authoritative Garden gate at
+[run 30182571701](https://github.com/crapthings/odin-garden/actions/runs/30182571701).
 
 ## Release checklist
 

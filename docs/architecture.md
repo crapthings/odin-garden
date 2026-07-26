@@ -39,6 +39,7 @@ The permitted runtime dependencies are:
 odin-sparql   -> odin-rdf
 odin-reasoner -> odin-rdf
 reasoner SPARQL adapter -> odin-sparql   (optional; outside reasoner core)
+odin-cli      -> odin-rdf, odin-shacl, odin-sparql   (thin local application; no Graph)
 odin-garden   -> no runtime dependency
 ```
 
@@ -49,6 +50,7 @@ odin-garden   -> no runtime dependency
 | RDF terms, syntax, canonicalization, streaming input/output | `odin-rdf` | Not a dataset database or query engine. |
 | Forward rule evaluation, asserted/inferred triple facts, closure provenance | `odin-reasoner` | Its fact store is internal, triple-only, and currently default-graph scoped. |
 | Query parsing, algebra, result semantics, graph-scoped read scans | `odin-sparql` | Its Dataset boundary is read-only and storage-agnostic. |
+| Local file admission, bounded command composition, standard-output and exit behavior | `odin-cli` | Uses released components without exposing a server, store, or Graph runtime dependency. |
 | Cross-project revisions, fixtures, compatibility, architectural decisions | `odin-garden` | Has no runtime dependency. |
 
 `odin-sparql` already permits an application-owned immutable snapshot through

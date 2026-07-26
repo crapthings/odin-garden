@@ -3,14 +3,16 @@
 ## Current baselines
 
 `ecosystem.toml` is the authoritative, machine-readable record for every
-Garden integration run. It contains five fixed **release-qualified component
+Garden integration run. It contains six fixed **release-qualified component
 combinations**. The RDFS-to-SPARQL baseline pins `odin-rdf v0.32.1`,
 `odin-reasoner v0.6.0`, `odin-sparql v0.2.0`, and the experimental
 `odin-graph v0.1.0`. The independent `sparql-core-v0.7` baseline pins
 `odin-rdf v0.33.0` and `odin-sparql v0.7.0`, with no Graph input. The separate
 SHACL validation baseline pins `odin-rdf v0.33.0` and `odin-shacl v0.1.0`.
-The local CLI application baseline adds `odin-cli v0.1.0` to that released pair
-and fixes its JSON report and exit status. The Odin compiler remains a pinned
+The local CLI validation application baseline adds `odin-cli v0.1.0` to that
+released pair and fixes its JSON report and exit status. The independent local
+CLI query baseline pins `odin-cli v0.2.0`, RDF v0.33.0, SHACL v0.1.0, and
+SPARQL v0.7.0; it has no Graph checkout. The Odin compiler remains a pinned
 development build and is recorded exactly rather than treated as a moving
 dependency.
 
@@ -47,6 +49,13 @@ It proves that a source fact excerpt is preserved while a consumer-owned
 single-select policy is enforced; it neither declares the source erroneous nor
 chooses a value.
 
+`commands.odin_cli_query_local_friends` verifies all four exact tags and runs
+the v0.2 command over one local Turtle default graph. It compares default
+SELECT JSON (including its no-newline terminator) and default CONSTRUCT
+N-Triples, requires quiet standard error and exit 0, and statically rejects a
+Graph import. SHACL is pinned because the released CLI binary also contains the
+validation command; the query evaluation path uses only RDF and SPARQL.
+
 ## Supported combinations
 
 The current baseline is supported for its documented local integration path.
@@ -63,7 +72,8 @@ integration commands pass without local source changes.
    as `sh scripts/verify-rdfs-sparql.sh`,
    `sh scripts/verify-sparql-core-v0-7.sh`, `sh scripts/verify-shacl.sh`, or
    `sh scripts/verify-cli-validate.sh` or
-   `sh scripts/verify-cli-wikidata-capital-selection.sh`.
+   `sh scripts/verify-cli-wikidata-capital-selection.sh` or
+   `sh scripts/verify-cli-query-v0-2.sh`.
 4. Review fixture output and any change to RDF term, blank-node, ownership,
    resource-limit, Dataset-view, or error behavior.
 5. Record an ADR before accepting behavior changes in those boundaries, then

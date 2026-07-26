@@ -114,6 +114,10 @@ CC0 Wikidata fact excerpt. Its [capital-selection decision](docs/adr/0003-wikida
 shows how an application policy can flag a multi-valued import without
 rewriting or falsely condemning the source data.
 
+For non-public business data, Garden provides a
+[local validation intake](docs/real-data-validation-intake.md). Raw data stays
+outside the repository unless its owner explicitly authorizes publication.
+
 New semantic evidence follows the
 [fixture policy](docs/fixture-policy.md), [fixture taxonomy](fixtures/README.md),
 and [review checklist](docs/fixture-review-checklist.md).

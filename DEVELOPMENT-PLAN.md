@@ -234,6 +234,32 @@ an explicit standalone policy, or a UI fallback; it does not start C1–C5.
 It is an evidence sample, not an Odin dependency or a scheduled product
 workstream.
 
+## Phase G9 — Release-boundary review for development integrations
+
+Development convergence is useful evidence, but it cannot turn an adjacent
+checkout into an undeclared runtime release dependency. A component may be
+tagged only when every public dependency has a stable, reviewable delivery
+boundary.
+
+### Deliverables
+
+- [x] Compare released Garden pins with the current Reasoner, SPARQL, and
+  Graph heads.
+- [x] Record that the post-v0.2 SPARQL public Dataset implementation requires
+  experimental Graph, while Reasoner's core remains RDF-only.
+- [x] Decide in ADR 0005 to defer a post-v0.2 SPARQL release until its Graph
+  delivery boundary is explicitly chosen and Garden-qualified.
+- [ ] When a release is actually proposed, choose the boundary, run the
+  component release guide, then add a fixed-version Garden gate without
+  weakening the existing baseline.
+
+### Acceptance
+
+Every published component can state the exact supported revisions and public
+contracts it needs. Current-source convergence may inform a release decision,
+but no consumer needs an unqualified adjacent checkout to reproduce a tagged
+release.
+
 ## Decision gate: whether to create `odin-graph` or `odin-store`
 
 Neither project is scheduled by date. Revisit extraction only when all of the

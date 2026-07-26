@@ -1,6 +1,6 @@
 # CLI release readiness — 2026-07-26
 
-## Candidate
+## Qualified baseline
 
 The `odin-cli-validate-person-record` application baseline records the
 following immutable published inputs:
@@ -12,7 +12,7 @@ following immutable published inputs:
 | odin-shacl | `v0.1.0` | `4ee8249b84380e4ef1d888bd94f8cd24d6e7b985` |
 | odin-cli | `v0.1.0` | `63c639e8cdc2a691377f36085631cb4bf4664b02` |
 
-## Evidence required
+## Evidence
 
 - The fixed Garden command uses only the two authored local Turtle graphs and
   four explicit resource limits.
@@ -26,6 +26,10 @@ following immutable published inputs:
   [run 30182111169](https://github.com/crapthings/odin-cli/actions/runs/30182111169).
 
 The `cli-validate` job in `Release-qualified integration` is the
-authoritative remote application gate. It must run successfully on the Garden
-candidate and again after merge on `main` before this baseline is treated as
-release-qualified evidence.
+authoritative remote application gate. It passed for the Garden pull request
+[run 30182538483](https://github.com/crapthings/odin-garden/actions/runs/30182538483)
+and again after squash merge on `main` as
+[run 30182571701](https://github.com/crapthings/odin-garden/actions/runs/30182571701).
+The latter validates Garden commit
+`cd4b77c53433b9ab9970a7e2fc048c0aee0493d4` and is the release-qualified
+evidence for this application baseline.

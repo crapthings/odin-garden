@@ -160,7 +160,7 @@ and validator inputs.
 - [x] A versioned local-file, JSON-output, exit-status, and limits contract.
 - [x] A dedicated command that checks all release tags, output bytes, exit
   status, and absence of diagnostics for completed validation.
-- [ ] A successful remote and post-merge Garden CI run for this application
+- [x] A successful remote and post-merge Garden CI run for this application
   baseline.
 
 ### Acceptance

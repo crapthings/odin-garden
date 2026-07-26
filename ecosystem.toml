@@ -53,7 +53,7 @@ description = "Public RDF-only SPARQL Dataset and custom View boundary; Graph is
 
 [query_baselines.sparql_core_v0_7.toolchain]
 command = "odin"
-version = "dev-2026-07:819fdc7a8"
+version = "dev-2026-07-nightly:ab0131c"
 
 [query_baselines.sparql_core_v0_7.components.odin_rdf]
 repository = "https://github.com/crapthings/odin-rdf.git"

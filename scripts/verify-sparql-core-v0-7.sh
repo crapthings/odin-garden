@@ -34,7 +34,7 @@ require_revision ../odin-sparql 4150774bfecc23ea027036084b1edbd41dad13e5
 require_release_tag ../odin-rdf v0.33.0 eac24a8d3251d03cb3fe700e6ffbda0ad1a47ee4
 require_release_tag ../odin-sparql v0.7.0 4150774bfecc23ea027036084b1edbd41dad13e5
 
-expected_odin='dev-2026-07:819fdc7a8'
+expected_odin='dev-2026-07-nightly:ab0131c'
 actual_odin=$(odin version)
 actual_odin=${actual_odin##* version }
 if [ "$actual_odin" != "$expected_odin" ]; then

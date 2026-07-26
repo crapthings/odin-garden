@@ -21,12 +21,17 @@ and the released Store-adopting immutable Snapshot. It is a compatibility
 guarantee for that integration command, not graph-extraction success or a
 general shared-store API guarantee.
 
+The exact cross-project commitments for this row are in the
+[release-qualified interoperability contracts](release-qualified-interop-contract.md).
+They are deliberately limited to exercised behavior; a SHACL validation report
+and universal rule-exchange format are not part of this compatibility row.
+
 The current release-qualified shared-path verification is
-[Garden CI run 30083966449](https://github.com/crapthings/odin-garden/actions/runs/30083966449).
-The initial release-readiness record remains in
-[release readiness — 2026-07-24](release-readiness-2026-07-24.md), and its RDF
+[Garden CI run 30180602169](https://github.com/crapthings/odin-garden/actions/runs/30180602169).
+The current evidence record is
+[release readiness — 2026-07-26](release-readiness-2026-07-26.md), and its RDF
 component is backed by the published release commit's successful
-[W3C CI job](https://github.com/crapthings/odin-rdf/actions/runs/30075331131).
+[CI run 30180307959](https://github.com/crapthings/odin-rdf/actions/runs/30180307959).
 
 ## Release checklist
 

@@ -94,6 +94,9 @@ claim.
 The exercised ownership, graph-scope, blank-node, resource-limit, and error
 boundaries are recorded in
 [`docs/rdfs-sparql-first-closure-contract.md`](docs/rdfs-sparql-first-closure-contract.md).
+The release-qualified interoperability commitments, including the explicit
+deferral of validation reports and a universal Rule IR, are recorded in
+[`docs/release-qualified-interop-contract.md`](docs/release-qualified-interop-contract.md).
 
 New semantic evidence follows the
 [fixture policy](docs/fixture-policy.md), [fixture taxonomy](fixtures/README.md),

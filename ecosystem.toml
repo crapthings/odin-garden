@@ -45,6 +45,34 @@ command = "sh scripts/verify-rdfs-sparql.sh"
 requires_adjacent_checkouts = ["../odin-rdf", "../odin-reasoner", "../odin-sparql", "../odin-graph"]
 status = "release-qualified local integration evidence"
 
+[query_baselines.sparql_core_v0_7]
+name = "sparql-core-v0.7"
+kind = "release-qualified"
+recorded_on = "2026-07-26"
+description = "Public RDF-only SPARQL Dataset and custom View boundary; Graph is optional and excluded from this core release row."
+
+[query_baselines.sparql_core_v0_7.toolchain]
+command = "odin"
+version = "dev-2026-07-nightly:ab0131c"
+
+[query_baselines.sparql_core_v0_7.components.odin_rdf]
+repository = "https://github.com/crapthings/odin-rdf.git"
+revision = "eac24a8d3251d03cb3fe700e6ffbda0ad1a47ee4"
+release = "v0.33.0"
+release_qualified = true
+
+[query_baselines.sparql_core_v0_7.components.odin_sparql]
+repository = "https://github.com/crapthings/odin-sparql.git"
+revision = "4150774bfecc23ea027036084b1edbd41dad13e5"
+release = "v0.7.0"
+release_qualified = true
+
+[commands.sparql_core_v0_7]
+description = "Run the RDF-only SPARQL v0.7 core Dataset and custom View release gate."
+command = "sh scripts/verify-sparql-core-v0-7.sh"
+requires_adjacent_checkouts = ["../odin-rdf", "../odin-sparql"]
+status = "release-qualified core query evidence"
+
 [validation_baselines.shacl_core_person_record]
 name = "shacl-core-person-record"
 kind = "release-qualified"

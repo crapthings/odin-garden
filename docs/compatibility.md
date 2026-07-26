@@ -3,14 +3,16 @@
 ## Current baselines
 
 `ecosystem.toml` is the authoritative, machine-readable record for every
-Garden integration run. It contains three fixed **release-qualified component
+Garden integration run. It contains five fixed **release-qualified component
 combinations**. The RDFS-to-SPARQL baseline pins `odin-rdf v0.32.1`,
 `odin-reasoner v0.6.0`, `odin-sparql v0.2.0`, and the experimental
-`odin-graph v0.1.0`. The separate SHACL validation baseline pins
-`odin-rdf v0.33.0` and `odin-shacl v0.1.0`. The local CLI application baseline
-adds `odin-cli v0.1.0` to that released pair and fixes its JSON report and exit
-status. The Odin compiler remains a pinned development build and is recorded
-exactly rather than treated as a moving dependency.
+`odin-graph v0.1.0`. The independent `sparql-core-v0.7` baseline pins
+`odin-rdf v0.33.0` and `odin-sparql v0.7.0`, with no Graph input. The separate
+SHACL validation baseline pins `odin-rdf v0.33.0` and `odin-shacl v0.1.0`.
+The local CLI application baseline adds `odin-cli v0.1.0` to that released pair
+and fixes its JSON report and exit status. The Odin compiler remains a pinned
+development build and is recorded exactly rather than treated as a moving
+dependency.
 
 The command in `commands.rdfs_sparql_first_closure` verifies all four exact
 identities before executing the fixture. It supplies release-qualified local
@@ -21,6 +23,12 @@ GitHub Actions runs the same command against those exact component commits in
 the `Release-qualified integration` workflow. The workflow installs the pinned
 `dev-2026-07` Odin release and recreates the documented adjacent-checkout
 layout without following any component branch.
+
+`commands.sparql_core_v0_7` verifies the v0.33.0 and v0.7.0 tags, then proves
+both the owned Memory_Dataset and an application-owned `custom_view` through
+the public Dataset API. It intentionally has no `odin-graph` checkout,
+collection, or import. This row qualifies the SPARQL core release boundary;
+the older RDFS-to-SPARQL-and-Graph row remains separate evidence.
 
 `commands.shacl_core_person_record` similarly verifies the exact RDF and SHACL
 tags before parsing the fixture's data and shapes graphs. It proves a bounded,
@@ -52,7 +60,8 @@ integration commands pass without local source changes.
 2. Update `ecosystem.toml` with immutable commit IDs, release labels, and the
    compiler identity used for the run.
 3. Run every command declared for the affected baseline in the manifest, such
-   as `sh scripts/verify-rdfs-sparql.sh`, `sh scripts/verify-shacl.sh`, or
+   as `sh scripts/verify-rdfs-sparql.sh`,
+   `sh scripts/verify-sparql-core-v0-7.sh`, `sh scripts/verify-shacl.sh`, or
    `sh scripts/verify-cli-validate.sh` or
    `sh scripts/verify-cli-wikidata-capital-selection.sh`.
 4. Review fixture output and any change to RDF term, blank-node, ownership,

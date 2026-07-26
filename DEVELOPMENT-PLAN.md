@@ -249,9 +249,10 @@ boundary.
   experimental Graph, while Reasoner's core remains RDF-only.
 - [x] Decide in ADR 0005 to defer a post-v0.2 SPARQL release until its Graph
   delivery boundary is explicitly chosen and Garden-qualified.
-- [ ] When a release is actually proposed, choose the boundary, run the
-  component release guide, then add a fixed-version Garden gate without
-  weakening the existing baseline.
+- [x] `odin-sparql v0.7.0` chose the RDF-only public Dataset boundary, ran its
+  component release guide, and added the separate fixed-version
+  `sparql-core-v0.7` Garden gate without weakening the existing RDFS/Graph
+  baseline. See ADR 0006.
 
 ### Acceptance
 

@@ -11,7 +11,7 @@ fixtures/<profile>/<scenario>/
   asserted.nt                  normalized asserted RDF where applicable
   inferred.nt                  expected profile-derived RDF for closure fixtures
   shapes.ttl                   authored validation shape graph for validation fixtures
-  expected-report.toml         stable validation-report expectations where applicable
+  expected-report.*            stable validation or application-output expectations where applicable
 ```
 
 This bundle separates five roles even when a small authored fixture stores them
@@ -30,3 +30,8 @@ Queries are separate so their expected result form can remain stable across
 source syntaxes. Follow the [fixture policy](../docs/fixture-policy.md) and
 complete the [review checklist](../docs/fixture-review-checklist.md) for every
 new or materially changed fixture.
+
+`fixtures/cli/` is reserved for application-layer fixtures. They may reuse an
+authored semantic fixture's input graphs, but also fix the command arguments,
+machine output, exit behavior, and operational exclusions that the application
+owns.

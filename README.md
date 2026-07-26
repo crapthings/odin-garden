@@ -103,6 +103,12 @@ fixture are recorded separately in
 It remains distinct from the RDFS-to-SPARQL tuple and does not imply a shared
 Graph/store or a universal report serialization.
 
+The first local application workflow, `odin validate`, is qualified separately
+by its [CLI contract](docs/cli-validate-contract.md). It fixes local
+Turtle-only admission, deterministic JSON output, and exit behavior while
+remaining independent from inference, query, persistence, service, and network
+concerns.
+
 New semantic evidence follows the
 [fixture policy](docs/fixture-policy.md), [fixture taxonomy](fixtures/README.md),
 and [review checklist](docs/fixture-review-checklist.md).

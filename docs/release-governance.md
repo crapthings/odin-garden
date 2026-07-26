@@ -15,10 +15,16 @@ qualify the baseline.
 validation pair. It is a separate row because it uses RDF v0.33.0 and has no
 Reasoner, SPARQL, or Graph runtime dependency.
 
+`verify-cli-validate.sh` applies the same check to RDF, SHACL, and the thin
+CLI layer, then verifies an exact JSON response and a violation exit status.
+It establishes an application workflow only; it is not a server, query, or
+storage compatibility claim.
+
 | Baseline | Odin | odin-rdf | Components | Garden gate | Status |
 | --- | --- | --- | --- | --- | --- |
 | `rdfs-sparql-first-closure` | `dev-2026-07-nightly:ab0131c` | `d07162c` (`v0.32.1`) | `476fe59` Reasoner (`v0.6.0`); `d8503a6` SPARQL (`v0.2.0`); `8c34912` Graph (`v0.1.0`, experimental) | `verify-rdfs-sparql.sh` | Release-qualified local integration path |
 | `shacl-core-person-record` | `dev-2026-07-nightly:ab0131c` | `eac24a8` (`v0.33.0`) | `4ee8249` SHACL (`v0.1.0`) | `verify-shacl.sh` | Release-qualified validation path |
+| `odin-cli-validate-person-record` | `dev-2026-07-nightly:ab0131c` | `eac24a8` (`v0.33.0`) | `4ee8249` SHACL (`v0.1.0`); `63c639e` CLI (`v0.1.0`) | `verify-cli-validate.sh` | Release-qualified local application path |
 
 This row is limited to the documented default-graph RDFS closure path. It
 checks the copied immutable snapshot, the released borrowed indexed live View,
@@ -34,6 +40,9 @@ The separate SHACL row is defined by the
 [bounded validation contract](shacl-core-validation-contract.md) and its
 person-record fixture; it does not promote a shared Graph, Reasoner rule API,
 or universal report serialization.
+The separate CLI row is defined by the
+[local CLI validation contract](cli-validate-contract.md) and its exact-output
+fixture; it only composes the released parser and validator for local files.
 
 The current release-qualified shared-path verification is
 [Garden CI run 30180602169](https://github.com/crapthings/odin-garden/actions/runs/30180602169).
@@ -45,6 +54,8 @@ The SHACL candidate evidence is recorded in
 [SHACL release readiness — 2026-07-26](release-readiness-shacl-2026-07-26.md),
 with `odin-shacl` source CI at
 [run 30181642051](https://github.com/crapthings/odin-shacl/actions/runs/30181642051).
+The CLI application candidate is recorded in
+[CLI release readiness — 2026-07-26](release-readiness-cli-2026-07-26.md).
 
 ## Release checklist
 

@@ -17,7 +17,7 @@ for a later graph-contract decision, not a shared public graph API.
    SELECT, ASK, and CONSTRUCT execute. Terms supplied by its Dataset view remain
    borrowed from the snapshot and are valid only until `Snapshot.destroy`.
 
-The release-qualified `odin-reasoner v0.3.0` baseline includes a distinct live
+The release-qualified `odin-reasoner v0.6.0` baseline includes a distinct live
 path: `sparql_adapter.indexed_view` borrows the source Store's owned terms and
 reuses its indexed matching operation without materializing a second dataset.
 The Garden equivalence test executes SELECT, ASK, and CONSTRUCT through that

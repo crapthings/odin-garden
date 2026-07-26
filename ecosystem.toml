@@ -8,7 +8,7 @@
 [baseline]
 name = "rdfs-sparql-first-closure"
 kind = "release-qualified"
-recorded_on = "2026-07-24"
+recorded_on = "2026-07-26"
 
 [toolchain]
 command = "odin"
@@ -16,14 +16,14 @@ version = "dev-2026-07-nightly:ab0131c"
 
 [components.odin_rdf]
 repository = "https://github.com/crapthings/odin-rdf.git"
-revision = "daa350521a8ad9f79012bb1fefa96cf00938f3f1"
-release = "v0.31.1"
+revision = "d07162c20355f40cd05f031798b808a54c06fb25"
+release = "v0.32.1"
 release_qualified = true
 
 [components.odin_reasoner]
 repository = "https://github.com/crapthings/odin-reasoner.git"
-revision = "c62ebd8b5070eeb44c5b818bc30698b4f0da0b26"
-release = "v0.3.0"
+revision = "476fe5917181776368b21f26622e0f79d7f22a4f"
+release = "v0.6.0"
 release_qualified = true
 
 [components.odin_sparql]
@@ -42,5 +42,5 @@ purpose = "experimental tagged graph baseline plus optional SPARQL and Reasoner 
 [commands.rdfs_sparql_first_closure]
 description = "Run the pinned release-qualified RDFS closure to SPARQL integration fixture."
 command = "sh scripts/verify-rdfs-sparql.sh"
-requires_adjacent_checkouts = ["../odin-rdf", "../odin-reasoner", "../odin-sparql"]
+requires_adjacent_checkouts = ["../odin-rdf", "../odin-reasoner", "../odin-sparql", "../odin-graph"]
 status = "release-qualified local integration evidence"

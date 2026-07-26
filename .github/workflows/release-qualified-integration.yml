@@ -33,14 +33,14 @@ jobs:
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         with:
           repository: crapthings/odin-rdf
-          ref: daa350521a8ad9f79012bb1fefa96cf00938f3f1 # v0.31.1
+          ref: d07162c20355f40cd05f031798b808a54c06fb25 # v0.32.1
           path: _deps/odin-rdf
           fetch-depth: 0
           persist-credentials: false
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         with:
           repository: crapthings/odin-reasoner
-          ref: c62ebd8b5070eeb44c5b818bc30698b4f0da0b26 # v0.3.0
+          ref: 476fe5917181776368b21f26622e0f79d7f22a4f # v0.6.0
           path: _deps/odin-reasoner
           fetch-depth: 0
           persist-credentials: false

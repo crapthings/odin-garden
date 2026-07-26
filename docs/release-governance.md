@@ -11,9 +11,9 @@ passes, and its component entries are `release_qualified = true` in
 release tag, so a matching SHA without the corresponding published tag cannot
 qualify the baseline.
 
-| Baseline | Odin | odin-rdf | odin-reasoner | odin-sparql | Garden gate | Status |
-| --- | --- | --- | --- | --- | --- | --- |
-| `rdfs-sparql-first-closure` | `dev-2026-07-nightly:ab0131c` | `daa3505` (`v0.31.1`) | `c62ebd8` (`v0.3.0`) | `d8503a6` (`v0.2.0`) | `verify-rdfs-sparql.sh` | Release-qualified local integration path |
+| Baseline | Odin | odin-rdf | odin-reasoner | odin-sparql | odin-graph | Garden gate | Status |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `rdfs-sparql-first-closure` | `dev-2026-07-nightly:ab0131c` | `d07162c` (`v0.32.1`) | `476fe59` (`v0.6.0`) | `d8503a6` (`v0.2.0`) | `8c34912` (`v0.1.0`, experimental) | `verify-rdfs-sparql.sh` | Release-qualified local integration path |
 
 This row is limited to the documented default-graph RDFS closure path. It
 checks the copied immutable snapshot, the released borrowed indexed live View,

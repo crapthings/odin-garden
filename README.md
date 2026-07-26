@@ -97,6 +97,11 @@ boundaries are recorded in
 The release-qualified interoperability commitments, including the explicit
 deferral of validation reports and a universal Rule IR, are recorded in
 [`docs/release-qualified-interop-contract.md`](docs/release-qualified-interop-contract.md).
+The bounded SHACL report boundary, its pinned release pair, and its qualifying
+fixture are recorded separately in
+[`docs/shacl-core-validation-contract.md`](docs/shacl-core-validation-contract.md).
+It remains distinct from the RDFS-to-SPARQL tuple and does not imply a shared
+Graph/store or a universal report serialization.
 
 New semantic evidence follows the
 [fixture policy](docs/fixture-policy.md), [fixture taxonomy](fixtures/README.md),

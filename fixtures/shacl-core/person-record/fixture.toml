@@ -1,0 +1,29 @@
+id = "shacl-core-person-record"
+title = "Bounded SHACL Core person-record validation report"
+version = 1
+data_graph = "data.ttl"
+shapes_graph = "shapes.ttl"
+expected_report = "expected-report.toml"
+source_kind = "authored integration fixture"
+source_version = "1"
+source_date = "2026-07-26"
+asserting_party = "Odin Garden maintainers"
+provenance = "Authored by the Odin Garden maintainers on 2026-07-26 to define the first bounded SHACL validation workflow."
+license = "CC0-1.0"
+semantic_profile = "odin-shacl bounded Core 0.1: sh:NodeShape, sh:targetClass through explicit rdfs:subClassOf traversal, simple IRI sh:path, sh:minCount, sh:maxCount, sh:datatype for xsd:string/xsd:integer, and sh:nodeKind for IRI/blank node/literal."
+verification_command = "sh scripts/verify-shacl.sh"
+entity_identity = "All fixture IRIs are authored, distinct identifiers. No aliases, sameAs relation, or blank nodes are asserted."
+contradiction_status = "No contradiction is asserted or expected. Validation results represent constraint violations, not logical inconsistency."
+validity_period = "Not applicable: this is a timeless synthetic validation fixture, not a claim about an external changing domain."
+
+[expectations]
+conforms = false
+result_count = 4
+graph_scope = "default graph only"
+report_lifetime = "The validator report owns result terms after parser and collector state are destroyed."
+
+[exclusions]
+reasoning = "The validator does not materialize RDFS/OWL facts. The explicit subclass relation exercises targetClass hierarchy traversal only."
+paths = "Only a single IRI sh:path is in profile; sequence, alternative, inverse, and repetition paths are rejected."
+components = "All unsupported SHACL Core components, custom severities/messages, SHACL-SPARQL, JavaScript, rules, and extension components are rejected."
+named_graphs = "The profile receives default-graph triples only."

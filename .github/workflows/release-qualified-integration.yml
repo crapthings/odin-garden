@@ -8,7 +8,7 @@ on:
       - 'fixtures/**'
       - 'integration/**'
       - 'queries/**'
-      - 'scripts/verify-rdfs-sparql.sh'
+      - 'scripts/**'
   push:
     branches: [main]
     paths:
@@ -17,7 +17,7 @@ on:
       - 'fixtures/**'
       - 'integration/**'
       - 'queries/**'
-      - 'scripts/verify-rdfs-sparql.sh'
+      - 'scripts/**'
   workflow_dispatch:
 
 permissions:
@@ -70,3 +70,34 @@ jobs:
           ln -s "$GITHUB_WORKSPACE/_deps/odin-graph" "$GITHUB_WORKSPACE/../odin-graph"
       - name: Verify the pinned RDFS-to-SPARQL integration path
         run: sh scripts/verify-rdfs-sparql.sh
+
+  shacl-core:
+    name: SHACL Core validation report
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        with:
+          repository: crapthings/odin-rdf
+          ref: eac24a8d3251d03cb3fe700e6ffbda0ad1a47ee4 # v0.33.0
+          path: _deps/shacl-odin-rdf
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        with:
+          repository: crapthings/odin-shacl
+          ref: 4ee8249b84380e4ef1d888bd94f8cd24d6e7b985 # v0.1.0
+          path: _deps/odin-shacl
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: laytan/setup-odin@8536d8fa450ec6f1bd9ddc84bbaaf16296c0051d # v2.12.2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          release: dev-2026-07
+      - name: Recreate the documented adjacent-checkout layout
+        run: |
+          ln -s "$GITHUB_WORKSPACE/_deps/shacl-odin-rdf" "$GITHUB_WORKSPACE/../odin-rdf"
+          ln -s "$GITHUB_WORKSPACE/_deps/odin-shacl" "$GITHUB_WORKSPACE/../odin-shacl"
+      - name: Verify the pinned SHACL validation path
+        run: sh scripts/verify-shacl.sh

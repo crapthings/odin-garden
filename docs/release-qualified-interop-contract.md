@@ -98,13 +98,15 @@ resource limits, and end-to-end fixture are agreed.
 [`first-closure`](../fixtures/rdfs-core/first-closure/) fixture, its expected
 derivations, and the RDFS-to-SPARQL integration gate.
 
-## 4. Validation reports are deferred, not implicit
+## 4. Validation reports remain separate from this RDFS-to-SPARQL tuple
 
 The current Reasoner can expose bounded OWL consistency evidence, but that is
-not a SHACL validation-report model.  No Garden-supported public validation
-report exists yet.  A future SHACL slice must define its own result identity,
-severity, paths, source-shape/source-constraint fields, ownership, limits, and
-serialization before it can be release-qualified.
+not a SHACL validation-report model. The RDFS-to-SPARQL tuple documented here
+does not expose or imply a validation-report API. The independently qualified
+`shacl-core-person-record` baseline defines its own result identity, severity,
+paths, source-shape/source-constraint fields, ownership, limits, and error
+behavior in the [bounded validation contract](shacl-core-validation-contract.md).
+It does not make Reasoner provenance a validation result or broaden this tuple.
 
 Likewise, provenance records explain the first support for an inferred fact;
 they are not validation results and must not be presented as such.

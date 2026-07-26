@@ -21,6 +21,13 @@ An authored fixture must say so; it must not imply that it is a quotation from
 an external authority. External sources require a stable citation, retrieval
 date, applicable license, and a local source copy or content-addressed digest.
 
+Business, confidential, regulated, or otherwise non-public data is not
+admitted to Garden merely because it is useful for local validation. It must
+remain in an authorized local workflow unless its owner explicitly authorizes
+publication. Use the [real-data validation intake](real-data-validation-intake.md)
+to record authority, boundaries, redacted evidence, and any decision to create
+a shareable synthetic or anonymized fixture.
+
 ## Interpretation rules
 
 Source documents and normalized RDF are different artifacts. A source document

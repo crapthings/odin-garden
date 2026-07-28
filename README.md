@@ -22,12 +22,14 @@ flowchart TB
     RDF["odin-rdf<br/>RDF model, syntax, streaming ingestion,<br/>and canonicalization"]
     SPARQL["odin-sparql<br/>SPARQL 1.1 query parsing<br/>and bounded execution"]
     Reasoner["odin-reasoner<br/>profiled forward reasoning<br/>and closure snapshots"]
+    Store["odin-store alpha<br/>local durable snapshots<br/>and operational ledger"]
 
     SPARQL -->|runtime dependency| RDF
     Reasoner -->|runtime dependency| RDF
     Garden -.->|defines contracts and verifies integration| RDF
     Garden -.->|defines contracts and verifies integration| SPARQL
     Garden -.->|defines contracts and verifies integration| Reasoner
+    Garden -.->|defines workload contracts; no runtime dependency| Store
 ```
 
 The permitted runtime dependencies are:
@@ -36,12 +38,14 @@ The permitted runtime dependencies are:
 odin-sparql   -> odin-rdf
 odin-reasoner -> odin-rdf
 SPARQL adapter -> odin-sparql   (optional; outside the reasoner core)
+odin-store    -> odin-rdf, odin-sparql   (independent local alpha)
 odin-garden   -> no runtime dependency
 ```
 
-Candidate layers such as `odin-graph`, `odin-store`, and a service layer are
-intentionally deferred. They will be considered only when current consumers
-show stable, shared requirements.
+`odin-graph` and a service layer remain deferred until consumers show stable,
+shared requirements. `odin-store` exists separately as a local durability
+alpha; it is not a shared graph representation, a required runtime dependency,
+or a release-qualified ecosystem baseline.
 
 The first integration path is deliberately narrow:
 
@@ -75,7 +79,8 @@ flowchart LR
 - Network services, authentication, tenancy, or protocol code.
 - Unreviewed scraped data, generated summaries, or unbounded document
   collections.
-- Claims that the ecosystem already includes a graph or storage layer.
+- Claims that the ecosystem already includes a shared, release-qualified graph
+  or storage layer.
 
 ## Status
 
@@ -85,6 +90,12 @@ evidence-backed RDFS-to-SPARQL integration path is release-qualified. The
 current decision is to retain local storage implementations until a second
 production-quality consumer proves a genuinely shared graph contract; see
 [ADR 0002](docs/adr/0002-retain-local-storage-pending-shared-graph-contract.md).
+
+`odin-store v0.1.0-alpha.1` is an independent local durability experiment with
+its own public API and a schema-neutral operational ledger. Garden records its
+workload boundary in the [Store operational workload contract](docs/store-operational-workload-contract.md)
+and [ADR 0007](docs/adr/0007-recognize-independent-store-alpha.md). It is not
+silently part of any existing release-qualified combination.
 
 The initial fixture and its fixed release-qualified command live in
 [`ecosystem.toml`](ecosystem.toml). It is reproducible compatibility evidence
@@ -152,14 +163,14 @@ point integration checks at moving `main` branches.
 ## Roadmap
 
 The staged execution plan is in [DEVELOPMENT-PLAN.md](DEVELOPMENT-PLAN.md).
-It includes the explicit decision gate for any future `odin-graph` or
-`odin-store` extraction.
+It includes the explicit decision gate for any future shared `odin-graph` or
+service extraction.
 
 The current ecosystem boundary is documented in
-[docs/architecture.md](docs/architecture.md). The decision to defer both
-runtime extractions, then create `odin-graph` before any future `odin-store`,
-is recorded in
-[ADR 0001](docs/adr/0001-defer-odin-graph.md).
+[docs/architecture.md](docs/architecture.md). The historical decision to defer
+both runtime extractions is recorded in [ADR 0001](docs/adr/0001-defer-odin-graph.md);
+[ADR 0007](docs/adr/0007-recognize-independent-store-alpha.md) records the
+current independent Store alpha.
 
 ## License
 

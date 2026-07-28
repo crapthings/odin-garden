@@ -2,8 +2,15 @@
 
 - Status: accepted
 - Date: 2026-07-24
+- Partially superseded: 2026-07-28 by
+  [ADR 0007](0007-recognize-independent-store-alpha.md) for the independent
+  local `odin-store` alpha. The shared-graph decision remains accepted.
 
 ## Context
+
+> Historical note: the Store-specific repository deferral below described the
+> state on 2026-07-24. `odin-store` now exists as an independent local alpha;
+> ADR 0007 distinguishes that experiment from the shared runtime proposed here.
 
 The ecosystem currently contains three intentionally different data-holding
 mechanisms:

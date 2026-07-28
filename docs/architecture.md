@@ -3,9 +3,9 @@
 ## Purpose
 
 This document records the current runtime boundaries of the Odin semantic
-ecosystem and the evidence required before extracting a shared graph or storage
-layer. It is an integration contract, not an API specification for a future
-package.
+ecosystem and the evidence required before extracting a shared graph or
+admitting a storage release as an ecosystem baseline. It is an integration
+contract, not an API specification for a future package.
 
 ## Current runtime shape
 
@@ -31,6 +31,9 @@ package.
        odin-sparql Dataset adapter
 
 odin-garden: contracts, pinned compatibility, fixtures, and verification only
+
+odin-store: independent local durability alpha; not a required runtime
+dependency or a release-qualified ecosystem baseline
 ```
 
 The permitted runtime dependencies are:
@@ -40,6 +43,7 @@ odin-sparql   -> odin-rdf
 odin-reasoner -> odin-rdf
 reasoner SPARQL adapter -> odin-sparql   (optional; outside reasoner core)
 odin-cli      -> odin-rdf, odin-shacl, odin-sparql   (thin local application; no Graph)
+odin-store    -> odin-rdf, odin-sparql   (independent local alpha)
 odin-garden   -> no runtime dependency
 ```
 
@@ -51,6 +55,7 @@ odin-garden   -> no runtime dependency
 | Forward rule evaluation, asserted/inferred triple facts, closure provenance | `odin-reasoner` | Its fact store is internal, triple-only, and currently default-graph scoped. |
 | Query parsing, algebra, result semantics, graph-scoped read scans | `odin-sparql` | Its Dataset boundary is read-only and storage-agnostic. |
 | Local file admission, bounded command composition, standard-output and exit behavior | `odin-cli` | Uses released components without exposing a server, store, or Graph runtime dependency. |
+| Durable local RDF snapshots and schema-neutral operational provenance | `odin-store` | Independent alpha: local, single-writer, no shared Graph adoption or qualified baseline. |
 | Cross-project revisions, fixtures, compatibility, architectural decisions | `odin-garden` | Has no runtime dependency. |
 
 `odin-sparql` already permits an application-owned immutable snapshot through
@@ -95,21 +100,23 @@ behavior, persistence, or a general-purpose transaction API. A write-batch or
 snapshot primitive belongs here only after the reasoner and another consumer
 need the same public semantics.
 
-### `odin-store` — explicitly future work
+### `odin-store` — independent local alpha
 
-`odin-store` is a durable storage layer, not a synonym for an in-memory graph
-collection. It would own concrete requirements such as persistence across
-restart, recovery, concurrency, transaction isolation, backend failures,
-backup, and operational limits. It may depend on a validated `odin-graph`, but
-it is neither required nor implied by it.
+`odin-store v0.1.0-alpha.1` now exists as a durable local storage layer, not a
+synonym for an in-memory graph collection. It owns persistence across restart,
+verified recovery, single-writer publication, backup/retention tooling, and a
+schema-neutral operational provenance ledger. Its concrete workload is defined
+in the [Store operational workload contract](store-operational-workload-contract.md).
 
-No `odin-store` repository or implementation is created until those
-requirements are concrete and tested by more than one consumer path.
+The alpha may depend directly on `odin-rdf` and `odin-sparql`; it does not
+require `odin-graph`. It is neither a replacement for component-local runtime
+stores nor a shared ecosystem baseline. Broader concurrency, replication, and
+stable cross-platform support remain future requirements.
 
 ## Extraction gate
 
-Do not create a placeholder `odin-graph` or `odin-store` repository. Revisit
-the graph extraction only when every condition below has evidence:
+Do not create a placeholder shared `odin-graph` runtime. Revisit the graph
+extraction only when every condition below has evidence:
 
 1. `odin-reasoner` and `odin-sparql` use the same owned term identity,
    indexed scan, and immutable snapshot semantics in production-quality paths.
@@ -120,8 +127,9 @@ the graph extraction only when every condition below has evidence:
 4. Ownership, blank-node identity, set/multiset semantics, resource limits,
    snapshot behavior, and migration rules have ADRs and tests.
 
-Create `odin-store` only after the graph gate has passed *and* a durable or
-multi-writer requirement makes its transaction semantics concrete.
+Treat a Store release as an ecosystem baseline only after a pinned public API,
+platform policy, and reproducible workload gate are accepted. This is separate
+from the graph gate: Store's existence does not approve a shared graph runtime.
 
 ## Current assessment — 2026-07-26
 
@@ -130,14 +138,14 @@ it is no longer the representation or runtime prerequisite of the released
 `odin-sparql` core. `Memory_Dataset` owns its bounded RDF Dataset directly over
 `odin-rdf`; Graph remains an optional adapter. The remaining question is
 whether a second production-quality consumer needs Graph's particular no-copy
-ownership and index contract. No durable runtime layer is proposed:
+ownership and index contract. No shared durable runtime layer is proposed:
 
 | Gate | Status | Evidence / gap |
 | --- | --- | --- |
 | Common owned terms and snapshot semantics | Partial | The released `Memory_Dataset` owns an RDF-only bounded set; the Reasoner owns a distinct indexed transactional Store. Graph's optional Reasoner and SPARQL adapters remain migration evidence, not a shared runtime representation. See ADR 0002 and ADR 0006. |
 | Pinned closure-to-query integration | Met, deliberately split | Garden retains the historical fixed `odin-rdf v0.32.1` / Reasoner `v0.6.0` / SPARQL `v0.2.0` / experimental Graph `v0.1.0` closure tuple. Separately, `sparql-core-v0.7` pins RDF `v0.33.0` and SPARQL `v0.7.0` with no Graph checkout, and verifies owned and custom Dataset views. Neither row claims a common no-copy snapshot. |
 | Minimal API from existing use cases | Partial | Garden now has a provisional multi-source named-graph fixture and a [candidate shared graph contract](candidate-shared-graph-contract.md) for mutation, freeze, limits, and errors. Reasoner still has only indexed default-graph closure; the proposal is not an extracted implementation or a production requirement. |
-| Durable-store requirement | Not met | There is no approved persistence, restart, multi-writer, or isolation requirement. |
+| Durable-store requirement | Met for an independent local alpha; not yet a baseline | `odin-store v0.1.0-alpha.1` provides a single-writer, local persistence and verified-reopen workload. Its platform/API compatibility and cross-project release gate are not yet Garden-qualified. |
 
 The completed Garden fixture is evidence for the current in-memory Graph
 boundary, not approval for a shared Reasoner Store or durable storage. The

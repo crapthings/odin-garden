@@ -1,8 +1,12 @@
 # odin-garden
 
-> **Work in progress.** The Odin Garden is not ready for general integration
-> use yet. Its contracts, compatibility policy, fixtures, and verification
-> gates are being established in the open.
+> **Status:** work in progress; the first RDFS-to-SPARQL path is
+> release-qualified, while broader integration remains under construction.
+>
+> **Role:** cross-project contracts, fixtures, and verification for the Odin
+> semantic ecosystem.
+>
+> **Not:** a monorepo, shared runtime, graph database, or knowledge dump.
 
 ![Abstract semantic graph nodes linked through a calm green garden](assets/odin-garden-banner.jpg)
 
@@ -10,8 +14,9 @@
 Odin semantic infrastructure ecosystem. It is where independently released
 projects agree on their boundaries and prove that they work together.
 
-Garden is deliberately **not** a monorepo, shared-runtime package, graph
-database, or general knowledge dump.
+**Start here:** [ecosystem architecture](docs/architecture.md) ·
+[release governance](docs/release-governance.md) ·
+[development plan](DEVELOPMENT-PLAN.md)
 
 ## Ecosystem
 
@@ -57,7 +62,7 @@ flowchart LR
     Query --> Expected["checked expected result"]
 ```
 
-## What belongs here
+## Scope
 
 - Ecosystem architecture, dependency directions, and cross-project ADRs.
 - Pinned compatibility and compiler-version policy.
@@ -71,7 +76,7 @@ flowchart LR
 - Shared terminology for asserted and inferred facts, evidence, provenance,
   validity, and versioning.
 
-## What does not belong here
+## Boundaries
 
 - Runtime implementations copied from `odin-rdf`, `odin-sparql`, or
   `odin-reasoner`.

@@ -23,8 +23,10 @@ end-to-end behavior explicit.
 - [x] This execution plan.
 - [x] `docs/architecture.md` with the dependency map, package boundaries, and
   long-term semantic-data vocabulary.
-- [x] `docs/adr/0001-defer-odin-graph.md`, recording why the graph/store layer
-  remains pending.
+- [x] `docs/adr/0001-defer-odin-graph.md`, recording why the shared graph
+  layer remains pending.
+- [x] `docs/adr/0007-recognize-independent-store-alpha.md`, recording the
+  separate local Store alpha and its non-baseline status.
 
 ### Acceptance
 
@@ -261,10 +263,10 @@ contracts it needs. Current-source convergence may inform a release decision,
 but no consumer needs an unqualified adjacent checkout to reproduce a tagged
 release.
 
-## Decision gate: whether to create `odin-graph` or `odin-store`
+## Decision gate: whether to extract a shared `odin-graph`
 
-Neither project is scheduled by date. Revisit extraction only when all of the
-following are true:
+No shared Graph is scheduled by date. Revisit its extraction only when all of
+the following are true:
 
 1. `odin-reasoner` and `odin-sparql` each use the same owned term identity,
    indexed scan, and immutable snapshot semantics in production-quality paths.
@@ -272,8 +274,8 @@ following are true:
    versions and fixtures.
 3. The candidate shared API can be written from existing use cases without
    speculative methods.
-4. There is a concrete requirement for persistence, transactions, named graphs,
-   or a second independently maintained consumer.
+4. There is a concrete requirement for named graphs or a second independently
+   maintained consumer.
 5. Ownership, blank-node identity, set/multiset boundaries, resource limits,
    and migration semantics have an ADR and tests.
 
@@ -282,14 +284,14 @@ following are true:
 - Extract only the validated common kernel into `odin-graph`.
 - Keep inference, SPARQL algebra, parsing, and network/service concerns out of
   that kernel.
-- Consider `odin-store` only when durable storage and transaction semantics are
-  concrete requirements; it may depend on `odin-graph`, but need not exist at
-  the same time.
+- Keep Store's independent local durability alpha outside the shared Graph
+  adoption decision. Its workload boundary is recorded separately in
+  `docs/store-operational-workload-contract.md`.
 
 ### If the gate does not pass
 
 Continue evolving the reasoner-internal fact store and SPARQL adapters. Record
-new evidence in an ADR; do not create a placeholder repository.
+new evidence in an ADR; do not create a placeholder shared runtime.
 
 ## First work session checklist
 
